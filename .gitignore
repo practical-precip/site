@@ -48,3 +48,8 @@ next-env.d.ts
 
 # Compiled from editable content
 /app/generated/
+
+# Assembled from the metadata submodules
+/content/
+/.content-staging/
+/public/content-assets/

@@ -42,7 +42,7 @@ export default function GuidanceDocument({
           <>
             {" "}
             <a
-              href={`https://github.com/cameronbracken/pcef_workshop_site_mockup/blob/main/content/${document.contentFile}`}
+              href={`https://github.com/practical-precip/${document.contentFile.startsWith("product-guidance/") ? "datasets" : "guidance"}/edit/main/${document.contentFile}`}
               target="_blank"
               rel="noreferrer"
             >

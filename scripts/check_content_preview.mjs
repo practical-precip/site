@@ -5,8 +5,8 @@ import { fileURLToPath } from "node:url";
 import { readFileSync, writeFileSync, unlinkSync, existsSync } from "node:fs";
 import assert from "node:assert/strict";
 const root = fileURLToPath(new URL("../", import.meta.url)).replace(/\/$/, "");
-const base = root + "/content/product-guidance/loca2.md";
-const variant = root + "/content/product-guidance/loca2.northwest-test.md";
+const base = root + "/metadata/datasets/product-guidance/loca2.md";
+const variant = root + "/metadata/datasets/product-guidance/loca2.northwest-test.md";
 if (existsSync(variant))
   throw new Error(
     "Temporary test variant already exists; preserve it and choose another path.",

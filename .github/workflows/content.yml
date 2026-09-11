@@ -1,4 +1,4 @@
-name: Validate content
+name: Validate published site
 on:
   pull_request:
   push:
@@ -6,8 +6,10 @@ on:
 permissions:
   contents: read
 jobs:
-  content:
+  site:
     runs-on: ubuntu-latest
+    env:
+      SITE_CONTENT_MODE: snapshot
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -15,14 +17,14 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run content:check
-      - run: npm run test:content
+      - run: npm run snapshot:check
+      - run: npm run test:snapshot
       - run: npm run build:pages
       - run: npm run check:export
       - run: npm run lint
       - uses: actions/upload-artifact@v4
         with:
-          name: guidance-site-preview
+          name: published-site-preview
           path: docs/
           include-hidden-files: true
           retention-days: 7

@@ -1262,3 +1262,8 @@ dialog {
     gap: 5px;
   }
 }
+
+.catalog-controls { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+.catalog-controls label { display: flex; flex-direction: column; gap: .4rem; flex: 1 1 230px; }
+.catalog-controls input, .catalog-controls select { padding: .7rem; font: inherit; color: inherit; background: transparent; border: 1px solid currentColor; border-radius: .3rem; min-width: 0; width: 100%; box-sizing: border-box; }
+.catalog-controls option { color: #152c25; background: #faf8ef; }

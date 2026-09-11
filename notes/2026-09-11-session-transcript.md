@@ -154,3 +154,28 @@ Creation dates remain unknown where no source establishes them. Release and
 paper dates are separate. Tests cover content contributions, missing references,
 metadata errors, source coverage, and browser behavior. See `VALIDATION.md` for
 recorded check outcomes.
+
+## Organization and content separation
+
+The user requested independent metadata repositories, accessible contribution
+instructions for technical and online editors, and reconciliation of the workshop
+dataset names. They supplied a typed list and clarified PNNL6 with a paper DOI,
+NIU as Northern Illinois University, and UW-Mass as a separate entry.
+
+The selected arrangement is a public website in `practical-precip`, with private
+`guidance` and `datasets` repositories for invited collaborators. The user said
+the metadata repositories may become public later. Their current privacy does not
+make the content selected for the public website private.
+
+The 53 typed names were matched to 67 catalog records. Dataset facts, aliases,
+source crosswalks and Markdown recommendations moved to the dataset repository.
+Table rows, columns, regions, cell Markdown and figures moved to guidance.
+Contributor indexes, templates, field explanations and private branch/PR
+instructions accompany both repositories.
+
+The site pins content commits with submodules. Public builds use a generated
+snapshot and copied published assets because GitHub refused deploy keys for the
+private repositories. Maintainers with access pull reviewed content commits,
+validate them and update the snapshot before publishing. Public CI needs no
+private repository credentials. Browser tests cover alias search, dataset-type
+filters, regional guidance and live content editing.

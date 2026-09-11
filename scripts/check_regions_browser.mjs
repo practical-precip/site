@@ -129,6 +129,13 @@ try {
   assert.ok((await page.locator("#spatial .published-evidence a").count()) > 0);
   await page.goto(origin + "/products/");
   assert.equal(await page.locator(".product-card").count(), products.length);
+  await page.getByRole("searchbox", { name: "Find a dataset" }).fill("UWPD");
+  assert.equal(await page.locator(".product-card").count(), 1);
+  assert.match(await page.locator(".product-card").innerText(), /UW-Madison/);
+  await page.getByRole("searchbox", { name: "Find a dataset" }).fill("");
+  await page.getByRole("combobox", { name: "Dataset type" }).selectOption("collection");
+  assert.equal(await page.locator(".product-card").count(), products.filter(p=>p.kind === "collection").length);
+  await page.getByRole("combobox", { name: "Dataset type" }).selectOption("all");
   await page
     .getByRole("link", { name: "LOCA2 North America", exact: true })
     .click();

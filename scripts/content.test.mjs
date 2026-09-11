@@ -248,7 +248,7 @@ test("unknown creation dates and member counts remain unknown", () => fixture((r
   assert.deepEqual(p.funding, []);
 }));
 test("every NCAR matrix row maps to existing catalog records", () => {
-  const coverage = yaml.load(readFileSync(join(projectRoot, "notes/ncar-matrix-coverage.yaml"), "utf8"));
+  const coverage = yaml.load(readFileSync(join(projectRoot, "metadata/datasets/notes/ncar-matrix-coverage.yaml"), "utf8"));
   assert.deepEqual(coverage.rows.map((r) => r.row), Array.from({length:28}, (_, i) => i + 1));
   const ids = new Set(loadContent().products.map((p) => p.id));
   for (const row of coverage.rows) {

@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { topics, columns, products } from "../app/data.ts";
 const root = fileURLToPath(new URL("../docs/", import.meta.url));
 const prefix = "/pcef_workshop_site_mockup";
-const published = "https://cameronbracken.github.io" + prefix;
+const published = "https://practical-precip.github.io" + prefix;
 let links = 0;
 function inspectHtml(file) {
   const html = readFileSync(file, "utf8");

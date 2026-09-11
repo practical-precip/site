@@ -27,6 +27,8 @@ export default async function ProductPage({
   if (!p) notFound();
   const rows: [string, string][] = [
     ["Provider", p.provider],
+    ["Also known as", p.aliases.join(", ") || "No alternate names recorded"],
+    ["Dataset type", p.kind.replaceAll("-", " ")],
     ["Version scope", p.version],
     ["Source scope", p.source_scope],
     ["CMIP generation", p.generation.join(", ") || "Not documented"],
@@ -42,7 +44,7 @@ export default async function ProductPage({
     ["Grid", p.coverage.grid],
     [
       "Spatial resolution",
-      `${p.coverage.grid_spacing.value} ${p.coverage.grid_spacing.unit}`,
+      `${p.coverage.grid_spacing.value ?? "Not established"} ${p.coverage.grid_spacing.unit}`,
     ],
     ["Temporal resolution", p.coverage.timestep],
     ["Historical period", p.coverage.historical],
@@ -163,7 +165,7 @@ export default async function ProductPage({
         </section>
         <p className="contribution-note">
           <a
-            href={`https://github.com/cameronbracken/pcef_workshop_site_mockup/blob/main/content/products/${p.id}.yaml`}
+            href={`https://github.com/practical-precip/datasets/edit/main/products/${p.id}.yaml`}
           >
             View or edit product metadata
           </a>

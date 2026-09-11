@@ -1,3 +1,3 @@
 :HL["/pcef_workshop_site_mockup/_next/static/css/8bc48b7dd4dc8d58.css","style"]
-:HL["/pcef_workshop_site_mockup/_next/static/css/859182b30a21607a.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"products","param":null,"prefetchHints":4192,"slots":{"children":{"name":"product","param":{"type":"d","key":"gard-lens","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"9RazZwMyzey3HWoRCwMS9"}
+:HL["/pcef_workshop_site_mockup/_next/static/css/2d8855a7d089219f.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"products","param":null,"prefetchHints":4192,"slots":{"children":{"name":"product","param":{"type":"d","key":"gard-lens","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"6z-tm7ioX1hFkZXXqmWHO"}

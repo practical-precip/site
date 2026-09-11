@@ -2,6 +2,7 @@ import { readdirSync, statSync } from "node:fs";
 import { spawn } from "node:child_process";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { prepareContent } from "./prepare-content.mjs";
 import { buildContent, projectRoot } from "./content.mjs";
 // Polling also works on mounted workspaces that do not deliver native file events.
 export function contentSignature(root = projectRoot) {
@@ -18,8 +19,15 @@ export function contentSignature(root = projectRoot) {
       }
     }
   }
-  scan(resolve(root, "content"));
-  scan(resolve(root, "public"));
+  for (const repo of ["guidance", "datasets"]) {
+    for (const folder of [repo === "guidance" ? "cells" : "products", repo === "guidance" ? "rows" : "product-guidance", "assets"]) scan(resolve(root, "metadata", repo, folder));
+    for (const file of readdirSync(resolve(root, "metadata", repo))) {
+      if (!/\.(yaml|json)$/.test(file)) continue;
+      const full = resolve(root, "metadata", repo, file);
+      const stat = statSync(full);
+      entries.push(`${full}:${stat.size}:${stat.mtimeMs}`);
+    }
+  }
   return entries.join("\n");
 }
 export function watchContent(root, onChange, interval = 500) {
@@ -43,7 +51,8 @@ if (
   buildContent();
   console.log("Content compiled. Watching Markdown, YAML, and public assets.");
   const close = watchContent(projectRoot, () => {
-    buildContent();
+    prepareContent(projectRoot);
+    buildContent(projectRoot);
     console.log("Content updated.");
   });
   const server = spawn(

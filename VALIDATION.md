@@ -103,3 +103,42 @@ matrix transcription from checked provider/paper details.
 No climate arrays were downloaded or benchmarked. Matrix-only properties and
 unresolved access, license and creation-date fields are identified explicitly.
 Recommendations remain drafts awaiting expert review.
+
+## Organization and independent content repositories, September 11, 2026
+
+The site repository moved to `practical-precip`. Guidance and dataset content now
+live in the private `practical-precip/guidance` and `practical-precip/datasets`
+repositories. Both include online editing instructions for invited contributors,
+local PR instructions, templates, source indexes and standalone validation CI.
+The website remains public by explicit user choice.
+
+All 53 names in the typed workshop list map through `datasets/names.yaml` to one
+or more of 67 records. Original workshop groups remain separate from scientific
+dataset types. The original 28 PDF rows remain represented. NIU's WRF-BCC match
+is provisional; LOCA2-CA and generic BCSD-CMIP5 await exact identification.
+PNNL6 and UW-Mass have separate sourced records, with study/release qualifications.
+
+The site selects exact commits through submodules. Author builds assemble the
+YAML, Markdown, schemas and assets, validate cross-repository links, and generate
+a publication snapshot. Public CI builds from that snapshot and published assets
+without cloning private repositories. GitHub rejected read-only deploy keys;
+none were installed, and no personal token is stored in the site workflow.
+Snapshot checks cover its checksum and consistency with committed source pointers.
+They do not claim to re-validate private authoring files in public CI.
+
+Standalone metadata validation/tests passed locally and on GitHub for both
+private repositories. The full site source/integration suite passed. Source
+Pages build and TypeScript compilation passed for 78 generated pages. Export
+validation checked 30 guidance cells and 1,737 local links/assets. Browser checks
+passed for all 67 product pages, alias search, type filters, regional guidance,
+Markdown/math, source edit links and mobile layout. ESLint has no errors and the
+existing application-figure image warning.
+
+A reversible live Markdown edit in the separate dataset repository refreshed the
+site and was restored. The initial test used 127.0.0.1, which Next.js rejected for
+HMR under its development-origin policy. The test passed using the advertised
+localhost origin. Temporary test edits were restored before content commits.
+
+Independent reviews identified and corrected dataset classification, method and
+source-attribution issues. No meteorological arrays were downloaded or evaluated.
+Publication claims remain limited to documented properties and draft guidance.

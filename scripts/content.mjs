@@ -16,18 +16,19 @@ import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
 import { visit } from "unist-util-visit";
 import katex from "katex";
+import { readSnapshot } from "./published-content.mjs";
 export const projectRoot = fileURLToPath(new URL("../", import.meta.url));
-const schema = JSON.parse(
-  readFileSync(new URL("../content/schema.json", import.meta.url)),
-);
+function validator(root) {
+const schema = JSON.parse(readFileSync(resolve(root, "content/schema.json")));
 const ajv = new Ajv({ allErrors: true, jsonPointers: true, schemaId: "auto", format: "full" });
 ajv.addSchema(schema, "guidance");
-function validate(kind, value, file) {
+return function validate(kind, value, file) {
   const check = ajv.getSchema(`guidance#/definitions/${kind}`);
   if (!check(value))
     throw new Error(
       `${file}: ${ajv.errorsText(check.errors, { separator: "\n" })}`,
     );
+}
 }
 function unique(values, label) {
   if (new Set(values).size !== values.length)
@@ -45,6 +46,8 @@ function inside(base, file) {
   return path;
 }
 export function loadContent(root = projectRoot) {
+  if (process.env.SITE_CONTENT_MODE === "snapshot") return readSnapshot(root);
+  const validate = validator(root);
   const dir = resolve(root, "content");
   const seenFiles = new Set();
   const read = (file) => {
