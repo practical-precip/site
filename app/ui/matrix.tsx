@@ -1,8 +1,17 @@
 "use client";
 import { useRef, useState } from "react";
-import { columns, topics, priorities, type Cell } from "../data";
-import Link from "next/link";
-import { assetPath } from "../site-paths";
+import {
+  columns,
+  topics,
+  priorities,
+  resolveCell,
+  hasRegionalGuidance,
+} from "../data";
+import RegionSelector, {
+  RegionLink as Link,
+  useRegion,
+} from "./region-selector";
+import { regionName } from "../regions";
 export function Header({ active = "matrix" }: { active?: string }) {
   return (
     <header className="site-header">
@@ -11,7 +20,7 @@ export function Header({ active = "matrix" }: { active?: string }) {
           p.
         </span>
         <span>
-          precip<span className="brand-sub">A DOWNSCALING FIELD GUIDE</span>
+          precip<span className="brand-sub">PRECIPITATION DOWNSCALING</span>
         </span>
       </Link>
       <nav aria-label="Main navigation">
@@ -38,25 +47,28 @@ export function Header({ active = "matrix" }: { active?: string }) {
 export function Footer() {
   return (
     <footer>
-      <span>PRECIP / A technical field guide</span>
-      <span>Provisional guidance. Built for informed evaluation.</span>
+      <span>PRECIP / Precipitation downscaling guidance</span>
+      <span>Provisional guidance for product evaluation.</span>
       <Link href="/about">Scope & evidence</Link>
     </footer>
   );
 }
 export default function Matrix() {
+  const [region] = useRegion();
   const [filter, setFilter] = useState("all");
   const [selected, setSelected] = useState<{
     row: number;
     column: number;
-    cell: Cell;
   } | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const rows = topics
     .map((topic, row) => ({ topic, row }))
     .filter(({ topic }) => filter === "all" || filter === topic.id);
-  function open(row: number, column: number, cell: Cell) {
-    setSelected({ row, column, cell });
+  const selectedCell = selected
+    ? resolveCell(topics[selected.row].cells[selected.column], region)
+    : null;
+  function open(row: number, column: number) {
+    setSelected({ row, column });
     dialog.current?.showModal();
   }
   return (
@@ -66,38 +78,21 @@ export default function Matrix() {
         <section className="hero">
           <div>
             <p className="eyebrow">
-              <span /> FROM PRODUCT PROPERTIES TO PRACTICAL DECISIONS
+              <span /> PRECIPITATION PRODUCT EVALUATION
             </p>
-            <h1>
-              Precipitation downscaling.
-              <br />
-              <em>Start with your application.</em>
-            </h1>
+            <h1>Precipitation downscaling guidance</h1>
             <p className="hero-copy">
-              A cheatsheet for choosing what to check. Find the precipitation
-              feature you care about, then explore the product properties that
-              matter.
+              Evaluate downscaled precipitation for your application and region.
+              Compare product properties, identify relevant diagnostics, and
+              review the supporting literature.
             </p>
-          </div>
-          <div className="hero-aside">
-            <span className="tiny-label">A GUIDE, NOT A RANKING</span>
-            <p>
-              Finer grids.
-              <br />
-              More members.
-              <br />
-              <span>Better for your question?</span>
-            </p>
-            <a href={assetPath("/about/")}>
-              Understand the approach <span aria-hidden="true">↗</span>
-            </a>
           </div>
         </section>
         <section className="matrix-section" aria-labelledby="matrix-title">
           <div className="matrix-heading">
             <div>
               <p className="eyebrow">01 / THE GUIDANCE MATRIX</p>
-              <h2 id="matrix-title">What does your application need?</h2>
+              <h2 id="matrix-title">Evaluation priorities by application</h2>
             </div>
             <label className="filter-label">
               Focus on an application
@@ -114,6 +109,7 @@ export default function Matrix() {
               </select>
             </label>
           </div>
+          <RegionSelector />
           <div className="legend">
             <div>
               {Object.entries(priorities).map(([id, p]) => (
@@ -168,26 +164,36 @@ export default function Matrix() {
                         <small>{topic.use}</small>
                       </Link>
                     </th>
-                    {topic.cells.map((cell, column) => (
-                      <td key={column}>
-                        <button
-                          className={`matrix-cell ${cell.priority}`}
-                          onClick={() => open(row, column, cell)}
-                          aria-label={`${topic.title}, ${columns[column].title}: ${cell.title}. ${priorities[cell.priority].label}`}
-                        >
-                          <span className="cell-top">
-                            <i>{priorities[cell.priority].symbol}</i>
-                            <span className="cell-arrow" aria-hidden="true">
-                              ↗
+                    {topic.cells.map((base, column) => {
+                      const cell = resolveCell(base, region);
+                      return (
+                        <td key={column}>
+                          <button
+                            className={`matrix-cell ${cell.priority}`}
+                            onClick={() => open(row, column)}
+                            aria-label={`${topic.title}, ${columns[column].title}: ${cell.title}. ${priorities[cell.priority].label}`}
+                          >
+                            <span className="cell-top">
+                              <i>{priorities[cell.priority].symbol}</i>
+                              <span className="cell-arrow" aria-hidden="true">
+                                ↗
+                              </span>
                             </span>
-                          </span>
-                          <span className="cell-title">{cell.title}</span>
-                          <span className="cell-status">
-                            {priorities[cell.priority].label}
-                          </span>
-                        </button>
-                      </td>
-                    ))}
+                            <span className="cell-title">{cell.title}</span>
+                            {region !== "all" && (
+                              <span className="cell-region">
+                                {hasRegionalGuidance(base, region)
+                                  ? regionName(region)
+                                  : "General guidance"}
+                              </span>
+                            )}
+                            <span className="cell-status">
+                              {priorities[cell.priority].label}
+                            </span>
+                          </button>
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))}
               </tbody>
@@ -196,22 +202,17 @@ export default function Matrix() {
           <div className="matrix-note">
             <span className="note-mark">i</span>
             <p>
-              <strong>Use this as a starting point.</strong> Priorities are
-              editorial judgments, not benchmark scores. Suitability depends on
-              region, timescale, process, and product version. Every cell links
-              to evaluation guidance.
+              Priorities are editorial judgments, not benchmark scores.
+              Suitability depends on region, timescale, process, and product
+              version. Every cell links to evaluation guidance.
             </p>
             <Link href="/about#evidence">How to read this matrix ↗</Link>
           </div>
         </section>
         <section className="bottom-guide">
           <div>
-            <p className="eyebrow">A LITTLE CONTEXT GOES A LONG WAY</p>
-            <h2>
-              Resolution is a property.
-              <br />
-              <em>Suitability is a question.</em>
-            </h2>
+            <p className="eyebrow">EVALUATION APPROACH</p>
+            <h2>Define the evaluation target</h2>
           </div>
           <p>
             Start with the statistic you need. Define its spatial footprint,
@@ -231,7 +232,7 @@ export default function Matrix() {
           if (e.target === e.currentTarget) dialog.current?.close();
         }}
       >
-        {selected && (
+        {selected && selectedCell && (
           <>
             <button
               className="close"
@@ -243,15 +244,24 @@ export default function Matrix() {
             </button>
             <p className="eyebrow">{topics[selected.row].title}</p>
             <p className="dialog-property">{columns[selected.column].title}</p>
-            <span className={`status-badge ${selected.cell.priority}`}>
-              {priorities[selected.cell.priority].symbol}{" "}
-              {priorities[selected.cell.priority].label}
+            <p className="regional-scope">
+              {region !== "all" &&
+              hasRegionalGuidance(
+                topics[selected.row].cells[selected.column],
+                region,
+              )
+                ? `${regionName(region)} guidance`
+                : "General guidance"}
+            </p>
+            <span className={`status-badge ${selectedCell.priority}`}>
+              {priorities[selectedCell.priority].symbol}{" "}
+              {priorities[selectedCell.priority].label}
             </span>
-            <h2 id="guidance-title">{selected.cell.title}</h2>
-            <p>{selected.cell.summary}</p>
+            <h2 id="guidance-title">{selectedCell.title}</h2>
+            <p>{selectedCell.summary}</p>
             <div className="quick-check">
               <span className="tiny-label">A PRACTICAL CHECK</span>
-              <p>{selected.cell.check}</p>
+              <p>{selectedCell.check}</p>
             </div>
             <p className="draft-note">
               Provisional synthesis. This is not a product rating.

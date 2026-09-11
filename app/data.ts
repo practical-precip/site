@@ -1,3 +1,4 @@
+import type { RegionId, RegionSelection } from "./regions";
 export const columns = [
   {
     id: "spatial",
@@ -63,12 +64,33 @@ export const priorities = {
       "Fine resolution is often a secondary selection criterion for this target. Validation is still needed.",
   },
 };
-export type Cell = {
+export type GuidanceContent = {
   priority: Priority;
   title: string;
   summary: string;
   check: string;
 };
+export type Cell = GuidanceContent & {
+  regions?: Partial<Record<RegionId, Partial<GuidanceContent>>>;
+};
+export function resolveCell(
+  cell: Cell,
+  region: RegionSelection,
+): GuidanceContent {
+  const override = region === "all" ? undefined : cell.regions?.[region];
+  return {
+    ...cell,
+    ...Object.fromEntries(
+      Object.entries(override ?? {}).filter(([, value]) => value !== undefined),
+    ),
+  };
+}
+export function hasRegionalGuidance(cell: Cell, region: RegionSelection) {
+  return (
+    region !== "all" &&
+    Object.values(cell.regions?.[region] ?? {}).some((v) => v !== undefined)
+  );
+}
 export type Topic = {
   id: string;
   title: string;
@@ -84,7 +106,8 @@ const c = (
   title: string,
   summary: string,
   check: string,
-): Cell => ({ priority, title, summary, check });
+  regions?: Cell["regions"],
+): Cell => ({ priority, title, summary, check, regions });
 export const topics: Topic[] = [
   {
     id: "annual-precipitation",
@@ -92,29 +115,51 @@ export const topics: Topic[] = [
     short: "Annual totals",
     use: "Water balance & long-term supply",
     intro:
-      "Evaluate totals over the area and year definition used in your water balance. Start with seasonal and annual performance before paying for finer output.",
+      "Evaluate totals over the area and year definition used in your water balance. Start with seasonal and annual performance before selecting a finer output grid.",
     cells: [
       c(
         "context",
-        "Match the catchment",
+        "Catchment spatial support",
         "Choose a spatial scale that represents your catchment and elevation gradients. Fine grid spacing is not a guarantee of accurate basin totals.",
         "Compare area-weighted annual totals and elevation bands with an appropriate reference. Record the regridding method.",
+        {
+          northwest: {
+            title: "Evaluate terrain and basin totals",
+            check:
+              "Compare annual totals separately for coastal, mountain, and inland catchments. Evaluate elevation bands and record the reference coverage and regridding method.",
+          },
+          southwest: {
+            title: "Evaluate seasonal and basin totals",
+            check:
+              "Compare annual and seasonal basin totals separately. Evaluate elevation bands and test whether annual agreement masks differences between seasons.",
+          },
+          alaska: {
+            title: "Check basin and reference coverage",
+            check:
+              "Confirm coverage of the Alaska study basin. Compare elevation bands and document gaps in the reference network before interpreting basin totals.",
+          },
+          hawaii: {
+            title: "Evaluate island and elevation coverage",
+            check:
+              "Check the land mask for each study island. Compare totals by elevation and exposure, and document how coastal grid cells are handled.",
+          },
+        },
       ),
       c(
         "lower",
-        "Aggregation is enough",
+        "Annual aggregation",
         "Monthly or daily accumulations can support annual totals when the record is complete. Subdaily output is not required for this statistic alone.",
         "Check precipitation units, calendar, missing intervals, and whether your target uses calendar years or water years.",
       ),
       c(
         "essential",
-        "Sample model spread",
+        "Climate model uncertainty",
         "Use several driving models to examine uncertainty in projected annual changes. A large file count may still represent only a few models.",
         "Report model identities, scenario, and the distribution of basin-scale changes. Keep model and member counts separate.",
       ),
       c(
         "context",
-        "Separate signal & noise",
+        "Forced change and internal variability",
         "For short records or modest changes, internal variability can affect the interpretation of annual precipitation trends.",
         "Compare changes across initial-condition members where available. Keep the same baseline and future window.",
       ),
@@ -126,7 +171,7 @@ export const topics: Topic[] = [
       ),
       c(
         "essential",
-        "Align your periods",
+        "Baseline and future periods",
         "Require a usable historical reference period and output covering the planning horizon and scenario of interest.",
         "Inventory years, calendars, scenario transitions, and missing periods before comparing climatologies.",
       ),
@@ -178,7 +223,7 @@ export const topics: Topic[] = [
       ),
       c(
         "essential",
-        "Keep enough maxima",
+        "Record length for extremes",
         "Short time slices supply few annual maxima. Extrapolated return levels require uncertainty estimates and explicit climate assumptions.",
         "State the years and missing-year rule. Show sensitivity to fitting window, distribution, and nonstationarity assumptions.",
       ),
@@ -200,7 +245,7 @@ export const topics: Topic[] = [
     cells: [
       c(
         "context",
-        "Define wet at your scale",
+        "Wet-interval definition",
         "A catchment can receive rain somewhere while one location remains dry. Occurrence depends on spatial aggregation.",
         "Compute wet frequency and spells at the station, grid, or basin support used in the application.",
       ),
@@ -230,7 +275,7 @@ export const topics: Topic[] = [
       ),
       c(
         "essential",
-        "Avoid broken sequences",
+        "Sequence completeness",
         "Missing intervals and disconnected time slices can truncate spells or create false ones.",
         "Retain missingness, verify continuity, and define how spells crossing year or scenario boundaries are handled.",
       ),
@@ -282,7 +327,7 @@ export const topics: Topic[] = [
       ),
       c(
         "essential",
-        "Track a shifting season",
+        "Seasonal phase changes",
         "Use historical and future windows that support evaluation of the changing snowfall season.",
         "Check seasonal completeness and scenario availability. Compare phase by month and elevation, not just annually.",
       ),
@@ -304,7 +349,7 @@ export const topics: Topic[] = [
     cells: [
       c(
         "essential",
-        "Fine grid, credible field?",
+        "Spatial dependence",
         "Spatial dependence must be evaluated directly. A high-resolution grid alone does not establish coherent precipitation fields.",
         "Compare correlation with distance, simultaneous extremes, and basin-average event totals at common spatial support.",
       ),

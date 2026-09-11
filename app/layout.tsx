@@ -5,23 +5,23 @@ export const metadata: Metadata = {
   metadataBase: new URL(publishedSiteUrl),
   title: "Precip | A precipitation downscaling field guide",
   description:
-    "An application-first cheatsheet for evaluating precipitation downscaling products. Explore product properties, practical checks, and supporting literature.",
+    "A technical guide for evaluating precipitation downscaling products. Explore product properties, practical checks, and supporting literature.",
   openGraph: {
     title: "Precip | A precipitation downscaling field guide",
-    description: "Start with your application. Know what to check.",
+    description: "Evaluation criteria for downscaled precipitation products.",
     images: [
       {
         url: `${publishedSiteUrl}/og.png`,
         width: 1730,
         height: 909,
-        alt: "Precip: A precipitation downscaling field guide. Start with your application.",
+        alt: "Precip: A precipitation downscaling field guide. Application and regional evaluation criteria.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Precip | A precipitation downscaling field guide",
-    description: "Start with your application. Know what to check.",
+    description: "Evaluation criteria for downscaled precipitation products.",
     images: [`${publishedSiteUrl}/og.png`],
   },
 };

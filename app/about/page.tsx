@@ -23,11 +23,7 @@ export default function About() {
       <Header active="about" />
       <main id="main" className="about-page">
         <p className="eyebrow">03 / ABOUT THE GUIDE</p>
-        <h1>
-          Make the question clear.
-          <br />
-          <em>Then evaluate the product.</em>
-        </h1>
+        <h1>Scope and interpretation</h1>
         <p className="article-intro">
           This field guide translates a workshop matrix into practical questions
           for technical users of downscaled precipitation. Rows describe
@@ -73,7 +69,7 @@ export default function About() {
             The handwritten sketch includes an example caution about STAR and
             spatial coherence. That product-specific statement needs an exact
             product identity, version, evaluation region, and supporting
-            evidence before it can become a recommendation here. The sketch's
+            evidence before it can become a recommendation here. The sketch&apos;s
             broad annual-precipitation reassurance is also treated as a prompt
             for evaluation, not a universal endorsement.
           </p>

@@ -1021,3 +1021,136 @@ figcaption a,
 dialog {
   margin: auto;
 }
+
+/* Region controls share one configuration and URL selection. */
+.hero {
+  grid-template-columns: 1fr;
+  padding: 42px 0 34px;
+}
+.hero h1 {
+  max-width: 950px;
+  font-size: clamp(36px, 3.7vw, 56px);
+}
+.region-selector {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(260px, 420px);
+  gap: 28px;
+  align-items: center;
+  margin: 24px 0;
+  padding: 20px 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.region-controls {
+  max-width: 490px;
+}
+.region-controls .filter-label {
+  font-size: 12px;
+}
+.region-controls p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
+.region-controls .map-caption {
+  font-size: 10px;
+}
+.map-caption a {
+  text-decoration: underline;
+}
+.region-reset {
+  color: var(--sage);
+  background: transparent;
+  border: 0;
+  padding: 8px 0;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.region-reset:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.region-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.map-region {
+  cursor: pointer;
+  outline: none;
+}
+.map-region path {
+  fill: #537568;
+  stroke: var(--panel);
+  stroke-width: 1.5;
+}
+.map-region:nth-child(2n) path {
+  fill: #63816e;
+}
+.map-region:hover path {
+  fill: var(--sage);
+}
+.map-region.selected path {
+  fill: var(--orange);
+  stroke: var(--bg);
+  stroke-width: 2;
+}
+.map-region:focus-visible path {
+  stroke: var(--text);
+  stroke-width: 5;
+}
+.map-region text {
+  fill: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.map-region.selected text {
+  text-decoration: underline;
+}
+.map-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.cell-region {
+  font-size: 9px;
+  color: var(--sage);
+  margin: 5px 0 1px;
+}
+.regional-scope {
+  color: var(--sage);
+  font-size: 11px;
+  margin: 12px 0;
+}
+.article-shell .region-selector {
+  grid-template-columns: 1fr minmax(220px, 300px);
+  padding: 18px;
+  gap: 20px;
+}
+@media (max-width: 650px) {
+  .region-selector,
+  .article-shell .region-selector {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px;
+    gap: 12px;
+  }
+  .region-map {
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+  }
+  .region-controls {
+    max-width: none;
+  }
+  .region-controls select {
+    min-width: 0;
+  }
+}

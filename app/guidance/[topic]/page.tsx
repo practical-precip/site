@@ -1,8 +1,9 @@
 import { assetPath } from "../../site-paths";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { RegionLink as Link } from "../../ui/region-selector";
+import GuidanceCells from "../../ui/guidance-cells";
 import { notFound } from "next/navigation";
-import { columns, topics, priorities } from "../../data";
+import { columns, topics } from "../../data";
 import { sources, type SourceId } from "../../sources";
 import { Header, Footer } from "../../ui/matrix";
 import { figureNotes } from "../../figure-notes";
@@ -80,32 +81,7 @@ export default async function Guidance({
                 ))}
               </div>
             </section>
-            {columns.map((col, i) => {
-              const cell = topic.cells[i];
-              return (
-                <section className="guidance-section" id={col.id} key={col.id}>
-                  <div className="section-kicker">
-                    <span>
-                      0{i + 1} / {col.title}
-                    </span>
-                    <span className={`status-badge ${cell.priority}`}>
-                      {priorities[cell.priority].symbol}{" "}
-                      {priorities[cell.priority].label}
-                    </span>
-                  </div>
-                  <h2>{cell.title}</h2>
-                  <p>{cell.summary}</p>
-                  <dl className="property-definition">
-                    <dt>Product property</dt>
-                    <dd>{col.definition}</dd>
-                  </dl>
-                  <div className="quick-check">
-                    <span className="tiny-label">WHAT TO EVALUATE</span>
-                    <p>{cell.check}</p>
-                  </div>
-                </section>
-              );
-            })}
+            <GuidanceCells cells={topic.cells} />
             <section id="figure" className="guidance-section">
               <p className="eyebrow">ILLUSTRATION / NOT PRODUCT BENCHMARKS</p>
               <h2>{figure.title}</h2>

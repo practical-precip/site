@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { RegionLink as Link } from "../ui/region-selector";
 import { sources } from "../sources";
 import { topics } from "../data";
 import { Header, Footer } from "../ui/matrix";
@@ -25,11 +25,7 @@ export default function ReadingRoom() {
       <Header active="reading" />
       <main id="main" className="reading-page">
         <p className="eyebrow">02 / THE READING ROOM</p>
-        <h1>
-          The evidence behind
-          <br />
-          <em>the evaluation questions.</em>
-        </h1>
+        <h1>Supporting literature</h1>
         <p className="article-intro">
           A starting bibliography, organized by the questions in the matrix.
           These studies explain methods and limitations. They are not a

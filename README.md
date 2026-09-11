@@ -172,3 +172,32 @@ The Pages build uses `/pcwf_workshop_site_mockup` as the URL prefix and adds `.n
 This repository contains a fresh source snapshot and no history or configuration from the earlier private hosting service. Local edits do not change the public site until rebuilt and pushed.
 
 Keep guidance marked provisional until it has supporting evidence and review. Product-specific recommendations should identify the product version, region, evaluation period, metric, and uncertainty.
+
+## Configure regions and regional guidance
+
+Edit `app/regions.ts` to change region names, order, state membership, map abbreviations, or label positions. Both the map and dropdown are generated from this list. IDs are stable content and URL keys. State membership uses two-digit FIPS codes from `app/us-states.json`. The default map covers the 50 states and DC. See [MAP-SOURCES.md](MAP-SOURCES.md) for geography and licensing.
+
+Each cell accepts an optional fifth argument to `c(...)`:
+
+```ts
+c(
+  "context",
+  "Catchment spatial support",
+  "General summary for all regions.",
+  "General evaluation check.",
+  {
+    northwest: {
+      title: "Evaluate terrain and basin totals",
+      check: "Compare coastal, mountain, and inland catchments separately.",
+    },
+  },
+)
+```
+
+A regional entry can override `title`, `summary`, `check`, and `priority` independently. Omitted fields inherit the general entry. Omit `regions` entirely for general guidance. Selecting a region updates matrix boxes, summaries, and application guidance. Boxes without an entry remain visible and are labeled as general guidance. The application dropdown works alongside the region selector.
+
+The selection is stored in `?region=northwest` and carried through internal links, including section anchors. Unknown region IDs display general guidance. Reset removes the region parameter. Regions can be selected using the mouse, dropdown, or Tab followed by Enter or Space on the map.
+
+The seeded regional checks are provisional examples for four regions in the annual precipitation spatial-resolution cell. Add reviewed regional evidence before treating them as regional recommendations.
+
+Run the regional data checks with `node --experimental-strip-types scripts/check_regions.mjs`. The browser check in `scripts/check_regions_browser.mjs` requires Playwright, a local browser installation, and a running site. Set `PLAYWRIGHT_MODULE` to the Playwright module path if it is not installed in the project, and `PRECIP_SITE_URL` to the local site URL, including the repository prefix when checking the Pages export.
