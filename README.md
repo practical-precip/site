@@ -73,6 +73,8 @@ Clone without `--recurse-submodules`, then use the published snapshot:
 
 ```sh
 npm ci
+SITE_CONTENT_MODE=snapshot npm run dev
+# Or build the Pages export:
 SITE_CONTENT_MODE=snapshot npm run build:pages
 SITE_CONTENT_MODE=snapshot npm run check:export
 ```

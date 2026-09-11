@@ -50,7 +50,7 @@ if (
 ) {
   buildContent();
   console.log("Content compiled. Watching Markdown, YAML, and public assets.");
-  const close = watchContent(projectRoot, () => {
+  const close = process.env.SITE_CONTENT_MODE === "snapshot" ? () => {} : watchContent(projectRoot, () => {
     prepareContent(projectRoot);
     buildContent(projectRoot);
     console.log("Content updated.");
