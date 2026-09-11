@@ -46,7 +46,7 @@ export default function GuidanceDocument({
               target="_blank"
               rel="noreferrer"
             >
-              View or edit this Markdown file
+              Edit guidance (invited contributors)
             </a>
           </>
         )}

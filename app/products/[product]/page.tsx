@@ -167,7 +167,7 @@ export default async function ProductPage({
           <a
             href={`https://github.com/practical-precip/datasets/edit/main/products/${p.id}.yaml`}
           >
-            View or edit product metadata
+            Edit metadata (invited contributors)
           </a>
         </p>
       </main>

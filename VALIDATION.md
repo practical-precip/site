@@ -142,3 +142,10 @@ localhost origin. Temporary test edits were restored before content commits.
 Independent reviews identified and corrected dataset classification, method and
 source-attribution issues. No meteorological arrays were downloaded or evaluated.
 Publication claims remain limited to documented properties and draft guidance.
+
+A fresh public-site clone without initialized metadata submodules passed its
+locked dependency install, snapshot Pages build, 1,737-link export check and all
+three snapshot tests. Snapshot development mode also rendered all 67 records
+without accessing private metadata. The complete maintainer suite has 21 passing
+tests. Snapshot checks reject changed JSON and mismatched source commit pointers;
+asset bytes are validated by export/link checks, not covered by the JSON checksum.
