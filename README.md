@@ -84,7 +84,9 @@ and checks the exported pages. It does not fetch private sources. The standalone
 metadata checks run in the private repositories. Maintainers run the full source
 and integration tests before updating the publication snapshot.
 
-GitHub Pages publishes committed `docs/` from `main`. The snapshot and published
+GitHub Actions builds the public snapshot on `main` and deploys the validated
+artifact to Pages. Committed `docs/` remains the reviewable export and asset source.
+The snapshot and published
 assets in `docs/content-assets/` reproduce the selected content without exposing
 private notes or contributor discussions. GitHub refused deploy keys for these
 repositories, so this workflow needs no private-repository credential in the

@@ -1,5 +1,6 @@
 name: Validate published site
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches: [main]
@@ -28,3 +29,21 @@ jobs:
           path: docs/
           include-hidden-files: true
           retention-days: 7
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          path: docs/
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: site
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy validated public site
+        id: deployment
+        uses: actions/deploy-pages@v4

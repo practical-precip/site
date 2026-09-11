@@ -149,3 +149,8 @@ three snapshot tests. Snapshot development mode also rendered all 67 records
 without accessing private metadata. The complete maintainer suite has 21 passing
 tests. Snapshot checks reject changed JSON and mismatched source commit pointers;
 asset bytes are validated by export/link checks, not covered by the JSON checksum.
+
+The legacy branch-based Pages job attempted to initialize private submodules and
+failed. Pages now uses the validated snapshot build artifact from the explicit
+Actions workflow, whose checkout does not fetch submodules. Deployment is limited
+to `main`; pull requests build a preview only.
