@@ -1,0 +1,13 @@
+[workspace]
+name = "precip-guide-figures"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64", "win-64"]
+
+[dependencies]
+python = "3.13.*"
+matplotlib-base = "3.10.*"
+numpy = "2.*"
+ruff = "*"
+
+[tasks]
+figures = "python scripts/make_figures.py"
