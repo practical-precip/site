@@ -201,3 +201,7 @@ The selection is stored in `?region=northwest` and carried through internal link
 The seeded regional checks are provisional examples for four regions in the annual precipitation spatial-resolution cell. Add reviewed regional evidence before treating them as regional recommendations.
 
 Run the regional data checks with `node --experimental-strip-types scripts/check_regions.mjs`. The browser check in `scripts/check_regions_browser.mjs` requires Playwright, a local browser installation, and a running site. Set `PLAYWRIGHT_MODULE` to the Playwright module path if it is not installed in the project, and `PRECIP_SITE_URL` to the local site URL, including the repository prefix when checking the Pages export.
+
+## Development transcript
+
+The [September 11 session transcript](notes/2026-09-11-session-transcript.md) records the conversation and implementation steps for regional filtering, wording revisions, and the repository rename and publication.
