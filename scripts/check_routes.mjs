@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { topics, columns } from '../app/data.ts';
 const origin = process.env.PRECIP_SITE_URL || 'http://localhost:3000';
-const metadataOrigin = process.env.PRECIP_METADATA_ORIGIN || 'https://cameronbracken.github.io/pcwf_workshop_site_mockup';
+const metadataOrigin = process.env.PRECIP_METADATA_ORIGIN || 'https://cameronbracken.github.io/pcef_workshop_site_mockup';
 let checked = 0;
 async function get(path, status=200) {
  const response = await fetch(origin+path);

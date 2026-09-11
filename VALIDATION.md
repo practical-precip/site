@@ -25,3 +25,7 @@ Browser interaction and visual regression testing have not been performed for th
 - Browser checks used a temporary Chromium headless shell with Playwright after the in-app browser plugin and an older cached browser could not start. `PLAYWRIGHT_MODULE` and `PLAYWRIGHT_EXECUTABLE` allow these local paths to be configured. Browser binaries were not added to the project.
 - Regional content remains provisional. Four regional examples are supplied for annual precipitation spatial resolution. Remaining cells inherit general guidance.
 - Local changes only. No commit, push, or deployment was performed.
+
+## Repository name correction, September 11, 2026
+
+Renamed the project to `pcef_workshop_site_mockup`. Updated package metadata, documentation, the Pages build prefix, published metadata origin, and route/browser checks. Regenerated `docs/` from source. Build, export validation, regional data tests, and browser checks passed with the corrected prefix. ESLint reports no errors and the existing figure image warning. The previous repository name is absent from source and the generated export.

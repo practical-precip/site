@@ -2,7 +2,7 @@
 
 A technical cheatsheet organized by application needs and downscaled product properties. The main page has a 5-by-6 matrix. Each cell opens a summary and links to a section of an application guide with evaluation checks, literature, and an illustrative figure.
 
-[Hosted site](https://cameronbracken.github.io/pcwf_workshop_site_mockup/) (public, no sign-in required).
+[Hosted site](https://cameronbracken.github.io/pcef_workshop_site_mockup/) (public, no sign-in required).
 
 ## Run locally for development
 
@@ -11,12 +11,12 @@ Requirements: Node.js 22.13 or newer and npm. Pixi is only needed to regenerate 
 From the workshop directory:
 
 ```sh
-cd pcwf_workshop_site_mockup
+cd pcef_workshop_site_mockup
 npm ci
 npm run dev
 ```
 
-If your terminal is already in this repository, omit `cd pcwf_workshop_site_mockup`. All commands below run from the directory containing `package.json`.
+If your terminal is already in this repository, omit `cd pcef_workshop_site_mockup`. All commands below run from the directory containing `package.json`.
 
 Open the local URL printed by the server, normally `http://localhost:3000`. Leave the terminal running while developing. Save a file to update the preview, and use `Ctrl+C` to stop the server. Restart the server after changing environment variables or if page metadata does not refresh.
 
@@ -167,7 +167,7 @@ git commit -S -m "Update workshop guidance"
 git push origin main
 ```
 
-The Pages build uses `/pcwf_workshop_site_mockup` as the URL prefix and adds `.nojekyll` so GitHub serves the exported assets unchanged. `npm run dev` serves the same site locally at the root path. Never hand-edit `docs/`; regenerate it from source. Pushing rebuilt files on `main` triggers GitHub's Pages deployment.
+The Pages build uses `/pcef_workshop_site_mockup` as the URL prefix and adds `.nojekyll` so GitHub serves the exported assets unchanged. `npm run dev` serves the same site locally at the root path. Never hand-edit `docs/`; regenerate it from source. Pushing rebuilt files on `main` triggers GitHub's Pages deployment.
 
 This repository contains a fresh source snapshot and no history or configuration from the earlier private hosting service. Local edits do not change the public site until rebuilt and pushed.
 

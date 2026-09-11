@@ -4,7 +4,7 @@ import { resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { topics, columns } from '../app/data.ts';
 const root = fileURLToPath(new URL('../docs/', import.meta.url));
-const prefix = '/pcwf_workshop_site_mockup';
+const prefix = '/pcef_workshop_site_mockup';
 const published = 'https://cameronbracken.github.io' + prefix;
 let links = 0;
 function inspectHtml(file) {
