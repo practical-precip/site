@@ -28,6 +28,7 @@ export default function About() {
           This field guide translates a workshop matrix into practical questions
           for technical users of downscaled precipitation. Rows describe
           application needs. Columns describe general properties of products.
+          Contributors edit the table metadata and Markdown guidance through pull requests.
         </p>
         <section className="guidance-section" id="evidence">
           <h2>How to read the matrix</h2>
@@ -75,7 +76,7 @@ export default function About() {
           </p>
         </section>
         <section className="guidance-section">
-          <h2>The six product properties</h2>
+          <h2>Product properties</h2>
           <dl className="glossary">
             {columns.map((c) => (
               <div key={c.id}>

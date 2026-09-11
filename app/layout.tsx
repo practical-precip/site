@@ -1,6 +1,7 @@
 import { publishedSiteUrl } from "./site-paths";
 import type { Metadata } from "next";
 import "./globals.css";
+import "katex/dist/katex.min.css";
 export const metadata: Metadata = {
   metadataBase: new URL(publishedSiteUrl),
   title: "Precip | A precipitation downscaling field guide",

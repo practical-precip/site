@@ -1,0 +1,88 @@
+id: en-gard
+name: En-GARD dataset in the NCAR matrix
+provider: NCAR
+version: >-
+  Family/configuration described in the pinned NCAR matrix; see source scope and
+  field-specific qualifications.
+summary: >-
+  The matrix identifies a dataset available on request. The linked code is not a download of
+  that dataset. This record is separate from GARD-LENS and CarbonPlan GARD.
+source_scope: >-
+  NCAR matrix transcription. Provider and publication links are supplied for follow-up; only
+  sources explicitly marked checked below were independently read. Download availability and
+  data files were not tested.
+generation:
+  - CMIP6
+dates:
+  created: null
+  released: null
+  publication: null
+  notes: >-
+    Exact creation/release dates are not established. Simulation periods and version tokens
+    are not creation dates.
+method:
+  family: Statistical downscaling
+  description: Ensemble Generalized Analog Regression Downscaling
+  reference_dataset: GMET
+  training_period: Not established from the sources checked.
+coverage:
+  domain: Conterminous United States
+  grid: >-
+    Latitude-longitude output grid described in the matrix; confirm coordinates in selected
+    files.
+  grid_spacing:
+    value: 0.125
+    unit: degree
+  timestep: Daily
+  historical: Historical component of 1950-2100; experiment transition must be checked.
+  future: Future component of 1950-2100; not every model/scenario is necessarily complete.
+  scenarios:
+    - SSP3-7.0
+  variables:
+    - name: precipitation
+      unit: Verify units and accumulation interval in selected files.
+      description: Variable family identified in the matrix; archive names and availability may differ.
+    - name: mean temperature
+      unit: Verify units in selected files.
+      description: >-
+        t_mean in the matrix; minimum and maximum temperature are not established for this
+        configuration.
+  calendar: Not established from the sources checked.
+ensemble:
+  driving_models: CMIP6
+  model_count: null
+  members: Not established from the sources checked.
+  member_counts: []
+access:
+  landing_page: https://github.com/NCAR/GARD
+  data: https://github.com/NCAR/GARD
+  format: Not established from the sources checked.
+  license: Not established. Public access does not itself specify reuse terms.
+  license_url: null
+  subsetting: >-
+    Not verified. The linked documentation may describe access, rather than provide a
+    working subset service.
+  cost: Not established from the sources checked.
+references: []
+metadata_sources:
+  - url: >-
+      https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+    locator: >-
+      Page 1, dataset row 13: En-GARD dataset in the NCAR matrix. Transcribed method, grid,
+      domain, period, scenarios and reference information. Public/in-progress labels
+      describe this snapshot, not verified current availability.
+verified_on: '2026-09-11'
+guidance: product-guidance/en-gard.md
+relevant_rows:
+  - annual-precipitation
+existing_uses: []
+funding: []
+associated_resources:
+  - label: Provider or method documentation
+    url: https://github.com/NCAR/GARD
+    description: Follow-up resource; availability of data must be confirmed.
+  - label: Related publication or technical report
+    url: https://journals.ametsoc.org/view/journals/hydr/23/10/JHM-D-21-0142.1.xml
+    description: >-
+      Publication linked by the matrix. Its scope may describe a method or historical
+      evaluation rather than every cataloged configuration.

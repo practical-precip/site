@@ -1,0 +1,103 @@
+id: star-esdm
+name: STAR-ESDM
+provider: Texas Tech University / collaborators
+version: >-
+  Family/configuration described in the pinned NCAR matrix; see source scope and
+  field-specific qualifications.
+summary: >-
+  The matrix describes an earlier configuration and labels it not yet public. Later
+  STAR-ESDM1-0 files exist in DRCDP; their domain, reference data, and release scope must
+  not be substituted silently.
+source_scope: >-
+  NCAR matrix transcription. Provider and publication links are supplied for follow-up; only
+  sources explicitly marked checked below were independently read. Download availability and
+  data files were not tested.
+generation:
+  - CMIP6
+dates:
+  created: null
+  released: null
+  publication: null
+  notes: >-
+    Exact creation/release dates are not established. Simulation periods and version tokens
+    are not creation dates.
+method:
+  family: Statistical downscaling
+  description: >-
+    Signal decomposition into trends, climatologies and daily variability, separately
+    bias-corrected and reassembled.
+  reference_dataset: NClimGrid-Daily
+  training_period: Not established from the sources checked.
+coverage:
+  domain: Conterminous United States in the matrix
+  grid: >-
+    Latitude-longitude output grid described in the matrix; confirm coordinates in selected
+    files.
+  grid_spacing:
+    value: 0.041666666666666664
+    unit: degree
+  timestep: Daily
+  historical: Historical component of 1950-2100; experiment transition must be checked.
+  future: Future component of 1950-2100; not every model/scenario is necessarily complete.
+  scenarios:
+    - SSP2-4.5
+    - SSP5-8.5
+  variables:
+    - name: precipitation
+      unit: Verify units and accumulation interval in selected files.
+      description: Variable family identified in the matrix; archive names and availability may differ.
+    - name: minimum temperature
+      unit: Verify units and accumulation interval in selected files.
+      description: Variable family identified in the matrix; archive names and availability may differ.
+    - name: maximum temperature
+      unit: Verify units and accumulation interval in selected files.
+      description: Variable family identified in the matrix; archive names and availability may differ.
+  calendar: Not established from the sources checked.
+ensemble:
+  driving_models: 25 CMIP6 models in the matrix
+  model_count: 25
+  members: Not established from the sources checked.
+  member_counts: []
+access:
+  landing_page: https://meetingorganizer.copernicus.org/EGU21/EGU21-13931.html
+  data: https://meetingorganizer.copernicus.org/EGU21/EGU21-13931.html
+  format: Not established from the sources checked.
+  license: Not established. Public access does not itself specify reuse terms.
+  license_url: null
+  subsetting: >-
+    Not verified. The linked documentation may describe access, rather than provide a
+    working subset service.
+  cost: Not established from the sources checked.
+references: []
+metadata_sources:
+  - url: >-
+      https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+    locator: >-
+      Page 1, dataset row 16: STAR-ESDM. Transcribed method, grid, domain, period, scenarios
+      and reference information. Public/in-progress labels describe this snapshot, not
+      verified current availability.
+  - url: >-
+      https://esgf-node.ornl.gov/thredds/dodsC/user_pub_work/DRCDP/NAM/TTU/STAR-ESDM1-0/CMIP6/ScenarioMIP/historical-ssp585/ACCESS-CM2/r1i1p1f1/day/pr/v20250429/pr_NAM_TTU_STAR-ESDM1-0_CMIP6_historical-ssp585_ACCESS-CM2_r1i1p1f1_day_20900101-20941231.nc.html
+    locator: >-
+      Indexed header checked: later public STAR-ESDM1-0 file exists. Its file-level license
+      and CMOR table creation date are not applied to the older matrix family.
+  - url: https://meetingorganizer.copernicus.org/EGU21/EGU21-13931.html
+    locator: >-
+      Checked: EGU21-13931 abstract describes signal decomposition and bias correction, not
+      an ensemble of downscaling methods.
+verified_on: '2026-09-11'
+guidance: product-guidance/star-esdm.md
+relevant_rows:
+  - annual-precipitation
+existing_uses: []
+funding: []
+associated_resources:
+  - label: Provider or method documentation
+    url: https://meetingorganizer.copernicus.org/EGU21/EGU21-13931.html
+    description: Follow-up resource; availability of data must be confirmed.
+  - label: Later DRCDP STAR-ESDM1-0 file metadata
+    url: >-
+      https://esgf-node.ornl.gov/thredds/dodsC/user_pub_work/DRCDP/NAM/TTU/STAR-ESDM1-0/CMIP6/ScenarioMIP/historical-ssp585/ACCESS-CM2/r1i1p1f1/day/pr/v20250429/pr_NAM_TTU_STAR-ESDM1-0_CMIP6_historical-ssp585_ACCESS-CM2_r1i1p1f1_day_20900101-20941231.nc.html
+    description: >-
+      Public indexed file header, a later configuration requiring separate release
+      reconciliation.

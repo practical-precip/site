@@ -1,0 +1,103 @@
+id: carbonplan-deepsd
+name: CarbonPlan DeepSD
+provider: CarbonPlan
+version: >-
+  Family/configuration described in the pinned NCAR matrix; see source scope and
+  field-specific qualifications.
+summary: >-
+  Distinguish DeepSD and bias-corrected DeepSD-BC. Test dry-day frequency and intensity
+  tails explicitly before using this experimental implementation for precipitation extremes.
+source_scope: >-
+  Matrix fields supplemented by the CarbonPlan release article checked on 2026-09-11.
+  Run-specific availability and data licenses still require verification.
+generation:
+  - CMIP6
+dates:
+  created: null
+  released: '2022-06-30'
+  publication: null
+  notes: Date of the first-release article, not dataset creation or every later run.
+method:
+  family: Machine learning
+  description: DeepSD machine-learning super-resolution
+  reference_dataset: ERA5
+  training_period: Not established from the sources checked.
+coverage:
+  domain: Global
+  grid: >-
+    Latitude-longitude output grid described in the matrix; confirm coordinates in selected
+    files.
+  grid_spacing:
+    value: 0.25
+    unit: degree
+  timestep: Daily
+  historical: Historical component of 1950-2099; experiment transition must be checked.
+  future: Future component of 1950-2099; not every model/scenario is necessarily complete.
+  scenarios:
+    - SSP2-4.5
+    - SSP3-7.0
+    - SSP5-8.5
+  variables:
+    - name: precipitation
+      unit: Verify units and accumulation interval in selected files.
+      description: Variable family identified in the matrix; archive names and availability may differ.
+    - name: minimum temperature
+      unit: Verify units and accumulation interval in selected files.
+      description: Variable family identified in the matrix; archive names and availability may differ.
+    - name: maximum temperature
+      unit: Verify units and accumulation interval in selected files.
+      description: Variable family identified in the matrix; archive names and availability may differ.
+  calendar: Not established from the sources checked.
+ensemble:
+  driving_models: CanESM5 and MRI-ESM2-0 examples in the matrix; verify run catalog
+  model_count: null
+  members: Not established from the sources checked.
+  member_counts: []
+access:
+  landing_page: https://carbonplan.org/research/cmip6-downscaling-explainer
+  data: https://carbonplan.org/research/cmip6-downscaling-explainer
+  format: Not established from the sources checked.
+  license: Not established. Public access does not itself specify reuse terms.
+  license_url: null
+  subsetting: >-
+    Not verified. The linked documentation may describe access, rather than provide a
+    working subset service.
+  cost: Not established from the sources checked.
+references: []
+metadata_sources:
+  - url: >-
+      https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+    locator: >-
+      Page 1, dataset row 28: CarbonPlan DeepSD. Transcribed method, grid, domain, period,
+      scenarios and reference information. Public/in-progress labels describe this snapshot,
+      not verified current availability.
+  - url: https://carbonplan.org/research/cmip6-downscaling-explainer
+    locator: >-
+      Checked: first-release date, method distinctions, coverage and funding. Run counts are
+      not GCM counts.
+verified_on: '2026-09-11'
+guidance: product-guidance/carbonplan-deepsd.md
+relevant_rows:
+  - annual-precipitation
+existing_uses: []
+funding:
+  - agency: Microsoft AI for Earth
+    award: null
+    notes: Grant acknowledged in release article.
+    source_url: https://carbonplan.org/research/cmip6-downscaling-explainer
+  - agency: NASA
+    award: 80NSSC21M0065
+    notes: Contributing support acknowledged in release article.
+    source_url: https://carbonplan.org/research/cmip6-downscaling-explainer
+associated_resources:
+  - label: Provider or method documentation
+    url: https://carbonplan.org/research/cmip6-downscaling-explainer
+    description: Follow-up resource; availability of data must be confirmed.
+  - label: Related publication or technical report
+    url: https://doi.org/10.1145/3097983.3098004
+    description: >-
+      DeepSD method paper linked by the CarbonPlan release article. It does not describe
+      every CarbonPlan run.
+  - label: Run catalog
+    url: https://github.com/carbonplan/cmip6-downscaling/blob/main/datasets.md
+    description: Resolve method, GCM, scenario and run availability.

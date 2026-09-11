@@ -1,0 +1,89 @@
+id: conus404
+name: CONUS404
+provider: NCAR / USGS
+version: >-
+  Family/configuration described in the pinned NCAR matrix; see source scope and
+  field-specific qualifications.
+summary: >-
+  Use as a historical hydroclimate comparator after evaluating regional biases. This record
+  does not describe a future projection or the future warming experiment mentioned in the
+  matrix.
+source_scope: >-
+  Matrix entry reconciled with GDEX d559000 on 2026-09-11. Its abstract and archive
+  time-range fields differ by one water year; both are retained.
+generation:
+  - Other
+dates:
+  created: null
+  released: null
+  publication: null
+  notes: >-
+    Exact creation/release dates are not established. Simulation periods and version tokens
+    are not creation dates.
+method:
+  family: Dynamical downscaling
+  description: WRF regional reanalysis
+  reference_dataset: ERA5 atmospheric forcing; not statistical calibration
+  training_period: Not applicable to physical reanalysis forcing.
+coverage:
+  domain: CONUS and transboundary basins in Canada and Mexico
+  grid: Lambert conformal model grid
+  grid_spacing:
+    value: 4
+    unit: km
+  timestep: Hourly
+  historical: Water years 1980-2021 in abstract; archive time coverage extends to 2022-09-30
+  future: Not applicable to this historical record.
+  scenarios:
+    - 'Not applicable: historical reanalysis'
+  variables:
+    - name: precipitation
+      unit: Verify units and accumulation interval in selected files.
+      description: >-
+        Precipitation is covered by this record. Additional atmospheric variables require a
+        complete archive-specific inventory.
+  calendar: Not established from the sources checked.
+ensemble:
+  driving_models: ERA5 reanalysis, not a GCM ensemble
+  model_count: null
+  members: Not established from the sources checked.
+  member_counts: []
+access:
+  landing_page: https://gdex.ucar.edu/datasets/d559000/
+  data: https://gdex.ucar.edu/datasets/d559000/
+  format: >-
+    GDEX archive plus linked Zarr distribution on Microsoft Planetary Computer; inspect
+    native file headers.
+  license: Not established. Public access does not itself specify reuse terms.
+  license_url: null
+  subsetting: >-
+    Not verified. The linked documentation may describe access, rather than provide a
+    working subset service.
+  cost: Not established from the sources checked.
+references: []
+metadata_sources:
+  - url: >-
+      https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+    locator: >-
+      Page 1, dataset row 22: CONUS404. Transcribed method, grid, domain, period, scenarios
+      and reference information. Public/in-progress labels describe this snapshot, not
+      verified current availability.
+  - url: https://gdex.ucar.edu/datasets/d559000/
+    locator: >-
+      Checked: model and ERA5 forcing, grid, abstract WY1980-2021 versus archive through
+      WY2022, related Zarr distribution and citations.
+verified_on: '2026-09-11'
+guidance: product-guidance/conus404.md
+relevant_rows:
+  - annual-precipitation
+existing_uses: []
+funding: []
+associated_resources:
+  - label: Provider or method documentation
+    url: https://gdex.ucar.edu/datasets/d559000/
+    description: Follow-up resource; availability of data must be confirmed.
+  - label: Related publication or technical report
+    url: https://doi.org/10.1175/BAMS-D-21-0326.1
+    description: >-
+      Publication linked by the matrix. Its scope may describe a method or historical
+      evaluation rather than every cataloged configuration.

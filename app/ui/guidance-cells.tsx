@@ -7,6 +7,7 @@ import {
   type Cell,
 } from "../data";
 import { regionName } from "../regions";
+import GuidanceDocument from "./guidance-document";
 import RegionSelector, { useRegion } from "./region-selector";
 export default function GuidanceCells({ cells }: { cells: Cell[] }) {
   const [region] = useRegion();
@@ -34,15 +35,11 @@ export default function GuidanceCells({ cells }: { cells: Cell[] }) {
               </p>
             )}
             <h2>{cell.title}</h2>
-            <p>{cell.summary}</p>
+            <GuidanceDocument document={cell} />
             <dl className="property-definition">
               <dt>Product property</dt>
               <dd>{col.definition}</dd>
             </dl>
-            <div className="quick-check">
-              <span className="tiny-label">WHAT TO EVALUATE</span>
-              <p>{cell.check}</p>
-            </div>
           </section>
         );
       })}

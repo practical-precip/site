@@ -16,7 +16,7 @@ User and assistant messages are reproduced in order, including progress updates.
 - Transferred verified changes into the main checkout. Corrected the local and GitHub repository names to `pcef_workshop_site_mockup`, rebuilt the URL prefix, and reran checks.
 - Created signed commits `f93dc7f` (regional guidance and wording) and `0fc6618` (repository name and Pages paths). Pushed to `main`, confirmed the Pages deployment succeeded, and checked the live page for regional controls and corrected asset paths.
 
-See [validation details](../VALIDATION.md), [configuration instructions](../README.md#configure-regions-and-regional-guidance), and the [source repository](https://github.com/cameronbracken/pcef_workshop_site_mockup).
+See [validation details](../VALIDATION.md), [configuration instructions](../CONTRIBUTING.md#add-or-change-a-regional-version), and the [source repository](https://github.com/cameronbracken/pcef_workshop_site_mockup).
 
 ## Conversation
 
@@ -112,3 +112,45 @@ Pushed all updates through signed commit `0fc6618`. Checks passed, the checkout 
 ### 19. User
 
 Save the transcript from this session so others can see how the site was made
+
+## Catalog development continuation
+
+The following user requests continue the session. The implementation account is
+a summary, not a verbatim reconstruction of intervening assistant messages.
+
+### User requests
+
+> Create a set of editable metadata for this guidance table, the rows and columns should be configurable as well as the information in each box, it should include factual information from academic papers, links to papers, and expert guidance. It should be easily human editable so others can contribute information with a pull request.
+
+> Each box should be an editable markdown file so experts can add prose, images and equations. Then create a separate set of editable metadata that is a catlog of downscaled precipitation products, it should have detailed metadata about each product as well as recommendation and expert guidance.
+
+> For the downscaling datasets you can use this repo to help populate it, https://github.com/NCAR/hydro-climate-evaluation?tab=readme-ov-file#year-range, and this pdf https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/refs/heads/main/docs/downscalingMethodsMatrixPublic.36x24.pdf
+
+> Search the web for any additional info you can find to help populate the metadata
+
+> The metadata items we want for each source is here dataset_metadata.jpg, add "file format", "creation data", "license" and merge the metadata with what you have already and add the information you can find
+
+> then commit and push the repo
+
+> There are 20+ data sources in the pdf file, were all these captured?
+
+### Implementation account
+
+The guidance table now reads row and column definitions from YAML. Each box has
+a Markdown document with review metadata and optional regional documents. The
+compiler validates citations, images, equations, IDs, paths, and metadata before
+building the site. Contributions can change content without editing React code.
+
+The product catalog started with 12 entries. An independent PDF inventory found
+28 source rows, of which nine were covered. The remaining 19 families were added,
+for 31 family/variant records. The row-to-record crosswalk is saved alongside
+source-review notes. Provider documentation and papers supplement the matrix,
+with unresolved details and conflicting sources marked explicitly. All guidance
+remains draft pending expert review. No climate data arrays were downloaded or
+product performance tested.
+
+The whiteboard fields were merged into the product schema and detail pages.
+Creation dates remain unknown where no source establishes them. Release and
+paper dates are separate. Tests cover content contributions, missing references,
+metadata errors, source coverage, and browser behavior. See `VALIDATION.md` for
+recorded check outcomes.

@@ -6,7 +6,7 @@ import { Header, Footer } from "../ui/matrix";
 export const metadata: Metadata = {
   title: "Reading room | Precip",
   description:
-    "Seven starting references on precipitation downscaling, extremes, internal variability, rain-snow phase, and dependence.",
+    "Supporting references on precipitation downscaling, extremes, internal variability, rain-snow phase, and dependence.",
   openGraph: {
     title: "Reading room | Precip",
     description: "The evidence behind the field guide.",

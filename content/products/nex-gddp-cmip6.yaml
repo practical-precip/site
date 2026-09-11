@@ -1,0 +1,112 @@
+id: nex-gddp-cmip6
+name: NEX-GDDP-CMIP6
+version: >-
+  Original archive described in 2022; later v1 revisions and v2 exist and require separate
+  review.
+summary: >-
+  Global daily CMIP6 projections using bias correction and spatial disaggregation at 0.25
+  degrees.
+provider: NASA Earth Exchange / NASA Center for Climate Simulation
+method:
+  family: Statistical downscaling
+  description: Bias correction and spatial disaggregation (BCSD).
+  reference_dataset: Global Meteorological Forcing Dataset (GMFD).
+  training_period: 1960-2014 reference data in the 2022 description.
+coverage:
+  domain: Global land coverage, 60 degrees south to 90 degrees north; check masks.
+  grid: Regular latitude-longitude grid.
+  grid_spacing:
+    value: 0.25
+    unit: degrees
+  timestep: Daily
+  historical: 1950-2014
+  future: 2015-2100
+  scenarios:
+    - SSP1-2.6
+    - SSP2-4.5
+    - SSP3-7.0
+    - SSP5-8.5
+  variables:
+    - name: pr
+      unit: kg m-2 s-1 (daily mean precipitation flux)
+      description: Convert to daily accumulation using the file time interval.
+  calendar: Check the selected file time coordinate and technical-note handling of model calendars.
+ensemble:
+  driving_models: CMIP6
+  model_count: 35
+  members: >-
+    One variant per model in the original 2022 archive; do not interpret model count as
+    within-model member count.
+  member_counts:
+    - model: Each GCM in the original 2022 archive
+      count: 1
+      scope: >-
+        One selected variant per model in the described release; later archives require a
+        new inventory.
+      source_url: https://www.nature.com/articles/s41597-022-01393-4
+access:
+  landing_page: https://www.nccs.nasa.gov/data-collections/nex-gddp-cmip6/
+  data: https://registry.opendata.aws/nex-gddp-cmip6/
+  format: NetCDF4; AWS S3 and NCCS THREDDS access.
+  license: >-
+    CC BY-SA 4.0 for the archive described in the 2022 paper; confirm terms for the selected
+    release.
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  subsetting: >-
+    NCCS THREDDS NetCDF Subset Service supports variable, latitude/longitude, and time
+    selection; public S3 offers file access.
+  cost: >-
+    AWS registry documents public S3 access without an AWS account. Compute and storage
+    costs for user analyses are not estimated.
+references:
+  - thrasher
+metadata_sources:
+  - url: https://pmc.ncbi.nlm.nih.gov/articles/PMC9163132/
+    locator: Methods, Data Records, and Usage Notes (original archive).
+  - url: https://www.nccs.nasa.gov/data-collections/nex-gddp-cmip6/
+    locator: Coverage, resolution, access, and links to v1/v2 technical notes. Subsetting examples.
+  - url: >-
+      https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+    locator: >-
+      Page 1, combined NEX-GDDP CMIP5/CMIP6 row. Existing version-specific provider metadata
+      takes precedence.
+  - url: https://www.nature.com/articles/s41597-022-01393-4
+    locator: Publication date, Methods, Technical Validation, and Acknowledgements.
+  - url: https://registry.opendata.aws/nex-gddp-cmip6/
+    locator: Public S3 access.
+verified_on: '2026-09-11'
+guidance: product-guidance/nex-gddp-cmip6.md
+relevant_rows:
+  - annual-precipitation
+  - annual-maximum
+  - intermittency
+  - spatial-coherence
+generation:
+  - CMIP6
+dates:
+  created: null
+  released: null
+  publication: '2022-06-03'
+  notes: >-
+    Date of the Thrasher et al. dataset paper, not the data creation date or a later archive
+    revision.
+existing_uses:
+  - description: >-
+      Dataset paper evaluates the original downscaled archive. This is documented technical
+      validation, not proof of suitability for all applications.
+    url: https://www.nature.com/articles/s41597-022-01393-4
+funding:
+  - agency: NASA
+    award: null
+    notes: NASA Earth Exchange workplan 2018-2022 at Ames Research Center.
+    source_url: https://www.nature.com/articles/s41597-022-01393-4
+associated_resources:
+  - label: Provider documentation
+    url: https://www.nccs.nasa.gov/data-collections/nex-gddp-cmip6/
+    description: Product descriptions and links maintained by the provider.
+  - label: NCCS subsetting examples
+    url: https://www.nccs.nasa.gov/data-collections/nex-gddp-cmip6/
+    description: THREDDS and NetCDF Subset Service access examples.
+source_scope: >-
+  Provider documentation and selected papers checked. Unresolved fields are marked
+  explicitly; data files and application performance were not tested.

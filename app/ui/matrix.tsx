@@ -12,6 +12,7 @@ import RegionSelector, {
   useRegion,
 } from "./region-selector";
 import { regionName } from "../regions";
+import GuidanceDocument from "./guidance-document";
 export function Header({ active = "matrix" }: { active?: string }) {
   return (
     <header className="site-header">
@@ -32,6 +33,12 @@ export function Header({ active = "matrix" }: { active?: string }) {
           href="/reading-room"
         >
           Reading room
+        </Link>
+        <Link
+          aria-current={active === "products" ? "page" : undefined}
+          href="/products"
+        >
+          Product catalog
         </Link>
         <Link
           aria-current={active === "about" ? "page" : undefined}
@@ -134,7 +141,7 @@ export default function Matrix() {
             role="region"
             aria-label="Guidance matrix, scroll horizontally on smaller screens"
           >
-            <table>
+            <table style={{ minWidth: 200 + columns.length * 145 }}>
               <caption className="sr-only">
                 Application needs by downscaled product properties. Each cell
                 opens a guidance summary.
@@ -258,14 +265,7 @@ export default function Matrix() {
               {priorities[selectedCell.priority].label}
             </span>
             <h2 id="guidance-title">{selectedCell.title}</h2>
-            <p>{selectedCell.summary}</p>
-            <div className="quick-check">
-              <span className="tiny-label">A PRACTICAL CHECK</span>
-              <p>{selectedCell.check}</p>
-            </div>
-            <p className="draft-note">
-              Provisional synthesis. This is not a product rating.
-            </p>
+            <GuidanceDocument document={selectedCell} />
             <Link
               className="primary-link"
               href={`/guidance/${topics[selected.row].id}#${columns[selected.column].id}`}

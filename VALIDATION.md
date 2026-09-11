@@ -29,3 +29,77 @@ Browser interaction and visual regression testing have not been performed for th
 ## Repository name correction, September 11, 2026
 
 Renamed the project to `pcef_workshop_site_mockup`. Updated package metadata, documentation, the Pages build prefix, published metadata origin, and route/browser checks. Regenerated `docs/` from source. Build, export validation, regional data tests, and browser checks passed with the corrected prefix. ESLint reports no errors and the existing figure image warning. The previous repository name is absent from source and the generated export.
+
+## Editable Markdown and product catalog, September 11, 2026
+
+Implemented configurable YAML table/row metadata, 30 general Markdown cell files, four regional Markdown variants, nine bibliography entries, and two product catalog records with separate Markdown guidance. Published findings are distinct from expert interpretation and carry paper keys, locators, and scope. All seeded recommendations remain draft with explicit AI-assisted provenance.
+
+- `npm run content:check`: validates schema, cell mappings, regional references, local images/alt text, equations, citations, and referenced content files.
+- `npm run test:content`: 12 tests passed, including reordered dimensions, a new row without a figure, a new column, missing/unknown IDs, invalid priority/review records, malformed equations, unsafe links/HTML, path traversal, and product regional documents.
+- `npm run build:pages` and `npm run check:export`: passed for all application and product pages. Export validation checked 30 cells and 316 local links/assets.
+- `scripts/check_routes.mjs`: 25 local HTTP routes/assets passed, including all application metadata, section anchors, product routes, and unknown-application 404.
+- `scripts/check_regions_browser.mjs`: browser checks passed at the repository URL prefix for regional selection and general fallback, keyboard controls, modal/detail links, reload, application filters, Markdown images, KaTeX equations, paper links, product catalog/details, and mobile overflow. A mobile product screenshot was inspected.
+- Live editing was tested with a temporary regional product document and restored afterward. Native file events did not refresh reliably in this workspace, so the development server now polls content/assets and enables Watchpack polling. Automatic update, regional rendering/source links, and restoration to general guidance passed. `scripts/check_content_preview.mjs` preserves this test workflow.
+- An independent code review identified ignored product regional overrides and stale content previews. Both were fixed and the reviewer confirmed the revised paths. Browser tests then verified both behaviors.
+- ESLint passed with the existing unoptimized application-figure image warning. Markdown images intentionally use static assets with author-supplied paths.
+- The PR workflow is configured to validate, test, build, and upload a preview artifact. It has not run on GitHub in this local verification. Existing Pages hosting still requires maintainers to include a regenerated `docs/` before merging source-only contributions.
+
+Initial factual evidence was checked against primary paper abstracts/methods for Lehner et al. (2020), Lange (2019), Bhatia and Ganguly (2019), Jennings et al. (2018), and the VALUE synthesis. Product records cite the original NEX-GDDP-CMIP6 publication and LOCA2 publication/provider release documentation. The catalog identifies version scope rather than asserting that an old paper describes the latest release. LOCA2 reuse terms and file-specific units/calendars remain explicitly unrecorded or require file inspection. No product data were downloaded or benchmarked. Schema validation does not establish scientific correctness or expert endorsement.
+
+## NCAR and web catalog expansion, September 11, 2026
+
+Expanded from two to 12 product records, with 19 bibliography records in total.
+Added Alaska GARD-LENS and Northwest WUS-D3 Markdown guidance. The pinned NCAR
+README/PDF, provider sources, publication scope, discrepancies, and deferred
+candidates are documented in `notes/2026-09-11-catalog-sources.md`.
+
+- `npm run content:check` and all 12 `test:content` tests passed.
+- Pages build and TypeScript compilation passed for 23 generated pages.
+- Export validation passed for 30 guidance boxes and 563 local links/assets.
+- Browser checks passed for all 12 product detail pages, both new regional
+  documents and their source links, mobile overflow, and existing guidance/map
+  interactions. No browser JavaScript errors were observed.
+- The browser check now derives catalog size from configured content and visits
+  every product. Its initial regional assertion incorrectly expected a summary
+  that the component does not display; it was corrected to check the displayed
+  Markdown source link, then rerun successfully.
+- ESLint reports zero errors and the existing application figure image warning.
+- Focused independent scientific review found no blocking contradictions. Its
+  license, climate-sensitivity, and calibration-period suggestions were applied.
+- No climate data arrays were downloaded or evaluated. Documentation checks do
+  not certify product suitability. Guidance remains draft pending expert review.
+- Changes remain local; no commit, push, or deployment was performed for this update.
+
+## Full matrix coverage and metadata fields, September 11, 2026
+
+The catalog now has 31 records representing all 28 NCAR PDF dataset rows, with
+20 bibliography records. Coverage is at the family/configuration level, not a
+claim that every archive release or member has a separate record. The editable
+crosswalk is `notes/ncar-matrix-coverage.yaml`.
+
+The schema and product pages now include all concepts in `dataset_metadata.jpg`,
+plus file format, creation date and license. Creation, release and publication
+dates are distinct. Unknown dates/counts remain null; unrecorded funding/uses
+remain empty arrays with explicit UI messages. `source_scope` distinguishes
+matrix transcription from checked provider/paper details.
+
+- Content validation and all 15 content tests passed. New cases check metadata
+  dates, positive member counts, required access fields, source URLs, unknown
+  values and all 28 source-row mappings. A failing date test exposed AJV's fast
+  date mode; full date validation is now enabled and the test passes.
+- Pages build and TypeScript compilation passed for 42 generated pages.
+- Export validation passed for 30 guidance boxes and 981 local links/assets.
+- Browser checks passed for all 31 product pages and regional documents,
+  required metadata labels/sections, map/dropdown behavior, Markdown rendering,
+  links and mobile overflow. No browser JavaScript errors were observed.
+- ESLint reports no errors and one existing application-figure image warning.
+- Independent inventory review confirmed 28 rows: 18 statistical, nine dynamical
+  and one machine-learning row. It identified 19 missing rows in the earlier
+  catalog. All are now represented. Review corrections preserved En-GARD mean
+  temperature and STAR-ESDM signal decomposition rather than a method ensemble.
+- The contributor guide and session transcript now document the metadata design,
+  source reconciliation, uncertainty and contribution workflow.
+
+No climate arrays were downloaded or benchmarked. Matrix-only properties and
+unresolved access, license and creation-date fields are identified explicitly.
+Recommendations remain drafts awaiting expert review.

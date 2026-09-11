@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../schema.json#/definitions/row
+id: spatial-coherence
+title: Spatial coherence
+short: Storms across a region
+use: Basin floods & connected systems
+intro: >-
+  Evaluate whether precipitation occurs together at different locations. Good individual
+  grid-cell distributions do not establish credible storm footprints or basin-average
+  extremes.
+metrics:
+  - Correlation versus distance
+  - Concurrent exceedance frequency
+  - Basin-average storm totals
+references:
+  - maraun
+  - value
+  - lange
+figure:
+  title: The same local values can produce a different basin peak.
+  alt: >-
+    Synthetic rainfall at two equal-area cells has the same distribution in each cell in
+    both cases. Synchronized rain gives a basin maximum of 20 mm/day; staggered rain
+    gives a maximum of 10 mm/day.
+  caption: >-
+    Each cell has the same set of daily values in both examples. Changing the relative
+    timing changes the equal-area basin mean and its maximum. This is a constructed
+    dependence example, not an evaluation of a named product.
+  image: /figures/spatial-coherence.png
+  pdf: /figures/spatial-coherence.pdf
+  provenance: >-
+    Original synthetic example, generated with Matplotlib. No observations or
+    downscaling product output are shown.
+  data: /figures/examples.json
+  code: /figures/make_figures.py
+cells:
+  spatial: cells/spatial-coherence/spatial.md
+  temporal: cells/spatial-coherence/temporal.md
+  models: cells/spatial-coherence/models.md
+  members: cells/spatial-coherence/members.md
+  domain: cells/spatial-coherence/domain.md
+  coverage: cells/spatial-coherence/coverage.md

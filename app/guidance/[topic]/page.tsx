@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { columns, topics } from "../../data";
 import { sources, type SourceId } from "../../sources";
 import { Header, Footer } from "../../ui/matrix";
-import { figureNotes } from "../../figure-notes";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return topics.map((t) => ({ topic: t.id }));
@@ -35,7 +34,7 @@ export default async function Guidance({
   const { topic: id } = await params;
   const topic = topics.find((t) => t.id === id);
   if (!topic) notFound();
-  const figure = figureNotes[id];
+  const figure = topic.figure;
   return (
     <>
       <Header active="guidance" />
@@ -54,7 +53,7 @@ export default async function Guidance({
                 {c.title}
               </a>
             ))}
-            <a href="#figure">Illustrative figure</a>
+            {figure && <a href="#figure">Illustrative figure</a>}
             <a href="#literature">Supporting literature</a>
             <hr />
             <Link href="/">← Back to the matrix</Link>
@@ -82,38 +81,39 @@ export default async function Guidance({
               </div>
             </section>
             <GuidanceCells cells={topic.cells} />
-            <section id="figure" className="guidance-section">
-              <p className="eyebrow">ILLUSTRATION / NOT PRODUCT BENCHMARKS</p>
-              <h2>{figure.title}</h2>
-              <figure>
-                <a
-                  href={assetPath(`/figures/${id}.png`)}
-                  aria-label={`Open full-size figure: ${figure.title}`}
-                >
-                  <img
-                    src={assetPath(`/figures/${id}.png`)}
-                    width="1200"
-                    height="620"
-                    alt={figure.alt}
-                  />
-                </a>
-                <figcaption>
-                  {figure.caption}{" "}
-                  <a href={assetPath("/figures/examples.json")}>
-                    Download example data (JSON)
+            {figure && (
+              <section id="figure" className="guidance-section">
+                <p className="eyebrow">ILLUSTRATION / NOT PRODUCT BENCHMARKS</p>
+                <h2>{figure.title}</h2>
+                <figure>
+                  <a
+                    href={assetPath(figure.image)}
+                    aria-label={`Open full-size figure: ${figure.title}`}
+                  >
+                    <img
+                      src={assetPath(figure.image)}
+                      width="1200"
+                      height="620"
+                      alt={figure.alt}
+                    />
                   </a>
-                  .
-                </figcaption>
-              </figure>
-              <p className="figure-provenance">
-                Original synthetic example, generated with Matplotlib. No
-                observations or downscaling product output are shown.{" "}
-                <a href={assetPath("/figures/make_figures.py")} download>
-                  Download plotting script
-                </a>
-                .
-              </p>
-            </section>
+                  <figcaption>
+                    {figure.caption}{" "}
+                    {figure.data && (
+                      <a href={assetPath(figure.data)}>Download example data</a>
+                    )}
+                  </figcaption>
+                </figure>
+                <p className="figure-provenance">
+                  {figure.provenance}{" "}
+                  {figure.code && (
+                    <a href={assetPath(figure.code)} download>
+                      Download plotting script
+                    </a>
+                  )}
+                </p>
+              </section>
+            )}
             <section id="literature" className="guidance-section">
               <p className="eyebrow">EVIDENCE & LIMITS</p>
               <h2>Supporting literature</h2>

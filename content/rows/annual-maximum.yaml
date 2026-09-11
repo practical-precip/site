@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../schema.json#/definitions/row
+id: annual-maximum
+title: Annual maximum precipitation
+short: Annual maxima
+use: Extreme rainfall & flood studies
+intro: >-
+  Define the accumulation duration and spatial support first. A maximum hourly point
+  value, a maximum daily grid value, and a basin-average storm maximum answer different
+  questions.
+metrics:
+  - Duration-specific annual maxima
+  - Return-level uncertainty
+  - Areal extreme bias
+references:
+  - kendon
+  - extremes
+  - maraun
+figure:
+  title: A daily total does not identify an hourly peak.
+  alt: >-
+    Two synthetic 24-hour storms both total 48 mm. One is steady at 2 mm each hour; the
+    other places all 48 mm in two hours with a peak of 30 mm.
+  caption: >-
+    The constructed storms have identical daily accumulations of 48 mm and different
+    hourly maxima. Daily output alone cannot distinguish these within-day sequences.
+  image: /figures/annual-maximum.png
+  pdf: /figures/annual-maximum.pdf
+  provenance: >-
+    Original synthetic example, generated with Matplotlib. No observations or
+    downscaling product output are shown.
+  data: /figures/examples.json
+  code: /figures/make_figures.py
+cells:
+  spatial: cells/annual-maximum/spatial.md
+  temporal: cells/annual-maximum/temporal.md
+  models: cells/annual-maximum/models.md
+  members: cells/annual-maximum/members.md
+  domain: cells/annual-maximum/domain.md
+  coverage: cells/annual-maximum/coverage.md

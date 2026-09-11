@@ -1,3 +1,4 @@
-:HL["/pcef_workshop_site_mockup/_next/static/css/c08876e7b1f6e96b.css","style"]
+:HL["/pcef_workshop_site_mockup/_next/static/css/8bc48b7dd4dc8d58.css","style"]
+:HL["/pcef_workshop_site_mockup/_next/static/css/859182b30a21607a.css","style"]
 :HL["/pcef_workshop_site_mockup/figures/intermittency.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"guidance","param":null,"prefetchHints":4192,"slots":{"children":{"name":"topic","param":{"type":"d","key":"intermittency","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"BxBy6M9zz7p7KkA_H_mvm"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"guidance","param":null,"prefetchHints":4192,"slots":{"children":{"name":"topic","param":{"type":"d","key":"intermittency","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"9RazZwMyzey3HWoRCwMS9"}

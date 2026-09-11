@@ -1,0 +1,33 @@
+version: 1
+products:
+  - loca2
+  - nex-gddp-cmip6
+  - maca-metdata
+  - maca-livneh
+  - loca-cmip5
+  - nex-gddp-cmip5
+  - nex-dcp30
+  - gdpcir
+  - gard-lens
+  - wus-d3
+  - na-cordex
+  - tgw
+  - alaska-hawaii-bcsd
+  - reclamation-bcsd
+  - reclamation-bcca
+  - ornl-dbcca
+  - carbonplan-maca
+  - candcs-m6
+  - global-bccaq
+  - en-gard
+  - carbonplan-gard
+  - star-esdm
+  - canlead-v1
+  - uw-pd-cmip5
+  - icar
+  - canrcm4-le
+  - conus404
+  - adda-v2
+  - edde-v1
+  - ornl-regcm
+  - carbonplan-deepsd

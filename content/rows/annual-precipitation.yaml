@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../schema.json#/definitions/row
+id: annual-precipitation
+title: Annual precipitation
+short: Annual totals
+use: Water balance & long-term supply
+intro: >-
+  Evaluate totals over the area and year definition used in your water balance. Start
+  with seasonal and annual performance before selecting a finer output grid.
+metrics:
+  - Annual and seasonal bias
+  - Interannual variability
+  - Basin-average change
+references:
+  - lehner
+  - lange
+figure:
+  title: The same annual total can hide a different season.
+  alt: >-
+    Two synthetic monthly precipitation series both total 960 mm, but one has winter
+    peaks and the other is constant.
+  caption: >-
+    Both constructed examples total 960 mm in one year. The first has a winter maximum;
+    the second has 80 mm each month. Annual agreement alone cannot establish seasonal
+    agreement.
+  image: /figures/annual-precipitation.png
+  pdf: /figures/annual-precipitation.pdf
+  provenance: >-
+    Original synthetic example, generated with Matplotlib. No observations or
+    downscaling product output are shown.
+  data: /figures/examples.json
+  code: /figures/make_figures.py
+cells:
+  spatial: cells/annual-precipitation/spatial.md
+  temporal: cells/annual-precipitation/temporal.md
+  models: cells/annual-precipitation/models.md
+  members: cells/annual-precipitation/members.md
+  domain: cells/annual-precipitation/domain.md
+  coverage: cells/annual-precipitation/coverage.md

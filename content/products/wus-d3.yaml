@@ -1,0 +1,116 @@
+provider: UCLA Center for Climate Science and collaborators
+method:
+  family: Dynamical downscaling
+  description: WRF 4.1.3, with 45 km outer and 9 km inner domains.
+  reference_dataset: >-
+    GCM boundary forcing; separate ERA5-driven reference simulation. No statistical training
+    target for the original GCM-driven runs.
+  training_period: Not applicable to the dynamical model. Evaluation in the paper uses 1981-2010.
+coverage:
+  domain: Western United States, including the WECC US region; use the inner-domain mask.
+  grid: WRF regional model grid; use supplied coordinates and projection.
+  grid_spacing:
+    value: 9
+    unit: km (inner domain; 45 km outer domain)
+  timestep: Hourly selected variables; other output frequencies depend on tier.
+  historical: 1980-2014
+  future: 2015-2100
+  scenarios:
+    - SSP3-7.0
+    - SSP2-4.5 (CESM2 only in the original paper)
+    - SSP5-8.5 (CESM2 only in the original paper)
+  variables:
+    - name: precipitation (tier-dependent variable names)
+      unit: Inspect WRF accumulation conventions, resets, and time intervals.
+      description: >-
+        Precipitation. Confirm whether the selected variable is a rate or accumulated
+        amount.
+  calendar: >-
+    Not verified from data files. Read the time coordinate, calendar, and accumulation
+    interval before combining products.
+ensemble:
+  driving_models: CMIP6
+  model_count: 14
+  members: >-
+    16 simulations in the original paper: 14 SSP3-7.0 projections plus two additional CESM2
+    scenarios. These are not 16 different GCMs.
+  member_counts: []
+access:
+  landing_page: https://registry.opendata.aws/wrf-cmip6/
+  data: https://registry.opendata.aws/wrf-cmip6/
+  format: WRF NetCDF output, organized into data tiers in AWS S3.
+  license: Creative Commons Attribution 4.0 International, per the AWS dataset registry.
+  license_url: https://registry.opendata.aws/wrf-cmip6/
+  subsetting: >-
+    Download access is documented; a server-side spatial/time subsetting service has not
+    been verified.
+  cost: >-
+    AWS registry provides public S3 access with no AWS account required. User processing and
+    storage costs are not estimated.
+verified_on: '2026-09-11'
+relevant_rows:
+  - annual-precipitation
+  - annual-maximum
+  - intermittency
+  - spatial-coherence
+id: wus-d3
+name: WUS-D3
+version: >-
+  Original ensemble described by Rahimi et al. (2024); separate from later bias-corrected
+  forcing experiments.
+summary: WRF dynamical downscaling over the western US, with hourly output for selected variables.
+guidance: product-guidance/wus-d3.md
+references:
+  - rahimi-wus-d3
+metadata_sources:
+  - url: >-
+      https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+    locator: Page 1, WUS-D3 row; scenarios expanded using the original paper.
+  - url: https://gmd.copernicus.org/articles/17/2265/2024/
+    locator: >-
+      Sections 2.1-2.2, 3, and data availability: models, scenarios, grid, evaluation, and
+      tiers. Publication date, data-tier description, code/data availability, and Financial
+      support.
+  - url: https://registry.opendata.aws/wrf-cmip6/
+    locator: License, access, updates, and publications distinguishing bias-corrected experiments.
+generation:
+  - CMIP6
+dates:
+  created: null
+  released: null
+  publication: '2024-03-20'
+  notes: >-
+    Original WUS-D3 overview publication date. Later uploads and corrected forcing
+    experiments have separate histories.
+existing_uses:
+  - description: >-
+      Original ensemble evaluated for historical climate and future mean and extreme
+      precipitation across western US states.
+    url: https://gmd.copernicus.org/articles/17/2265/2024/
+funding:
+  - agency: US Department of Energy
+    award: DE-SC0016605
+    notes: HyperFACETS project support.
+    source_url: https://gmd.copernicus.org/articles/17/2265/2024/
+  - agency: Strategic Environmental Research and Development Program
+    award: RC19-1391
+    notes: Study support.
+    source_url: https://gmd.copernicus.org/articles/17/2265/2024/
+  - agency: California Energy Commission
+    award: EPC-20-006
+    notes: Study support.
+    source_url: https://gmd.copernicus.org/articles/17/2265/2024/
+  - agency: University of California
+    award: LRF-18-542511
+    notes: Climate Ecosystems Future project.
+    source_url: https://gmd.copernicus.org/articles/17/2265/2024/
+associated_resources:
+  - label: Provider documentation
+    url: https://registry.opendata.aws/wrf-cmip6/
+    description: Product descriptions and links maintained by the provider.
+  - label: Model code and analysis archive
+    url: https://doi.org/10.5281/zenodo.10635867
+    description: WRF versions, figure notebooks, and geography files for the original study.
+source_scope: >-
+  Provider documentation and selected papers checked. Unresolved fields are marked
+  explicitly; data files and application performance were not tested.

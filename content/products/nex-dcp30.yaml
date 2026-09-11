@@ -1,0 +1,97 @@
+provider: NASA Earth Exchange / NCCS
+method:
+  family: Statistical downscaling
+  description: Bias correction and spatial disaggregation (BCSD).
+  reference_dataset: PRISM
+  training_period: Not recorded in the sources checked; inspect the release documentation.
+coverage:
+  domain: Conterminous United States
+  grid: Regular latitude-longitude grid.
+  grid_spacing:
+    value: 30
+    unit: arc-seconds (1/120 degree)
+  timestep: Monthly
+  historical: 1950-2005
+  future: 2006-2099 in NCCS documentation; inspect individual records.
+  scenarios:
+    - RCP2.6
+    - RCP4.5
+    - RCP6.0
+    - RCP8.5
+  variables:
+    - name: pr
+      unit: Check the monthly precipitation rate/amount convention in the selected file.
+      description: Monthly precipitation, not a daily event series.
+    - name: tasmin
+      unit: K; verify the selected distribution.
+      description: Monthly average of daily minimum near-surface temperature.
+    - name: tasmax
+      unit: K; verify the selected distribution.
+      description: Monthly average of daily maximum near-surface temperature.
+  calendar: >-
+    Not verified from data files. Read the time coordinate, calendar, and accumulation
+    interval before combining products.
+ensemble:
+  driving_models: CMIP5
+  model_count: 33
+  members: Model/member/scenario availability must be checked in the selected archive.
+  member_counts: []
+access:
+  landing_page: https://www.nccs.nasa.gov/nex-dcp30/
+  data: https://registry.opendata.aws/nasanex/
+  format: NetCDF4 classic; Earth Engine distribution also available.
+  license: Public domain, as stated by the Earth Engine dataset distribution.
+  license_url: https://developers.google.com/earth-engine/datasets/catalog/NASA_NEX-DCP30
+  subsetting: >-
+    NCCS lists THREDDS search, subset, download, and visualization services. Service
+    operation was not tested.
+  cost: >-
+    Data are public domain. Public S3 distribution is listed; optional platform and analysis
+    costs are not estimated.
+verified_on: '2026-09-11'
+relevant_rows:
+  - annual-precipitation
+id: nex-dcp30
+name: NEX-DCP30
+version: NCCS Version 1, CMIP5 monthly archive.
+summary: Monthly projections on a 30 arc-second CONUS grid for climate summaries.
+guidance: product-guidance/nex-dcp30.md
+references:
+  - thrasher-dcp30
+metadata_sources:
+  - url: >-
+      https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+    locator: 'Page 1, NEX-DCP30 row: method and reference data.'
+  - url: https://www.nccs.nasa.gov/nex-dcp30/
+    locator: >-
+      Description and Summary: 33 models, monthly cadence, 30 arc-second grid, time ranges.
+      Data Access: service capabilities.
+  - url: https://developers.google.com/earth-engine/datasets/catalog/NASA_NEX-DCP30
+    locator: Terms of Use and dataset citation.
+  - url: https://pmc.ncbi.nlm.nih.gov/articles/PMC5819482/
+    locator: 'Data Records: NASA NEX-DCP30.'
+generation:
+  - CMIP5
+dates:
+  created: null
+  released: null
+  publication: null
+  notes: >-
+    Exact dataset creation and release dates were not established from the sources reviewed.
+    A paper date, repository timestamp, or simulation year is not a dataset creation date.
+existing_uses:
+  - description: >-
+      Compared with other downscaled climate products in a Pacific Northwest
+      intercomparison.
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC5819482/
+funding: []
+associated_resources:
+  - label: Provider documentation
+    url: https://www.nccs.nasa.gov/nex-dcp30/
+    description: Product descriptions and links maintained by the provider.
+  - label: NASA NEX public archive
+    url: https://registry.opendata.aws/nasanex/
+    description: Archive access and distribution details.
+source_scope: >-
+  Provider documentation and selected papers checked. Unresolved fields are marked
+  explicitly; data files and application performance were not tested.

@@ -1,0 +1,122 @@
+source: >-
+  https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf
+checked_on: '2026-09-11'
+scope: >-
+  28 PDF dataset rows represented by 31 catalog records. Family coverage, not separate
+  enumeration of every release, training variant or run.
+rows:
+  - row: 1
+    dataset: 21st Century Hydrologic Projections for Alaska and Hawaii
+    products:
+      - alaska-hawaii-bcsd
+  - row: 2
+    dataset: Reclamation BCSD climate and hydrology projections
+    products:
+      - reclamation-bcsd
+  - row: 3
+    dataset: NEX-GDDP CMIP5 / NEX-GDDP-CMIP6
+    products:
+      - nex-gddp-cmip5
+      - nex-gddp-cmip6
+  - row: 4
+    dataset: NEX-DCP30
+    products:
+      - nex-dcp30
+  - row: 5
+    dataset: GDPCIR
+    products:
+      - gdpcir
+  - row: 6
+    dataset: Reclamation BCCA climate and hydrology projections
+    products:
+      - reclamation-bcca
+  - row: 7
+    dataset: ORNL DBCCA
+    products:
+      - ornl-dbcca
+  - row: 8
+    dataset: MACAv2-METDATA / MACAv2-LIVNEH
+    products:
+      - maca-metdata
+      - maca-livneh
+  - row: 9
+    dataset: CarbonPlan MACA
+    products:
+      - carbonplan-maca
+  - row: 10
+    dataset: CanDCS-M6
+    products:
+      - candcs-m6
+  - row: 11
+    dataset: Global BCCAQ (Gebrechorkos et al.)
+    products:
+      - global-bccaq
+  - row: 12
+    dataset: LOCA CMIP5 / LOCA2 North America
+    products:
+      - loca-cmip5
+      - loca2
+  - row: 13
+    dataset: En-GARD dataset in the NCAR matrix
+    products:
+      - en-gard
+  - row: 14
+    dataset: GARD-LENS
+    products:
+      - gard-lens
+  - row: 15
+    dataset: CarbonPlan GARD-SV and GARD-MV
+    products:
+      - carbonplan-gard
+  - row: 16
+    dataset: STAR-ESDM
+    products:
+      - star-esdm
+  - row: 17
+    dataset: CanLEAD v1
+    products:
+      - canlead-v1
+  - row: 18
+    dataset: UW-Madison Probabilistic Downscaling (UW-PD)
+    products:
+      - uw-pd-cmip5
+  - row: 19
+    dataset: ICAR dataset in the NCAR matrix
+    products:
+      - icar
+  - row: 20
+    dataset: CanRCM4 Large Ensemble
+    products:
+      - canrcm4-le
+  - row: 21
+    dataset: NA-CORDEX CMIP5
+    products:
+      - na-cordex
+  - row: 22
+    dataset: CONUS404
+    products:
+      - conus404
+  - row: 23
+    dataset: WUS-D3
+    products:
+      - wus-d3
+  - row: 24
+    dataset: IM3/HyperFACETS TGW
+    products:
+      - tgw
+  - row: 25
+    dataset: Argonne Dynamically Downscaled Archive V2 (ADDA_V2)
+    products:
+      - adda-v2
+  - row: 26
+    dataset: EPA Dynamically Downscaled Ensemble (EDDE) v1
+    products:
+      - edde-v1
+  - row: 27
+    dataset: ORNL RegCM
+    products:
+      - ornl-regcm
+  - row: 28
+    dataset: CarbonPlan DeepSD
+    products:
+      - carbonplan-deepsd
