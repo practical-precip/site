@@ -7,6 +7,8 @@ Checked on 2026-09-11:
 - Export checks confirmed that served text assets contain no private hosting domain or project identifiers.
 - Independent source review found no concrete migration issue in links, assets, metadata, or static route configuration.
 - `npm install`: zero known vulnerabilities reported.
+- Local Next.js development server: route checks passed for 22 routes/assets, 30 controls, all guidance anchors, metadata, downloads, and unknown-topic 404.
+- Authored-source whitespace checks passed. Generated upstream JavaScript contains whitespace diagnostics and was retained as built.
 
 The repository is a fresh snapshot. Previous hosting configuration, Git history, and local deployment receipts were not copied.
 
