@@ -20,23 +20,23 @@ try {
   const page = await browser.newPage();
   await page.goto(
     (process.env.PRECIP_SITE_URL || "http://127.0.0.1:3011") +
-      "/products/loca2/",
+      "/products/loca2/?region=northwest",
   );
   await page
     .getByRole("heading", { name: "LOCA2 North America", exact: true })
     .waitFor();
+  await page.waitForFunction(() => document.querySelector("#climate-region")?.value === "northwest");
   writeFileSync(
     variant,
-    readFileSync(root + "/metadata/datasets-and-guidance/templates/regional-guidance.md", "utf8").replace("## Guidance\n", "## Guidance\n\n## Regional reload verification\n"),
+    readFileSync(root + "/metadata/datasets-and-guidance/templates/regional-guidance.md", "utf8").replace("### Contributors\n\nNo entries.", "### Contributors\n\n- Preview test").replace("## Guidance\n", "## Guidance\n\n## Regional reload verification\n"),
   );
   writeFileSync(
     base,
     original.replace(
       "## Guidance\n",
-      "### Regions\n\n| Field | Value |\n| --- | --- |\n| Northwest | product-guidance/loca2.northwest-test.md |\n\n## Guidance\n",
+      "### Regions\n\n- __Northwest:__ product-guidance/loca2.northwest-test.md\n\n## Guidance\n",
     ),
   );
-  await page.locator("#climate-region").selectOption("northwest");
   await page
     .getByRole("heading", { name: "Regional reload verification", exact: true })
     .waitFor({ timeout: 20000 });

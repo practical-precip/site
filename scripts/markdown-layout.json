@@ -113,7 +113,11 @@
           "contributors": [
             "string"
           ],
-          "updated": "string"
+          "updated": "string",
+          "reviewed_by": [
+            "string"
+          ],
+          "reviewed_on": "string"
         },
         "evidence": [
           {
@@ -137,7 +141,11 @@
         "contributors": [
           "string"
         ],
-        "updated": "string"
+        "updated": "string",
+        "reviewed_by": [
+          "string"
+        ],
+        "reviewed_on": "string"
       },
       "evidence": [
         {

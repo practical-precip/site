@@ -176,3 +176,11 @@ These checks validate the migration and software behavior. They do not constitut
 - All 31 content, conversion, snapshot, and bibliography tests passed. BibTeX tests cover author lists, literal names, protected capitals, LaTeX accents, string macros, duplicate keys/fields, malformed entries, and required annotations.
 - Independent review confirmed the reference parity and found no important loss or validation issue.
 - Bibliography parser tests also run in public CI without access to the private source repository.
+
+## Labeled metadata lists
+
+- Converted 113 metadata pages and two templates from tables to labeled lists using double underscores. Collections use numbered entries with indented fields; value lists no longer require semicolon separators.
+- Exact equality checks passed for all 133 source records (including the unchanged BibTeX references), guidance prose, and the whole compiled site content.
+- All 35 tests passed. Added coverage for nested lists, leading-zero state codes, punctuation, soft-wrapped values, duplicate labels, missing bullets, invalid indentation, and empty markers.
+- Independent review found no important parser or instruction issue in its bounded review.
+- Chromium verified a live regional override written with underscore labels and restoration to general guidance. The test now supplies its required contributor name and selects the region through its URL before hydration.

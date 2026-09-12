@@ -203,3 +203,13 @@ Exact migration and compiled-content comparisons confirmed no scientific content
 User: "The references can be combined in a single file in bibtex format"
 
 Combined all 20 reference pages into `references.bib` in the private content repository. Citation keys, existing author labels, bibliographic fields, and the `support` and `scope` annotations were preserved exactly. The site owns BibTeX parsing and validation; contributors edit the one bibliography file. Updated contribution instructions include a BibTeX example and explain the custom annotation fields.
+
+## Labeled lists for human editing
+
+User: "Markdown tables are not very friendly to edit because the columns dont line up, how can we work around this?"
+
+The assistant proposed labeled lists under headings, with ordinary prose for guidance.
+
+User: "Ok but use double underscore instead of asterix so its easier to read"
+
+Converted editable metadata and templates to `- __Field:__ value` syntax, using nested lists for multiple values and numbered entries for collections of records. Updated the editing instructions and the site parser. The bibliography remains in `references.bib`. Exact comparisons confirmed the scientific content and prose are unchanged.
