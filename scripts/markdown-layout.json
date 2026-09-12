@@ -1,138 +1,5 @@
 {
   "groups": {
-    "product": {
-      "id": "string",
-      "name": "string",
-      "provider": "string",
-      "version": "string",
-      "summary": "string",
-      "source_scope": "string",
-      "generation": [
-        "string"
-      ],
-      "dates": {
-        "created": "nullable",
-        "released": "string",
-        "publication": "string",
-        "notes": "string"
-      },
-      "method": {
-        "family": "string",
-        "description": "string",
-        "reference_dataset": "string",
-        "training_period": "string"
-      },
-      "coverage": {
-        "domain": "string",
-        "grid": "string",
-        "grid_spacing": {
-          "value": "number",
-          "unit": "string"
-        },
-        "timestep": "string",
-        "historical": "string",
-        "future": "string",
-        "scenarios": [
-          "string"
-        ],
-        "variables": [
-          {
-            "name": "string",
-            "unit": "string",
-            "description": "string"
-          }
-        ],
-        "calendar": "string"
-      },
-      "ensemble": {
-        "driving_models": "string",
-        "model_count": "number",
-        "members": "string",
-        "member_counts": [
-          {
-            "model": "string",
-            "count": "number",
-            "scope": "string",
-            "source_url": "string"
-          }
-        ]
-      },
-      "access": {
-        "landing_page": "string",
-        "data": "string",
-        "format": "string",
-        "license": "string",
-        "license_url": "string",
-        "subsetting": "string",
-        "cost": "string"
-      },
-      "references": [
-        "string"
-      ],
-      "metadata_sources": [
-        {
-          "url": "string",
-          "locator": "string"
-        }
-      ],
-      "verified_on": "string",
-      "guidance": "string",
-      "relevant_rows": [
-        "string"
-      ],
-      "existing_uses": [
-        {
-          "description": "string",
-          "url": "string"
-        }
-      ],
-      "funding": [
-        {
-          "agency": "string",
-          "award": "string",
-          "notes": "string",
-          "source_url": "string"
-        }
-      ],
-      "associated_resources": [
-        {
-          "label": "string",
-          "url": "string",
-          "description": "string"
-        }
-      ],
-      "aliases": [
-        "string"
-      ],
-      "kind": "string",
-      "expert_guidance": {
-        "title": "string",
-        "summary": "string",
-        "review": {
-          "status": "string",
-          "contributors": [
-            "string"
-          ],
-          "updated": "string",
-          "reviewed_by": [
-            "string"
-          ],
-          "reviewed_on": "string"
-        },
-        "evidence": [
-          {
-            "statement": "string",
-            "paper": "string",
-            "locator": "string",
-            "scope": "string"
-          }
-        ],
-        "regions": {
-          "alaska": "string",
-          "northwest": "string"
-        }
-      }
-    },
     "document": {
       "title": "string",
       "summary": "string",
@@ -221,27 +88,6 @@
         ]
       }
     ],
-    "catalog": {
-      "version": "number",
-      "products": [
-        "string"
-      ]
-    },
-    "names": {
-      "source": "string",
-      "scope": "string",
-      "entries": [
-        {
-          "name": "string",
-          "workshop_group": "string",
-          "products": [
-            "string"
-          ],
-          "status": "string",
-          "notes": "string"
-        }
-      ]
-    },
     "matrix": {
       "source": "string",
       "checked_on": "string",
@@ -267,16 +113,6 @@
       "file": "Regions.md",
       "output": "regions.yaml",
       "type": "regions"
-    },
-    {
-      "file": "Dataset order.md",
-      "output": "catalog.yaml",
-      "type": "catalog"
-    },
-    {
-      "file": "Workshop names.md",
-      "output": "names.yaml",
-      "type": "names"
     },
     {
       "file": "notes/NCAR matrix coverage.md",

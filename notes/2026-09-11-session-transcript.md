@@ -213,3 +213,11 @@ The assistant proposed labeled lists under headings, with ordinary prose for gui
 User: "Ok but use double underscore instead of asterix so its easier to read"
 
 Converted editable metadata and templates to `- __Field:__ value` syntax, using nested lists for multiple values and numbered entries for collections of records. Updated the editing instructions and the site parser. The bibliography remains in `references.bib`. Exact comparisons confirmed the scientific content and prose are unchanged.
+
+## NestedText dataset records
+
+User: "I want to try using NestedText instead of markdown for the datasets, with markdown its difficult to see the nesting and the format itself is nonstandard which makes me nervous. We dont need the "Workshop name.md", the dataset names and the ids can be defined in the INDEX.md alone. "Dataset order.md" is also unnecessary."
+
+Converted all 67 datasets and their two regional records to standard NestedText, with expert guidance stored as Markdown in a multiline string. INDEX.md links now define display names, filename-based IDs, aliases, and order. Removed Workshop names.md and Dataset order.md. Guidance boxes remain Markdown, and references remain in the shared BibTeX file.
+
+The site uses the published NestedText parser and owns conversion and validation. Updated templates and online/Git contribution instructions. Preserved the user's existing field-guide wording edit. Exact data comparisons, the official reference parser, 41 tests, production build, export checks, and live/static browser checks passed. See VALIDATION.md for their scope.

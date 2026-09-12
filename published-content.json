@@ -1,9 +1,9 @@
 {
   "version": 1,
   "revisions": {
-    "datasets-and-guidance": "5712251683d319d02e2d507eadb9fe6ed2787022"
+    "datasets-and-guidance": "12513df5a77b365b0a648d6c98ef985bda394699"
   },
-  "sha256": "56af9bbbca0676120ded943054da96dd7e7c2b00af55d96137b71c2091a19a43",
+  "sha256": "66edc0e6e1a8d51f7e6b4251e63ec5f553a69d280412fb7beb09e915e8a6af20",
   "content": {
     "version": 1,
     "columns": [
@@ -1175,8 +1175,6 @@
     },
     "products": [
       {
-        "id": "loca2",
-        "name": "LOCA2 North America",
         "version": "Precipitation v20240915; original ensemble described by Pierce et al. (2023)",
         "summary": "Daily CMIP6 projections using localized constructed analogs on a roughly 6 km North American grid.",
         "provider": "Scripps Institution of Oceanography, UC San Diego",
@@ -1287,6 +1285,8 @@
             "description": "Variable-specific observed training datasets."
           }
         ],
+        "id": "loca2",
+        "name": "LOCA2 North America",
         "aliases": [
           "LOCA2"
         ],
@@ -1302,15 +1302,13 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nTreat LOCA2 as a candidate for basin water-balance and daily precipitation studies. Evaluate basin totals, wet/dry spells, and spatial dependence at the scale used by the application. Fine grid spacing alone does not demonstrate suitability.\n\n## Version and evaluation checks\n\nRecord the precipitation release and the model/member/scenario combination. The provider reports a precipitation update in September 2024. Do not transfer an evaluation of an older release to a new one without checking the changes.\n\nThe ensemble study is documented in [Pierce et al. (2023)](https://cirrus.ucsd.edu/~pierce/papers/Pierce_et_al_JHM_2023_LOCA2_precip_extremes_VoR.pdf). Compare extremes over matched accumulation windows and quantify sampling uncertainty. Daily data alone cannot provide hourly intensity-duration-frequency estimates.\n\n## Expert contribution needed\n\nAdd regional evaluation results, diagnostics, and evidence of limitations here. State the product release, basin, reference data, period, and application. These suggestions are an AI-assisted draft and have not been endorsed by a domain expert.",
-          "contentFile": "datasets/loca2.md",
+          "contentFile": "datasets/loca2.nt",
           "paperIds": [
             "pierce-loca2"
           ]
         }
       },
       {
-        "id": "nex-gddp-cmip6",
-        "name": "NEX-GDDP-CMIP6",
         "version": "Original archive described in 2022; later v1 revisions and v2 exist and require separate review.",
         "summary": "Global daily CMIP6 projections using bias correction and spatial disaggregation at 0.25 degrees.",
         "provider": "NASA Earth Exchange / NASA Center for Climate Simulation",
@@ -1436,6 +1434,8 @@
             "description": "THREDDS and NetCDF Subset Service access examples."
           }
         ],
+        "id": "nex-gddp-cmip6",
+        "name": "NEX-GDDP-CMIP6",
         "aliases": [
           "NASA-NEX-GDDP"
         ],
@@ -1451,7 +1451,7 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nConsider this archive when daily projections over multiple countries or broad domains are needed. Compare the 0.25-degree spatial support with the basin or site target, and test wet-day frequency and extremes rather than relying only on mean agreement.\n\n## Version and evaluation checks\n\nThis entry describes the original archive in [Thrasher et al. (2022)](https://pmc.ncbi.nlm.nih.gov/articles/PMC9163132/). The provider also distributes revised data and a v2 technical note. Pin the downloaded release and inspect its changes before using this entry's metadata.\n\nKeep climate-model spread separate from internal variability. One variant per model does not supply a large initial-condition ensemble for each model. Daily output does not identify hourly extremes.\n\n## Expert contribution needed\n\nAdd application-specific recommendations and failures with product version, reference data, metrics, period, and region. The advice here is an AI-assisted draft awaiting expert review.",
-          "contentFile": "datasets/nex-gddp-cmip6.md",
+          "contentFile": "datasets/nex-gddp-cmip6.nt",
           "paperIds": [
             "thrasher"
           ]
@@ -1460,8 +1460,6 @@
       {
         "provider": "Climatology Lab / University of Idaho; Northwest Knowledge Network distribution",
         "verified_on": "2026-09-11",
-        "id": "maca-metdata",
-        "name": "MACAv2-METDATA",
         "version": "CMIP5 MACAv2; provider-described archive.",
         "summary": "Daily constructed-analog projections with a distinct observational training dataset.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -1577,6 +1575,8 @@
             "description": "Product descriptions and links maintained by the provider."
           }
         ],
+        "id": "maca-metdata",
+        "name": "MACAv2-METDATA",
         "aliases": [
           "MACAv2",
           "MACA"
@@ -1593,7 +1593,7 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nCompare annual water balance, wet-day occurrence, and daily extremes before selecting this product for a basin. Where other meteorological inputs are needed, check variable availability for every selected model.\n\n## Limits and evaluation checks\n\nKeep the gridMET-trained variant separate from MACAv2-LIVNEH. Compare simulations with observations through climate statistics, not same-date storm matches.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Abatzoglou and Brown (2012)](https://rmets.onlinelibrary.wiley.com/doi/10.1002/joc.2312). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/maca-metdata.md",
+          "contentFile": "datasets/maca-metdata.nt",
           "paperIds": [
             "abatzoglou-maca"
           ]
@@ -1602,8 +1602,6 @@
       {
         "provider": "Climatology Lab / University of Idaho; Northwest Knowledge Network distribution",
         "verified_on": "2026-09-11",
-        "id": "maca-livneh",
-        "name": "MACAv2-LIVNEH",
         "version": "CMIP5 MACAv2; provider-described archive.",
         "summary": "Daily constructed-analog projections with a distinct observational training dataset.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -1719,6 +1717,8 @@
             "description": "Product descriptions and links maintained by the provider."
           }
         ],
+        "id": "maca-livneh",
+        "name": "MACAv2-LIVNEH",
         "aliases": [
           "MACAv2",
           "MACA"
@@ -1735,7 +1735,7 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nUse this entry when the Livneh-trained MACA archive is required, including studies connected to Columbia River basin coverage. Check basin masks and the observation record used for validation.\n\n## Limits and evaluation checks\n\nDifferences from MACAv2-METDATA combine training-data and grid differences. A paired comparison should match model, scenario, period, and aggregation scale.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Abatzoglou and Brown (2012)](https://rmets.onlinelibrary.wiley.com/doi/10.1002/joc.2312). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/maca-livneh.md",
+          "contentFile": "datasets/maca-livneh.nt",
           "paperIds": [
             "abatzoglou-maca"
           ]
@@ -1744,8 +1744,6 @@
       {
         "provider": "Scripps Institution of Oceanography, UC San Diego",
         "verified_on": "2026-09-11",
-        "id": "loca-cmip5",
-        "name": "LOCA CMIP5",
         "version": "Original LOCA CMIP5 archive at native 1/16 degree; not LOCA_8th evaluation data.",
         "summary": "Daily localized constructed-analog projections from the CMIP5 generation.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -1859,6 +1857,8 @@
             "description": "An application of the CMIP5 LOCA archive."
           }
         ],
+        "id": "loca-cmip5",
+        "name": "LOCA CMIP5",
         "aliases": [
           "LOCA"
         ],
@@ -1874,7 +1874,7 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nUseful as a candidate when reproducing studies built on CMIP5 LOCA. Test precipitation occurrence and spatial dependence at the basin scale.\n\n## Limits and evaluation checks\n\nThe NCAR map label LOCA_8th does not identify this native 1/16-degree archive. Obtain the evaluation preprocessing and version before transferring its results. Do not use LOCA2 release notes to describe this product.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Pierce et al. (2014)](https://doi.org/10.1175/JHM-D-14-0082.1). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/loca-cmip5.md",
+          "contentFile": "datasets/loca-cmip5.nt",
           "paperIds": [
             "pierce-loca"
           ]
@@ -1883,8 +1883,6 @@
       {
         "provider": "NASA Earth Exchange / Climate Analytics Group / NCCS",
         "verified_on": "2026-09-11",
-        "id": "nex-gddp-cmip5",
-        "name": "NEX-GDDP CMIP5",
         "version": "CMIP5 archive, NCCS Version 1 description.",
         "summary": "Global daily BCSD projections from 21 CMIP5 models.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -1989,6 +1987,8 @@
             "description": "Archive access and distribution details."
           }
         ],
+        "id": "nex-gddp-cmip5",
+        "name": "NEX-GDDP CMIP5",
         "aliases": [
           "NASA-NEX-GDDP"
         ],
@@ -2004,7 +2004,7 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nConsider this CMIP5 archive for reproducing global daily impact studies. Check wet-day frequency and daily extremes separately from average precipitation.\n\n## Limits and evaluation checks\n\nNCCS contains inconsistent daily/monthly and final-year wording. The Earth Engine catalog specifies daily data and a daily-mean precipitation flux. Verify the chosen files and do not assume the NCAR NASA-NEX label uniquely identifies this release.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Thrasher et al. (2012)](https://hess.copernicus.org/articles/16/3309/2012/). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/nex-gddp-cmip5.md",
+          "contentFile": "datasets/nex-gddp-cmip5.nt",
           "paperIds": [
             "thrasher-temperature"
           ]
@@ -2013,8 +2013,6 @@
       {
         "provider": "NASA Earth Exchange / NCCS",
         "verified_on": "2026-09-11",
-        "id": "nex-dcp30",
-        "name": "NEX-DCP30",
         "version": "NCCS Version 1, CMIP5 monthly archive.",
         "summary": "Monthly projections on a 30 arc-second CONUS grid for climate summaries.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -2127,6 +2125,8 @@
             "description": "Archive access and distribution details."
           }
         ],
+        "id": "nex-dcp30",
+        "name": "NEX-DCP30",
         "aliases": [
           "NASA-NEX-DCP30"
         ],
@@ -2142,7 +2142,7 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nConsider this product for monthly or annual climate summaries. Integrate precipitation rates over the correct month length before computing totals.\n\n## Limits and evaluation checks\n\nMonthly data cannot supply wet/dry spells or annual maximum daily precipitation. The fine spatial grid does not restore missing daily or hourly variability.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Thrasher et al. (2013)](https://doi.org/10.1002/2013EO370002). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/nex-dcp30.md",
+          "contentFile": "datasets/nex-dcp30.nt",
           "paperIds": [
             "thrasher-dcp30"
           ]
@@ -2151,8 +2151,6 @@
       {
         "provider": "Climate Impact Lab; Microsoft Planetary Computer distribution",
         "verified_on": "2026-09-11",
-        "id": "gdpcir",
-        "name": "GDPCIR",
         "version": "Dataset described by Gergel et al. (2024); collection licenses vary by model.",
         "summary": "Global daily CMIP6 projections using quantile delta mapping and localized-analog downscaling.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -2278,6 +2276,8 @@
             "description": "QDM/QPLAD pipeline and reproducibility resources."
           }
         ],
+        "id": "gdpcir",
+        "name": "GDPCIR",
         "aliases": [],
         "guidance": {
           "title": "GDPCIR evaluation guidance",
@@ -2298,7 +2298,7 @@
             }
           ],
           "body": "## Application guidance\n\nConsider this product for studies requiring global daily coverage and an explicit quantile-trend preservation method. Compare against other reference datasets as well as ERA5.\n\n## Limits and evaluation checks\n\nTest whether the target statistic is preserved after spatial and temporal aggregation. A method designed to preserve GCM quantile changes cannot establish the accuracy of those future changes. Keep model-specific licenses with downloaded subsets.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Gergel et al. (2024)](https://gmd.copernicus.org/articles/17/191/2024/). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/gdpcir.md",
+          "contentFile": "datasets/gdpcir.nt",
           "paperIds": [
             "gergel-gdpcir"
           ]
@@ -2307,8 +2307,6 @@
       {
         "provider": "NSF NCAR and Cornell University; NCAR GDEX",
         "verified_on": "2026-09-11",
-        "id": "gard-lens",
-        "name": "GARD-LENS",
         "version": "2024 published ensemble; NCAR GDEX d619000 (DOI 10.5065/5W7W-5224).",
         "summary": "Daily projections from 200 initial-condition members across three CMIP6 models.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -2461,6 +2459,8 @@
             "description": "GARD-LENS simulation files cited by the dataset paper."
           }
         ],
+        "id": "gard-lens",
+        "name": "GARD-LENS",
         "aliases": [],
         "guidance": {
           "title": "GARD-LENS evaluation guidance",
@@ -2481,7 +2481,7 @@
             }
           ],
           "body": "## Application guidance\n\nUse member-level series to estimate internal variability while keeping results grouped by parent GCM. Compare balanced parent-model summaries with any pooled-member result.\n\n## Limits and evaluation checks\n\nThe ensemble samples only three CMIP6 models under one future scenario. The paper identifies all three as relatively high climate-sensitivity models [Hartke et al. (2024)](https://www.nature.com/articles/s41597-024-04205-z), so also examine how their forced responses compare with a broader model ensemble. Do not interpret 200 members as 200 independent climate models or as complete scenario uncertainty. EC-Earth3 starts later, which affects common-period comparisons.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Hartke et al. (2024)](https://www.nature.com/articles/s41597-024-04205-z). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/gard-lens.md",
+          "contentFile": "datasets/gard-lens.nt",
           "paperIds": [
             "hartke-gard-lens"
           ],
@@ -2505,7 +2505,7 @@
                 }
               ],
               "body": "## Application guidance\n\nCompare basin and elevation-band precipitation against independent observations where possible. Record the processed GMET reference used in training and do not treat it as independent validation.\n\n## Interpretation limits\n\nThe cap described in [Hartke et al. (2024)](https://www.nature.com/articles/s41597-024-04205-z) applies to the training observations. Check the actual output distribution rather than assuming a 500 mm/day ceiling in the projections. Preserve parent-model identity when pooling members. All three parent models have relatively high climate sensitivity, and the archive samples only SSP3-7.0.\n\n## Expert contribution needed\n\nAdd Alaska basin and mountain precipitation evaluations with the release, reference data, period, and metric. This interpretation is an AI-assisted draft awaiting regional expert review.",
-              "contentFile": "datasets/regional/gard-lens.alaska.md",
+              "contentFile": "datasets/regional/gard-lens.alaska.nt",
               "paperIds": [
                 "hartke-gard-lens"
               ]
@@ -2516,8 +2516,6 @@
       {
         "provider": "UCLA Center for Climate Science and collaborators",
         "verified_on": "2026-09-11",
-        "id": "wus-d3",
-        "name": "WUS-D3",
         "version": "Original ensemble described by Rahimi et al. (2024); separate from later bias-corrected forcing experiments.",
         "summary": "WRF dynamical downscaling over the western US, with hourly output for selected variables.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -2643,6 +2641,8 @@
             "description": "WRF versions, figure notebooks, and geography files for the original study."
           }
         ],
+        "id": "wus-d3",
+        "name": "WUS-D3",
         "aliases": [],
         "guidance": {
           "title": "WUS-D3 evaluation guidance",
@@ -2663,7 +2663,7 @@
             }
           ],
           "body": "## Application guidance\n\nConsider hourly precipitation and spatial storm structure for western US applications. Evaluate accumulated precipitation, seasonal biases, and extremes against multiple suitable references.\n\n## Limits and evaluation checks\n\nRecord whether GCM forcing was bias corrected. Findings from the original ensemble cannot be assigned to later corrected experiments. Confirm WRF accumulation resets and time intervals before calculating hourly or daily extremes.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Rahimi et al. (2024)](https://gmd.copernicus.org/articles/17/2265/2024/). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/wus-d3.md",
+          "contentFile": "datasets/wus-d3.nt",
           "paperIds": [
             "rahimi-wus-d3"
           ],
@@ -2687,7 +2687,7 @@
                 }
               ],
               "body": "## Application guidance\n\nEvaluate seasonal precipitation and basin totals by elevation, with more than one suitable reference where available. Compare results separately for each driving GCM.\n\n## Interpretation limits\n\nThe reported behavior in [Rahimi et al. (2024)](https://gmd.copernicus.org/articles/17/2265/2024/) applies to the original forcing configuration. Confirm whether a downloaded simulation uses corrected GCM forcing before transferring this finding. Mountain reference uncertainty also matters when interpreting annual maximum daily precipitation.\n\n## Expert contribution needed\n\nAdd basin-level evaluations for the selected WUS-D3 configuration. This guidance is an AI-assisted interpretation pending expert review.",
-              "contentFile": "datasets/regional/wus-d3.northwest.md",
+              "contentFile": "datasets/regional/wus-d3.northwest.nt",
               "paperIds": [
                 "rahimi-wus-d3"
               ]
@@ -2698,8 +2698,6 @@
       {
         "provider": "Participating NA-CORDEX modeling groups; NCAR GDEX",
         "verified_on": "2026-09-11",
-        "id": "na-cordex",
-        "name": "NA-CORDEX CMIP5",
         "version": "North American CMIP5 archive; distinguish native, regridded, and bias-corrected outputs.",
         "summary": "A regional climate-model ensemble with 25 km and 50 km simulations over North America.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -2823,6 +2821,8 @@
             "description": "Naming, output frequencies, and experiment combinations."
           }
         ],
+        "id": "na-cordex",
+        "name": "NA-CORDEX CMIP5",
         "aliases": [],
         "guidance": {
           "title": "NA-CORDEX CMIP5 evaluation guidance",
@@ -2836,7 +2836,7 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nUse matched GCM-RCM pairs to examine the contribution of regional modeling to projection spread. Choose native or derived output according to the analysis and document that choice.\n\n## Limits and evaluation checks\n\nThe archive is an uneven experiment matrix. Treating all files as equally independent can overweight shared parent models, resolutions, or RCMs. Check the selected run inventory rather than assuming every pairing exists.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Bukovsky and Mearns (2020)](https://link.springer.com/article/10.1007/s10584-020-02835-x). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/na-cordex.md",
+          "contentFile": "datasets/na-cordex.nt",
           "paperIds": [
             "bukovsky-na-cordex"
           ]
@@ -2845,8 +2845,6 @@
       {
         "provider": "IM3 / HyperFACETS collaboration; MSD-LIVE data portal",
         "verified_on": "2026-09-11",
-        "id": "tgw",
-        "name": "IM3/HyperFACETS TGW",
         "version": "Jones et al. (2023) thermodynamic warming experiments.",
         "summary": "CONUS WRF simulations of historical weather repeated under four warming trajectories.",
         "source_scope": "Provider documentation and selected papers checked. Unresolved fields are marked explicitly; data files and application performance were not tested.",
@@ -2955,6 +2953,8 @@
             "description": "Experiment descriptions and Globus access."
           }
         ],
+        "id": "tgw",
+        "name": "IM3/HyperFACETS TGW",
         "aliases": [
           "IM3/HyperFACETS"
         ],
@@ -2977,15 +2977,13 @@
             }
           ],
           "body": "## Application guidance\n\nUse paired historical and warmed events to examine thermodynamic changes in storm precipitation, timing, and compound impacts. Preserve the mapping from each future year to its baseline weather year.\n\n## Limits and evaluation checks\n\nThese experiments replay historical circulation and are not independent future weather realizations. Do not treat repeated baseline events as independent samples in an extremes fit. Inspect the 2020 and 2060 transitions when computing long-term trends.\n\n## Documentation and expert contributions\n\nThe linked metadata sources describe this archive. Related publication: [Jones et al. (2023)](https://www.nature.com/articles/s41597-023-02485-5). Recommendations above are AI-assisted interpretation, not an endorsement from the dataset authors. Add region-specific evaluations with the release, model/member, reference data, period, and diagnostic before marking this guidance reviewed.",
-          "contentFile": "datasets/tgw.md",
+          "contentFile": "datasets/tgw.nt",
           "paperIds": [
             "jones-tgw"
           ]
         }
       },
       {
-        "id": "alaska-hawaii-bcsd",
-        "name": "21st Century Hydrologic Projections for Alaska and Hawaii",
         "provider": "NCAR / Reclamation",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Keep Alaska and Hawaii grids and reference data separate. This CMIP5 BCSD family is distinct from later CMIP6 Alaska/Hawaii datasets.",
@@ -3083,6 +3081,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "alaska-hawaii-bcsd",
+        "name": "21st Century Hydrologic Projections for Alaska and Hawaii",
         "aliases": [],
         "guidance": {
           "title": "21st Century Hydrologic Projections for Alaska and Hawaii evaluation guidance",
@@ -3096,13 +3096,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nKeep Alaska and Hawaii grids and reference data separate. This CMIP5 BCSD family is distinct from later CMIP6 Alaska/Hawaii datasets.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://www.sciencedirect.com/science/article/pii/S2405880722000309) is available for further review.",
-          "contentFile": "datasets/alaska-hawaii-bcsd.md",
+          "contentFile": "datasets/alaska-hawaii-bcsd.nt",
           "paperIds": []
         }
       },
       {
-        "id": "reclamation-bcsd",
-        "name": "Reclamation BCSD climate and hydrology projections",
         "provider": "Bureau of Reclamation / archive partners",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Select the archive generation and BCSD collection explicitly. Monthly output cannot resolve daily precipitation extremes. CMIP3 scenarios and archive availability require separate verification.",
@@ -3199,6 +3197,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "reclamation-bcsd",
+        "name": "Reclamation BCSD climate and hydrology projections",
         "aliases": [],
         "guidance": {
           "title": "Reclamation BCSD climate and hydrology projections evaluation guidance",
@@ -3212,13 +3212,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nSelect the archive generation and BCSD collection explicitly. Monthly output cannot resolve daily precipitation extremes. CMIP3 scenarios and archive availability require separate verification.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://gdo-dcp.ucllnl.org/downscaled_cmip_projections/techmemo/downscaled_climate.pdf) is available for further review.",
-          "contentFile": "datasets/reclamation-bcsd.md",
+          "contentFile": "datasets/reclamation-bcsd.nt",
           "paperIds": []
         }
       },
       {
-        "id": "reclamation-bcca",
-        "name": "Reclamation BCCA climate and hydrology projections",
         "provider": "Bureau of Reclamation / archive partners",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Do not substitute the neighboring BCSD monthly collection. Check event persistence and spatial coherence before basin-scale hydrologic use. CMIP3 coverage requires separate verification.",
@@ -3315,6 +3313,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "reclamation-bcca",
+        "name": "Reclamation BCCA climate and hydrology projections",
         "aliases": [],
         "guidance": {
           "title": "Reclamation BCCA climate and hydrology projections evaluation guidance",
@@ -3328,13 +3328,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nDo not substitute the neighboring BCSD monthly collection. Check event persistence and spatial coherence before basin-scale hydrologic use. CMIP3 coverage requires separate verification.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://gdo-dcp.ucllnl.org/downscaled_cmip_projections/techmemo/downscaled_climate.pdf) is available for further review.",
-          "contentFile": "datasets/reclamation-bcca.md",
+          "contentFile": "datasets/reclamation-bcca.nt",
           "paperIds": []
         }
       },
       {
-        "id": "ornl-dbcca",
-        "name": "ORNL DBCCA",
         "provider": "Oak Ridge National Laboratory",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Keep DBCCA-Livneh and DBCCA-Daymet separate in comparisons. Differences reflect both reference observations and processing choices.",
@@ -3438,6 +3436,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "ornl-dbcca",
+        "name": "ORNL DBCCA",
         "aliases": [
           "SWA 9505v3 - DBBCA",
           "SWA 9505v3 DBBCA"
@@ -3454,13 +3454,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nKeep DBCCA-Livneh and DBCCA-Daymet separate in comparisons. Differences reflect both reference observations and processing choices.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022EF002734) is available for further review.",
-          "contentFile": "datasets/ornl-dbcca.md",
+          "contentFile": "datasets/ornl-dbcca.nt",
           "paperIds": []
         }
       },
       {
-        "id": "carbonplan-maca",
-        "name": "CarbonPlan MACA",
         "provider": "CarbonPlan",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "This ERA5-trained global implementation is distinct from MACAv2-METDATA and MACAv2-LIVNEH. Use the run catalog to align models and scenarios across methods.",
@@ -3571,6 +3569,8 @@
             "description": "Resolve method, GCM, scenario and run availability."
           }
         ],
+        "id": "carbonplan-maca",
+        "name": "CarbonPlan MACA",
         "aliases": [],
         "guidance": {
           "title": "CarbonPlan MACA evaluation guidance",
@@ -3584,13 +3584,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nThis ERA5-trained global implementation is distinct from MACAv2-METDATA and MACAv2-LIVNEH. Use the run catalog to align models and scenarios across methods.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory.",
-          "contentFile": "datasets/carbonplan-maca.md",
+          "contentFile": "datasets/carbonplan-maca.nt",
           "paperIds": []
         }
       },
       {
-        "id": "candcs-m6",
-        "name": "CanDCS-M6",
         "provider": "Pacific Climate Impacts Consortium / Environment and Climate Change Canada",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "CanDCS-M6 is the multivariate product. CanDCS-U6 uses BCCAQv2 and is a different selection. Check provider errata before downloading.",
@@ -3689,6 +3687,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "candcs-m6",
+        "name": "CanDCS-M6",
         "aliases": [],
         "guidance": {
           "title": "CanDCS-M6 evaluation guidance",
@@ -3702,13 +3702,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nCanDCS-M6 is the multivariate product. CanDCS-U6 uses BCCAQv2 and is a different selection. Check provider errata before downloading.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/gdj3.257) is available for further review.",
-          "contentFile": "datasets/candcs-m6.md",
+          "contentFile": "datasets/candcs-m6.nt",
           "paperIds": []
         }
       },
       {
-        "id": "global-bccaq",
-        "name": "Global BCCAQ (Gebrechorkos et al.)",
         "provider": "Gebrechorkos and collaborators / CEDA",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Evaluate the reference precipitation product in your region. A global grid does not establish regional skill for extremes or mountain precipitation.",
@@ -3809,6 +3807,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "global-bccaq",
+        "name": "Global BCCAQ (Gebrechorkos et al.)",
         "aliases": [],
         "guidance": {
           "title": "Global BCCAQ (Gebrechorkos et al.) evaluation guidance",
@@ -3822,13 +3822,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nEvaluate the reference precipitation product in your region. A global grid does not establish regional skill for extremes or mountain precipitation.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://www.nature.com/articles/s41597-023-02528-x) is available for further review.",
-          "contentFile": "datasets/global-bccaq.md",
+          "contentFile": "datasets/global-bccaq.nt",
           "paperIds": []
         }
       },
       {
-        "id": "en-gard",
-        "name": "En-GARD dataset in the NCAR matrix",
         "provider": "NCAR",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "The matrix identifies a dataset available on request. The linked code is not a download of that dataset. This record is separate from GARD-LENS and CarbonPlan GARD.",
@@ -3916,6 +3914,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "en-gard",
+        "name": "En-GARD dataset in the NCAR matrix",
         "aliases": [],
         "guidance": {
           "title": "En-GARD dataset in the NCAR matrix evaluation guidance",
@@ -3929,13 +3929,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nThe matrix identifies a dataset available on request. The linked code is not a download of that dataset. This record is separate from GARD-LENS and CarbonPlan GARD.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://journals.ametsoc.org/view/journals/hydr/23/10/JHM-D-21-0142.1.xml) is available for further review.",
-          "contentFile": "datasets/en-gard.md",
+          "contentFile": "datasets/en-gard.nt",
           "paperIds": []
         }
       },
       {
-        "id": "carbonplan-gard",
-        "name": "CarbonPlan GARD-SV and GARD-MV",
         "provider": "CarbonPlan",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "SV and MV are separate run collections. CarbonPlan omits En-GARD stochastic ensemble generation. Model and scenario overlap must be checked before comparing methods.",
@@ -4047,6 +4045,8 @@
             "description": "Resolve method, GCM, scenario and run availability."
           }
         ],
+        "id": "carbonplan-gard",
+        "name": "CarbonPlan GARD-SV and GARD-MV",
         "aliases": [],
         "guidance": {
           "title": "CarbonPlan GARD-SV and GARD-MV evaluation guidance",
@@ -4060,13 +4060,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nSV and MV are separate run collections. CarbonPlan omits En-GARD stochastic ensemble generation. Model and scenario overlap must be checked before comparing methods.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory.",
-          "contentFile": "datasets/carbonplan-gard.md",
+          "contentFile": "datasets/carbonplan-gard.nt",
           "paperIds": []
         }
       },
       {
-        "id": "star-esdm",
-        "name": "STAR-ESDM",
         "provider": "Texas Tech University / collaborators",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "The matrix describes an earlier configuration and labels it not yet public. Later STAR-ESDM1-0 files exist in DRCDP; their domain, reference data, and release scope must not be substituted silently.",
@@ -4168,6 +4166,8 @@
             "description": "Public indexed file header, a later configuration requiring separate release reconciliation."
           }
         ],
+        "id": "star-esdm",
+        "name": "STAR-ESDM",
         "aliases": [],
         "guidance": {
           "title": "STAR-ESDM evaluation guidance",
@@ -4181,13 +4181,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nThe matrix describes an earlier configuration and labels it not yet public. Later STAR-ESDM1-0 files exist in DRCDP; their domain, reference data, and release scope must not be substituted silently.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory.",
-          "contentFile": "datasets/star-esdm.md",
+          "contentFile": "datasets/star-esdm.nt",
           "paperIds": []
         }
       },
       {
-        "id": "canlead-v1",
-        "name": "CanLEAD v1",
         "provider": "Environment and Climate Change Canada",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Distinguish the adjusted global and regional parent ensembles and the two reference datasets. They are not independent GCMs. Use member spread to examine internal variability.",
@@ -4280,6 +4278,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "canlead-v1",
+        "name": "CanLEAD v1",
         "aliases": [],
         "guidance": {
           "title": "CanLEAD v1 evaluation guidance",
@@ -4293,13 +4293,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nDistinguish the adjusted global and regional parent ensembles and the two reference datasets. They are not independent GCMs. Use member spread to examine internal variability.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://rmets.onlinelibrary.wiley.com/doi/full/10.1002/gdj3.142) is available for further review.",
-          "contentFile": "datasets/canlead-v1.md",
+          "contentFile": "datasets/canlead-v1.nt",
           "paperIds": []
         }
       },
       {
-        "id": "uw-pd-cmip5",
-        "name": "UW-Madison Probabilistic Downscaling (UW-PD)",
         "provider": "University of Wisconsin-Madison / NOAA distribution",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Distinguish a daily probability distribution from a sampled weather sequence. Stochastic realizations are not additional GCM initial-condition members. Check space-time dependence for basin applications.",
@@ -4399,6 +4397,8 @@
             "description": "Distribution-based downscaling methodology."
           }
         ],
+        "id": "uw-pd-cmip5",
+        "name": "UW-Madison Probabilistic Downscaling (UW-PD)",
         "aliases": [
           "UWPD"
         ],
@@ -4414,13 +4414,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nDistinguish a daily probability distribution from a sampled weather sequence. Stochastic realizations are not additional GCM initial-condition members. Check space-time dependence for basin applications.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory.",
-          "contentFile": "datasets/uw-pd-cmip5.md",
+          "contentFile": "datasets/uw-pd-cmip5.nt",
           "paperIds": []
         }
       },
       {
-        "id": "icar",
-        "name": "ICAR dataset in the NCAR matrix",
         "provider": "NCAR / collaborators",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "The matrix describes data available on request. Confirm the configuration and availability with the provider. Do not treat the planned CMIP6 scenarios as released data.",
@@ -4504,6 +4502,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "icar",
+        "name": "ICAR dataset in the NCAR matrix",
         "aliases": [
           "ICAR? (not publicly available yet)"
         ],
@@ -4519,13 +4519,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nThe matrix describes data available on request. Confirm the configuration and availability with the provider. Do not treat the planned CMIP6 scenarios as released data.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://journals.ametsoc.org/view/journals/hydr/17/3/jhm-d-15-0155_1.xml) is available for further review.",
-          "contentFile": "datasets/icar.md",
+          "contentFile": "datasets/icar.nt",
           "paperIds": []
         }
       },
       {
-        "id": "canrcm4-le",
-        "name": "CanRCM4 Large Ensemble",
         "provider": "Environment and Climate Change Canada",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "A large initial-condition ensemble samples internal variability under one parent GCM. It does not span structural uncertainty across many GCMs. This is distinct from bias-adjusted CanLEAD.",
@@ -4615,6 +4613,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "canrcm4-le",
+        "name": "CanRCM4 Large Ensemble",
         "aliases": [],
         "guidance": {
           "title": "CanRCM4 Large Ensemble evaluation guidance",
@@ -4628,13 +4628,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nA large initial-condition ensemble samples internal variability under one parent GCM. It does not span structural uncertainty across many GCMs. This is distinct from bias-adjusted CanLEAD.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://journals.ametsoc.org/view/journals/clim/29/1/jcli-d-15-0161.1.xml) is available for further review.",
-          "contentFile": "datasets/canrcm4-le.md",
+          "contentFile": "datasets/canrcm4-le.nt",
           "paperIds": []
         }
       },
       {
-        "id": "conus404",
-        "name": "CONUS404",
         "provider": "NCAR / USGS",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Use as a historical hydroclimate comparator after evaluating regional biases. This record does not describe a future projection or the future warming experiment mentioned in the matrix.",
@@ -4721,6 +4719,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "conus404",
+        "name": "CONUS404",
         "aliases": [
           "CONUS 404"
         ],
@@ -4736,13 +4736,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nUse as a historical hydroclimate comparator after evaluating regional biases. This record does not describe a future projection or the future warming experiment mentioned in the matrix.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://doi.org/10.1175/BAMS-D-21-0326.1) is available for further review.",
-          "contentFile": "datasets/conus404.md",
+          "contentFile": "datasets/conus404.nt",
           "paperIds": []
         }
       },
       {
-        "id": "adda-v2",
-        "name": "Argonne Dynamically Downscaled Archive V2 (ADDA_V2)",
         "provider": "Argonne National Laboratory",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "The cited study evaluates historical precipitation. ClimRR includes derived climate information; verify access to native hourly fields. Do not infer a complete future ensemble from this historical evaluation.",
@@ -4825,6 +4823,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "adda-v2",
+        "name": "Argonne Dynamically Downscaled Archive V2 (ADDA_V2)",
         "aliases": [
           "ADDA / ClimRR",
           "ADDA"
@@ -4841,13 +4841,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nThe cited study evaluates historical precipitation. ClimRR includes derived climate information; verify access to native hourly fields. Do not infer a complete future ensemble from this historical evaluation.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://www.nature.com/articles/s41598-024-51714-3) is available for further review.",
-          "contentFile": "datasets/adda-v2.md",
+          "contentFile": "datasets/adda-v2.nt",
           "paperIds": []
         }
       },
       {
-        "id": "edde-v1",
-        "name": "EPA Dynamically Downscaled Ensemble (EDDE) v1",
         "provider": "US Environmental Protection Agency",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Historical and future time windows differ by model and scenario. A 36 km regional model does not directly resolve local convective rainfall. Check each run before calculating paired changes.",
@@ -4936,6 +4934,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "edde-v1",
+        "name": "EPA Dynamically Downscaled Ensemble (EDDE) v1",
         "aliases": [],
         "guidance": {
           "title": "EPA Dynamically Downscaled Ensemble (EDDE) v1 evaluation guidance",
@@ -4949,13 +4949,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nHistorical and future time windows differ by model and scenario. A 36 km regional model does not directly resolve local convective rainfall. Check each run before calculating paired changes.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://doi.org/10.5194/acp-18-15471-2018) is available for further review.",
-          "contentFile": "datasets/edde-v1.md",
+          "contentFile": "datasets/edde-v1.nt",
           "paperIds": []
         }
       },
       {
-        "id": "ornl-regcm",
-        "name": "ORNL RegCM",
         "provider": "Oak Ridge National Laboratory",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Distinguish raw regional output from Livneh- and Daymet-adjusted variants. The distributed fine grid is not evidence that the regional model resolved processes at that scale.",
@@ -5049,6 +5047,8 @@
             "description": "Publication linked by the matrix. Its scope may describe a method or historical evaluation rather than every cataloged configuration."
           }
         ],
+        "id": "ornl-regcm",
+        "name": "ORNL RegCM",
         "aliases": [
           "SWA 9505v3 - RegCM",
           "SWA 9505v3 RegCM"
@@ -5065,13 +5065,11 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nDistinguish raw regional output from Livneh- and Daymet-adjusted variants. The distributed fine grid is not evidence that the regional model resolved processes at that scale.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022EF002734) is available for further review.",
-          "contentFile": "datasets/ornl-regcm.md",
+          "contentFile": "datasets/ornl-regcm.nt",
           "paperIds": []
         }
       },
       {
-        "id": "carbonplan-deepsd",
-        "name": "CarbonPlan DeepSD",
         "provider": "CarbonPlan",
         "version": "Family/configuration described in the pinned NCAR matrix; see source scope and field-specific qualifications.",
         "summary": "Distinguish DeepSD and bias-corrected DeepSD-BC. Test dry-day frequency and intensity tails explicitly before using this experimental implementation for precipitation extremes.",
@@ -5188,6 +5186,8 @@
             "description": "Resolve method, GCM, scenario and run availability."
           }
         ],
+        "id": "carbonplan-deepsd",
+        "name": "CarbonPlan DeepSD",
         "aliases": [],
         "guidance": {
           "title": "CarbonPlan DeepSD evaluation guidance",
@@ -5201,20 +5201,17 @@
           },
           "evidence": [],
           "body": "## Application guidance\n\nDistinguish DeepSD and bias-corrected DeepSD-BC. Test dry-day frequency and intensity tails explicitly before using this experimental implementation for precipitation extremes.\n\n## Evaluation and contributions\n\nCheck precipitation totals, wet-day frequency, event duration and spatial dependence against independent observations for the intended region and period. Record the selected release, model, member, scenario and reference data. Add prose, images, equations and study citations here, or link a complete regional guidance document in the frontmatter.\n\nThese recommendations are AI-assisted draft interpretation, not expert endorsement. The [NCAR matrix](https://raw.githubusercontent.com/NCAR/hydro-climate-evaluation/28f529dc6a265dbf669e6fd38ec20e7ee11c1998/docs/downscalingMethodsMatrixPublic.36x24.pdf) supplies the initial inventory. A [related publication or technical report](https://doi.org/10.1145/3097983.3098004) is available for further review.",
-          "contentFile": "datasets/carbonplan-deepsd.md",
+          "contentFile": "datasets/carbonplan-deepsd.nt",
           "paperIds": []
         }
       },
       {
-        "id": "era5",
-        "name": "ERA5",
         "kind": "reanalysis",
         "provider": "ECMWF",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Global atmospheric reanalysis. Native and regridded distributions have different grids.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -5282,6 +5279,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "era5",
+        "name": "ERA5",
+        "aliases": [],
         "guidance": {
           "title": "ERA5 guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5294,20 +5294,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nGlobal atmospheric reanalysis. Native and regridded distributions have different grids.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/era5.md",
+          "contentFile": "datasets/era5.nt",
           "paperIds": []
         }
       },
       {
-        "id": "era5-land",
-        "name": "ERA5-Land",
         "kind": "reanalysis",
         "provider": "ECMWF",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Land-model replay forced by ERA5. It is not an independent atmospheric model ensemble.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -5375,6 +5372,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "era5-land",
+        "name": "ERA5-Land",
+        "aliases": [],
         "guidance": {
           "title": "ERA5-Land guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5387,22 +5387,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nLand-model replay forced by ERA5. It is not an independent atmospheric model ensemble.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/era5-land.md",
+          "contentFile": "datasets/era5-land.nt",
           "paperIds": []
         }
       },
       {
-        "id": "merra2",
-        "name": "MERRA-2",
         "kind": "reanalysis",
         "provider": "NASA GMAO",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Global reanalysis. Distinguish precipitation diagnostics and collection names when selecting data.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "MERRA2"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -5470,6 +5465,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "merra2",
+        "name": "MERRA-2",
+        "aliases": [
+          "MERRA2"
+        ],
         "guidance": {
           "title": "MERRA-2 guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5482,20 +5482,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nGlobal reanalysis. Distinguish precipitation diagnostics and collection names when selecting data.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/merra2.md",
+          "contentFile": "datasets/merra2.nt",
           "paperIds": []
         }
       },
       {
-        "id": "jra3q",
-        "name": "JRA-3Q",
         "kind": "reanalysis",
         "provider": "Japan Meteorological Agency",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "JMA third reanalysis. JRA-3Q is distinct from JRA-55.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -5563,6 +5560,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "jra3q",
+        "name": "JRA-3Q",
+        "aliases": [],
         "guidance": {
           "title": "JRA-3Q guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5575,20 +5575,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nJMA third reanalysis. JRA-3Q is distinct from JRA-55.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/jra3q.md",
+          "contentFile": "datasets/jra3q.nt",
           "paperIds": []
         }
       },
       {
-        "id": "cmip6",
-        "name": "CMIP6",
         "kind": "collection",
         "provider": "WCRP / participating modeling centers",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "An intercomparison archive with many models, experiments and grids. Select source, experiment, member and grid IDs before comparing files.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [
           "CMIP6"
         ],
@@ -5658,6 +5655,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "cmip6",
+        "name": "CMIP6",
+        "aliases": [],
         "guidance": {
           "title": "CMIP6 guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5670,22 +5670,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nSelect a concrete model, experiment and release within this collection before comparing it with another product. Avoid treating a collection as one homogeneous dataset.\n\nAn intercomparison archive with many models, experiments and grids. Select source, experiment, member and grid IDs before comparing files.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/cmip6.md",
+          "contentFile": "datasets/cmip6.nt",
           "paperIds": []
         }
       },
       {
-        "id": "conus1",
-        "name": "CONUS-I",
         "kind": "historical-simulation",
         "provider": "NCAR / Global Water Futures partners",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "WRF retrospective ERA-Interim simulation with a paired pseudo-global-warming experiment. Keep historical and perturbed runs distinct.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "CONUS 1"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -5753,6 +5748,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "conus1",
+        "name": "CONUS-I",
+        "aliases": [
+          "CONUS 1"
+        ],
         "guidance": {
           "title": "CONUS-I guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5765,22 +5765,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nCheck the intended configuration, experiment and period before use. Evaluate precipitation totals, extremes, wet-day frequency and spatial dependence for the application.\n\nWRF retrospective ERA-Interim simulation with a paired pseudo-global-warming experiment. Keep historical and perturbed runs distinct.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/conus1.md",
+          "contentFile": "datasets/conus1.nt",
           "paperIds": []
         }
       },
       {
-        "id": "conus2",
-        "name": "CONUS-II",
         "kind": "historical-simulation",
         "provider": "NCAR / Global Water Futures partners",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "The WRF-CONUSII family is identified in partner documentation. Release, grid, forcing and period still need confirmation.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "CONUS 2"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -5848,6 +5843,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "conus2",
+        "name": "CONUS-II",
+        "aliases": [
+          "CONUS 2"
+        ],
         "guidance": {
           "title": "CONUS-II guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5860,22 +5860,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nCheck the intended configuration, experiment and period before use. Evaluate precipitation totals, extremes, wet-day frequency and spatial dependence for the application.\n\nThe WRF-CONUSII family is identified in partner documentation. Release, grid, forcing and period still need confirmation.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/conus2.md",
+          "contentFile": "datasets/conus2.nt",
           "paperIds": []
         }
       },
       {
-        "id": "conus404-pgw",
-        "name": "CONUS404-PGW",
         "kind": "downscaled-projection",
         "provider": "NCAR / USGS",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "WRF experiment using ERA5 weather with CESM2 large-ensemble warming perturbations. Repeated baseline weather is not an independent sequence of future weather.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "CONUS 404-PGW"
-        ],
         "generation": [
           "CMIP6"
         ],
@@ -5945,6 +5940,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "conus404-pgw",
+        "name": "CONUS404-PGW",
+        "aliases": [
+          "CONUS 404-PGW"
+        ],
         "guidance": {
           "title": "CONUS404-PGW guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -5957,20 +5957,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nCheck the intended configuration, experiment and period before use. Evaluate precipitation totals, extremes, wet-day frequency and spatial dependence for the application.\n\nWRF experiment using ERA5 weather with CESM2 large-ensemble warming perturbations. Repeated baseline weather is not an independent sequence of future weather.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/conus404-pgw.md",
+          "contentFile": "datasets/conus404-pgw.nt",
           "paperIds": []
         }
       },
       {
-        "id": "loca2-ca",
-        "name": "LOCA2-CA",
         "kind": "unresolved",
         "provider": "Not yet identified",
         "version": "Workshop label awaiting identification.",
         "summary": "Workshop name awaiting its provider link and release. A California delivery should not be silently treated as the complete North America LOCA2 archive.",
         "source_scope": "User-supplied workshop label. Identity or release details remain unresolved.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -6038,6 +6035,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "loca2-ca",
+        "name": "LOCA2-CA",
+        "aliases": [],
         "guidance": {
           "title": "LOCA2-CA guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6050,22 +6050,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nHelp identify this dataset by adding its provider page, paper, release and domain. Recommendations should wait until the record is identified.\n\nWorkshop name awaiting its provider link and release. A California delivery should not be silently treated as the complete North America LOCA2 archive.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/loca2-ca.md",
+          "contentFile": "datasets/loca2-ca.nt",
           "paperIds": []
         }
       },
       {
-        "id": "niu",
-        "name": "NIU / WRF-BCC (candidate match)",
         "kind": "unresolved",
         "provider": "Northern Illinois University (user-identified institution)",
         "version": "Provisional match to the WRF-BCC configuration documented in the 2022 paper.",
         "summary": "Northern Illinois University is confirmed. WRF-BCC is a documented candidate product; confirm that it is the intended workshop dataset.",
         "source_scope": "Institution identified by the user. Candidate properties below come from Gensini, Haberlie and Ashley; identity remains provisional and is not attributed to Cliff Mass.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "NIU"
-        ],
         "generation": [
           "CMIP5"
         ],
@@ -6135,6 +6130,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "niu",
+        "name": "NIU / WRF-BCC (candidate match)",
+        "aliases": [
+          "NIU"
+        ],
         "guidance": {
           "title": "NIU / WRF-BCC (candidate match) guidance",
           "summary": "Read the version and identity scope before using this record.",
@@ -6147,22 +6147,17 @@
           },
           "evidence": [],
           "body": "## Dataset identity\n\nNorthern Illinois University is confirmed. WRF-BCC is a documented candidate product; confirm that it is the intended workshop dataset.\n\nInstitution identified by the user. Candidate properties below come from Gensini, Haberlie and Ashley; identity remains provisional and is not attributed to Cliff Mass.\n\n## Evaluation guidance\n\nConfirm the experiment, release and intended application. Evaluate precipitation biases, event duration and spatial dependence in the region of interest. Add findings with links to supporting studies. This draft is not an expert endorsement.",
-          "contentFile": "datasets/niu.md",
+          "contentFile": "datasets/niu.nt",
           "paperIds": []
         }
       },
       {
-        "id": "edde-v2",
-        "name": "EDDE v2",
         "kind": "downscaled-projection",
         "provider": "US Environmental Protection Agency",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "CMIP6 WRF ensemble using MPI-ESM1-2-HR and NorESM2-MM. Version 2 is distinct from the existing EDDE v1 record.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "EDDEv2"
-        ],
         "generation": [
           "CMIP6"
         ],
@@ -6233,6 +6228,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "edde-v2",
+        "name": "EDDE v2",
+        "aliases": [
+          "EDDEv2"
+        ],
         "guidance": {
           "title": "EDDE v2 guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6245,20 +6245,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nCheck the intended configuration, experiment and period before use. Evaluate precipitation totals, extremes, wet-day frequency and spatial dependence for the application.\n\nCMIP6 WRF ensemble using MPI-ESM1-2-HR and NorESM2-MM. Version 2 is distinct from the existing EDDE v1 record.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/edde-v2.md",
+          "contentFile": "datasets/edde-v2.nt",
           "paperIds": []
         }
       },
       {
-        "id": "spear",
-        "name": "SPEAR",
         "kind": "model-ensemble",
         "provider": "NOAA GFDL",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Modeling system with prediction and large-ensemble experiments. The workshop label does not choose a unique experiment or model resolution.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -6326,6 +6323,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "spear",
+        "name": "SPEAR",
+        "aliases": [],
         "guidance": {
           "title": "SPEAR guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6338,20 +6338,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nSelect a concrete model, experiment and release within this collection before comparing it with another product. Avoid treating a collection as one homogeneous dataset.\n\nModeling system with prediction and large-ensemble experiments. The workshop label does not choose a unique experiment or model resolution.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/spear.md",
+          "contentFile": "datasets/spear.nt",
           "paperIds": []
         }
       },
       {
-        "id": "cesm-lens",
-        "name": "CESM-LENS",
         "kind": "model-ensemble",
         "provider": "NCAR / CESM community",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Raw CESM large ensembles, distinct from downscaled GARD-LENS. CESM1 LENS and CESM2 LENS2 require separate generation selection.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -6424,6 +6421,9 @@
             "description": "Alternative generation; do not silently substitute for CESM1."
           }
         ],
+        "id": "cesm-lens",
+        "name": "CESM-LENS",
+        "aliases": [],
         "guidance": {
           "title": "CESM-LENS guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6436,22 +6436,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nSelect a concrete model, experiment and release within this collection before comparing it with another product. Avoid treating a collection as one homogeneous dataset.\n\nRaw CESM large ensembles, distinct from downscaled GARD-LENS. CESM1 LENS and CESM2 LENS2 require separate generation selection.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/cesm-lens.md",
+          "contentFile": "datasets/cesm-lens.nt",
           "paperIds": []
         }
       },
       {
-        "id": "smiles",
-        "name": "SMILEs",
         "kind": "collection",
         "provider": "Multiple modeling centers",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Single-model initial-condition large ensembles: an ensemble class, not one dataset. This label is not CESM SMYLE initialized forecasts.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "SMILES"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -6519,6 +6514,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "smiles",
+        "name": "SMILEs",
+        "aliases": [
+          "SMILES"
+        ],
         "guidance": {
           "title": "SMILEs guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6531,20 +6531,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nSelect a concrete model, experiment and release within this collection before comparing it with another product. Avoid treating a collection as one homogeneous dataset.\n\nSingle-model initial-condition large ensembles: an ensemble class, not one dataset. This label is not CESM SMYLE initialized forecasts.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/smiles.md",
+          "contentFile": "datasets/smiles.nt",
           "paperIds": []
         }
       },
       {
-        "id": "aorc",
-        "name": "AORC",
         "kind": "observation",
         "provider": "NOAA National Weather Service",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Analysis of Record for Calibration forcing analysis. Select release and native versus National Water Model grid.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -6612,6 +6609,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "aorc",
+        "name": "AORC",
+        "aliases": [],
         "guidance": {
           "title": "AORC guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6624,20 +6624,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nAnalysis of Record for Calibration forcing analysis. Select release and native versus National Water Model grid.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/aorc.md",
+          "contentFile": "datasets/aorc.nt",
           "paperIds": []
         }
       },
       {
-        "id": "prism",
-        "name": "PRISM",
         "kind": "observation",
         "provider": "PRISM Climate Group",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Observation-derived climate grids. Cadence, grid and period vary by PRISM product.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -6705,6 +6702,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "prism",
+        "name": "PRISM",
+        "aliases": [],
         "guidance": {
           "title": "PRISM guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6717,22 +6717,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nObservation-derived climate grids. Cadence, grid and period vary by PRISM product.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/prism.md",
+          "contentFile": "datasets/prism.nt",
           "paperIds": []
         }
       },
       {
-        "id": "livneh",
-        "name": "Livneh gridded meteorology",
         "kind": "observation",
         "provider": "Livneh and collaborators",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Station-derived gridded meteorology. Earlier CONUS and later LOCA2 training datasets differ from the 2015 North American release.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "Livneh"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -6800,6 +6795,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "livneh",
+        "name": "Livneh gridded meteorology",
+        "aliases": [
+          "Livneh"
+        ],
         "guidance": {
           "title": "Livneh gridded meteorology guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6812,20 +6812,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nStation-derived gridded meteorology. Earlier CONUS and later LOCA2 training datasets differ from the 2015 North American release.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/livneh.md",
+          "contentFile": "datasets/livneh.nt",
           "paperIds": []
         }
       },
       {
-        "id": "daymet",
-        "name": "Daymet",
         "kind": "observation",
         "provider": "ORNL DAAC / Daymet team",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Gridded surface meteorology derived from observations. Select a version and regional collection.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -6893,6 +6890,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "daymet",
+        "name": "Daymet",
+        "aliases": [],
         "guidance": {
           "title": "Daymet guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -6905,22 +6905,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nGridded surface meteorology derived from observations. Select a version and regional collection.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/daymet.md",
+          "contentFile": "datasets/daymet.nt",
           "paperIds": []
         }
       },
       {
-        "id": "nclimgrid",
-        "name": "nClimGrid",
         "kind": "observation",
         "provider": "NOAA NCEI",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Family of observation-derived grids. The workshop name does not identify daily versus monthly output.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "NClimGrid"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -6988,6 +6983,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "nclimgrid",
+        "name": "nClimGrid",
+        "aliases": [
+          "NClimGrid"
+        ],
         "guidance": {
           "title": "nClimGrid guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7000,23 +7000,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nFamily of observation-derived grids. The workshop name does not identify daily versus monthly output.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/nclimgrid.md",
+          "contentFile": "datasets/nclimgrid.nt",
           "paperIds": []
         }
       },
       {
-        "id": "stage-iv",
-        "name": "Stage IV",
         "kind": "observation",
         "provider": "NCEP / River Forecast Centers",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Radar and gauge precipitation analysis. Check accumulation duration, coverage and processing changes before climate comparisons.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "Stage 4",
-          "Stage4"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -7084,6 +7078,12 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "stage-iv",
+        "name": "Stage IV",
+        "aliases": [
+          "Stage 4",
+          "Stage4"
+        ],
         "guidance": {
           "title": "Stage IV guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7096,20 +7096,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nRadar and gauge precipitation analysis. Check accumulation duration, coverage and processing changes before climate comparisons.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/stage-iv.md",
+          "contentFile": "datasets/stage-iv.nt",
           "paperIds": []
         }
       },
       {
-        "id": "gpcp",
-        "name": "GPCP",
         "kind": "observation",
         "provider": "Global Precipitation Climatology Project / NOAA distribution",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Satellite and gauge precipitation analyses. Generation, grid and cadence must be selected together.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -7177,6 +7174,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "gpcp",
+        "name": "GPCP",
+        "aliases": [],
         "guidance": {
           "title": "GPCP guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7189,20 +7189,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nSatellite and gauge precipitation analyses. Generation, grid and cadence must be selected together.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/gpcp.md",
+          "contentFile": "datasets/gpcp.nt",
           "paperIds": []
         }
       },
       {
-        "id": "ghcn",
-        "name": "GHCN",
         "kind": "observation",
         "provider": "NOAA NCEI",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Station observations rather than a gridded product. Precipitation availability and record length vary by station.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -7270,6 +7267,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "ghcn",
+        "name": "GHCN",
+        "aliases": [],
         "guidance": {
           "title": "GHCN guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7282,24 +7282,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nStation observations rather than a gridded product. Precipitation availability and record length vary by station.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/ghcn.md",
+          "contentFile": "datasets/ghcn.nt",
           "paperIds": []
         }
       },
       {
-        "id": "gridmet",
-        "name": "gridMET",
         "kind": "observation",
         "provider": "Climatology Lab",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Gridded meteorological dataset also known as METDATA. It is distinct from MACA projections trained on METDATA.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "METDATA",
-          "Gridmet",
-          "GridMet"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -7367,6 +7360,13 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "gridmet",
+        "name": "gridMET",
+        "aliases": [
+          "METDATA",
+          "Gridmet",
+          "GridMet"
+        ],
         "guidance": {
           "title": "gridMET guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7379,20 +7379,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nGridded meteorological dataset also known as METDATA. It is distinct from MACA projections trained on METDATA.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/gridmet.md",
+          "contentFile": "datasets/gridmet.nt",
           "paperIds": []
         }
       },
       {
-        "id": "mrms",
-        "name": "MRMS",
         "kind": "observation",
         "provider": "NOAA National Severe Storms Laboratory",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Multi-Radar Multi-Sensor system. Select the precipitation product and accumulation interval rather than treating every field as a two-minute total.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -7460,6 +7457,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "mrms",
+        "name": "MRMS",
+        "aliases": [],
         "guidance": {
           "title": "MRMS guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7472,20 +7472,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nMulti-Radar Multi-Sensor system. Select the precipitation product and accumulation interval rather than treating every field as a two-minute total.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/mrms.md",
+          "contentFile": "datasets/mrms.nt",
           "paperIds": []
         }
       },
       {
-        "id": "nldas",
-        "name": "NLDAS",
         "kind": "reanalysis",
         "provider": "NASA / NOAA and partners",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Land data assimilation family. Distinguish NLDAS phase, meteorological forcing and individual land-model outputs.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -7553,6 +7550,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "nldas",
+        "name": "NLDAS",
+        "aliases": [],
         "guidance": {
           "title": "NLDAS guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7565,20 +7565,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nConsider this family as a historical reference or forcing source. Check coverage, measurement or model biases, temporal accumulation, and independence from the downscaling training data.\n\nLand data assimilation family. Distinguish NLDAS phase, meteorological forcing and individual land-model outputs.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/nldas.md",
+          "contentFile": "datasets/nldas.nt",
           "paperIds": []
         }
       },
       {
-        "id": "mesaclip",
-        "name": "MESACLIP",
         "kind": "model-ensemble",
         "provider": "NCAR / Texas A&M University",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "High-resolution CESM project with ten-member historical/future ensembles and a distinct preindustrial control. It is not regional downscaling.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -7646,6 +7643,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "mesaclip",
+        "name": "MESACLIP",
+        "aliases": [],
         "guidance": {
           "title": "MESACLIP guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7658,22 +7658,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nSelect a concrete model, experiment and release within this collection before comparing it with another product. Avoid treating a collection as one homogeneous dataset.\n\nHigh-resolution CESM project with ten-member historical/future ensembles and a distinct preindustrial control. It is not regional downscaling.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/mesaclip.md",
+          "contentFile": "datasets/mesaclip.nt",
           "paperIds": []
         }
       },
       {
-        "id": "bcsd-cmip5",
-        "name": "BCSD-CMIP5 (workshop label)",
         "kind": "unresolved",
         "provider": "Archive not yet identified",
         "version": "Workshop label awaiting identification.",
         "summary": "BCSD is used by multiple CMIP5 archives. Reclamation BCSD and NASA products are possible matches; the workshop label alone does not establish one.",
         "source_scope": "User-supplied workshop label. Identity or release details remain unresolved.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "BCSD-CMIP5"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -7741,6 +7736,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "bcsd-cmip5",
+        "name": "BCSD-CMIP5 (workshop label)",
+        "aliases": [
+          "BCSD-CMIP5"
+        ],
         "guidance": {
           "title": "BCSD-CMIP5 (workshop label) guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -7753,20 +7753,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nHelp identify this dataset by adding its provider page, paper, release and domain. Recommendations should wait until the record is identified.\n\nBCSD is used by multiple CMIP5 archives. Reclamation BCSD and NASA products are possible matches; the workshop label alone does not establish one.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/bcsd-cmip5.md",
+          "contentFile": "datasets/bcsd-cmip5.nt",
           "paperIds": []
         }
       },
       {
-        "id": "wrf-pnnl6",
-        "name": "WRF-PNNL6",
         "kind": "historical-simulation",
         "provider": "Pacific Northwest National Laboratory",
         "version": "Chen et al. (2018) simulation and later evaluation extension; no complete archive release identified.",
         "summary": "Western US WRF simulation at 6 km. The original paper covers 1981-2015; later evaluation materials describe 1981-2020.",
         "source_scope": "Identified from the user-supplied DOI and primary paper. Later period corroborated by an author poster. Raw archive availability and a complete run inventory were not established.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -7843,6 +7840,9 @@
             "description": "BAMS evaluation. Full publisher table was not retrieved in this review."
           }
         ],
+        "id": "wrf-pnnl6",
+        "name": "WRF-PNNL6",
+        "aliases": [],
         "guidance": {
           "title": "WRF-PNNL6 guidance",
           "summary": "Read the version and identity scope before using this record.",
@@ -7855,22 +7855,17 @@
           },
           "evidence": [],
           "body": "## Dataset identity\n\nWestern US WRF simulation at 6 km. The original paper covers 1981-2015; later evaluation materials describe 1981-2020.\n\nIdentified from the user-supplied DOI and primary paper. Later period corroborated by an author poster. Raw archive availability and a complete run inventory were not established.\n\n## Evaluation guidance\n\nConfirm the experiment, release and intended application. Evaluate precipitation biases, event duration and spatial dependence in the region of interest. Add findings with links to supporting studies. This draft is not an expert endorsement.",
-          "contentFile": "datasets/wrf-pnnl6.md",
+          "contentFile": "datasets/wrf-pnnl6.nt",
           "paperIds": []
         }
       },
       {
-        "id": "wrf-uw-mass",
-        "name": "WRF-UW-Mass",
         "kind": "downscaled-projection",
         "provider": "University of Washington Climate Impacts Group / Cliff Mass and collaborators",
         "version": "CMIP5 13-projection WRF ensemble in the UW/CIG catalog",
         "summary": "Pacific Northwest hourly WRF projections at 12 km. The documented CMIP5 ensemble contains 13 projections from 12 distinct GCMs.",
         "source_scope": "User workshop name matched to the UW/CIG provider catalog. Scope is its CMIP5 13-projection ensemble, not every WRF project on the page.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "Mass Downscaling"
-        ],
         "generation": [
           "CMIP5"
         ],
@@ -7941,6 +7936,11 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "wrf-uw-mass",
+        "name": "WRF-UW-Mass",
+        "aliases": [
+          "Mass Downscaling"
+        ],
         "guidance": {
           "title": "WRF-UW-Mass guidance",
           "summary": "Read the version and identity scope before using this record.",
@@ -7953,20 +7953,17 @@
           },
           "evidence": [],
           "body": "## Dataset identity\n\nPacific Northwest hourly WRF projections at 12 km. The documented CMIP5 ensemble contains 13 projections from 12 distinct GCMs.\n\nUser workshop name matched to the UW/CIG provider catalog. Scope is its CMIP5 13-projection ensemble, not every WRF project on the page.\n\n## Evaluation guidance\n\nConfirm the experiment, release and intended application. Evaluate precipitation biases, event duration and spatial dependence in the region of interest. Add findings with links to supporting studies. This draft is not an expert endorsement.",
-          "contentFile": "datasets/wrf-uw-mass.md",
+          "contentFile": "datasets/wrf-uw-mass.nt",
           "paperIds": []
         }
       },
       {
-        "id": "highresmip",
-        "name": "HighResMIP",
         "kind": "collection",
         "provider": "WCRP / participating modeling centers",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "CMIP6 high-resolution intercomparison with atmosphere-only and coupled experiments. There is no single grid or pooled member count.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [
           "CMIP6"
         ],
@@ -8036,6 +8033,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "highresmip",
+        "name": "HighResMIP",
+        "aliases": [],
         "guidance": {
           "title": "HighResMIP guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -8048,20 +8048,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nSelect a concrete model, experiment and release within this collection before comparing it with another product. Avoid treating a collection as one homogeneous dataset.\n\nCMIP6 high-resolution intercomparison with atmosphere-only and coupled experiments. There is no single grid or pooled member count.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/highresmip.md",
+          "contentFile": "datasets/highresmip.nt",
           "paperIds": []
         }
       },
       {
-        "id": "cordex",
-        "name": "CORDEX",
         "kind": "collection",
         "provider": "WCRP / regional modeling centers",
         "version": "Family record; select a specific release or experiment before using data.",
         "summary": "Regional climate downscaling coordination across domains and generations. The existing NA-CORDEX record is one regional collection, not the whole program.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -8129,6 +8126,9 @@
             "description": "Resolve the release and availability before selecting data."
           }
         ],
+        "id": "cordex",
+        "name": "CORDEX",
+        "aliases": [],
         "guidance": {
           "title": "CORDEX guidance",
           "summary": "Draft guidance for the workshop dataset name.",
@@ -8141,20 +8141,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nSelect a concrete model, experiment and release within this collection before comparing it with another product. Avoid treating a collection as one homogeneous dataset.\n\nRegional climate downscaling coordination across domains and generations. The existing NA-CORDEX record is one regional collection, not the whole program.\n\n## Expert contributions\n\nAdd application or regional findings with links to supporting studies. Include the release, evaluation period and reference observations. This draft is not a product endorsement.",
-          "contentFile": "datasets/cordex.md",
+          "contentFile": "datasets/cordex.nt",
           "paperIds": []
         }
       },
       {
-        "id": "narr",
-        "name": "NARR",
         "kind": "reanalysis",
         "provider": "NOAA NCEP",
         "version": "Family record; select product stream and release.",
         "summary": "Regional reanalysis that assimilates precipitation observations. Archive endpoints and available variables must be checked.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -8222,6 +8219,9 @@
             "description": "Select release, product stream and access method."
           }
         ],
+        "id": "narr",
+        "name": "NARR",
+        "aliases": [],
         "guidance": {
           "title": "NARR guidance",
           "summary": "Draft guidance for the stated product family.",
@@ -8234,20 +8234,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nRegional reanalysis that assimilates precipitation observations. Archive endpoints and available variables must be checked.\n\nChoose a specific version and variable. Check precipitation accumulation intervals, geographic coverage and changes in the observing or modeling system. Add application findings with supporting links. This draft is not an expert endorsement.",
-          "contentFile": "datasets/narr.md",
+          "contentFile": "datasets/narr.nt",
           "paperIds": []
         }
       },
       {
-        "id": "hrrr",
-        "name": "HRRR",
         "kind": "collection",
         "provider": "NOAA",
         "version": "Family record; select product stream and release.",
         "summary": "Operational forecast and analysis system, not a homogeneous climate reanalysis. Select model version, initialization time and forecast lead.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -8315,6 +8312,9 @@
             "description": "Select release, product stream and access method."
           }
         ],
+        "id": "hrrr",
+        "name": "HRRR",
+        "aliases": [],
         "guidance": {
           "title": "HRRR guidance",
           "summary": "Draft guidance for the stated product family.",
@@ -8327,22 +8327,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nOperational forecast and analysis system, not a homogeneous climate reanalysis. Select model version, initialization time and forecast lead.\n\nChoose a specific version and variable. Check precipitation accumulation intervals, geographic coverage and changes in the observing or modeling system. Add application findings with supporting links. This draft is not an expert endorsement.",
-          "contentFile": "datasets/hrrr.md",
+          "contentFile": "datasets/hrrr.nt",
           "paperIds": []
         }
       },
       {
-        "id": "cfsr-cfsv2",
-        "name": "CFSR / CFSv2",
         "kind": "reanalysis",
         "provider": "NOAA NCEP",
         "version": "Family record; select product stream and release.",
         "summary": "The workshop shorthand CFSRv2 is interpreted as this family. A transition separates retrospective reanalysis from operational analyses and forecasts.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [
-          "CFSRv2"
-        ],
         "generation": [],
         "dates": {
           "created": null,
@@ -8410,6 +8405,11 @@
             "description": "Select release, product stream and access method."
           }
         ],
+        "id": "cfsr-cfsv2",
+        "name": "CFSR / CFSv2",
+        "aliases": [
+          "CFSRv2"
+        ],
         "guidance": {
           "title": "CFSR / CFSv2 guidance",
           "summary": "Draft guidance for the stated product family.",
@@ -8422,20 +8422,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nThe workshop shorthand CFSRv2 is interpreted as this family. A transition separates retrospective reanalysis from operational analyses and forecasts.\n\nChoose a specific version and variable. Check precipitation accumulation intervals, geographic coverage and changes in the observing or modeling system. Add application findings with supporting links. This draft is not an expert endorsement.",
-          "contentFile": "datasets/cfsr-cfsv2.md",
+          "contentFile": "datasets/cfsr-cfsv2.nt",
           "paperIds": []
         }
       },
       {
-        "id": "mswep",
-        "name": "MSWEP",
         "kind": "observation",
         "provider": "GloH2O",
         "version": "Family record; select product stream and release.",
         "summary": "Merged precipitation analysis. Select version and Past, Past_nogauge or NRT variant. V3 is not corrected for gauge undercatch.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -8508,6 +8505,9 @@
             "description": "Provider-linked V3 description; not labeled as a peer-reviewed paper here."
           }
         ],
+        "id": "mswep",
+        "name": "MSWEP",
+        "aliases": [],
         "guidance": {
           "title": "MSWEP guidance",
           "summary": "Draft guidance for the stated product family.",
@@ -8520,20 +8520,17 @@
           },
           "evidence": [],
           "body": "## What to check\n\nMerged precipitation analysis. Select version and Past, Past_nogauge or NRT variant. V3 is not corrected for gauge undercatch.\n\nChoose a specific version and variable. Check precipitation accumulation intervals, geographic coverage and changes in the observing or modeling system. Add application findings with supporting links. This draft is not an expert endorsement.",
-          "contentFile": "datasets/mswep.md",
+          "contentFile": "datasets/mswep.nt",
           "paperIds": []
         }
       },
       {
-        "id": "climatena",
-        "name": "ClimateNA",
         "kind": "collection",
         "provider": "ClimateNA team",
         "version": "Family record; select product stream and release.",
         "summary": "Climate estimation software/data family using interpolation and elevation adjustment. Its output is not a daily precipitation event series.",
         "source_scope": "Identity and the stated core properties checked against linked provider or project documentation on 2026-09-11. Other fields remain unknown; data files were not inspected.",
         "verified_on": "2026-09-11",
-        "aliases": [],
         "generation": [],
         "dates": {
           "created": null,
@@ -8601,6 +8598,9 @@
             "description": "Select release, product stream and access method."
           }
         ],
+        "id": "climatena",
+        "name": "ClimateNA",
+        "aliases": [],
         "guidance": {
           "title": "ClimateNA guidance",
           "summary": "Draft guidance for the stated product family.",
@@ -8613,7 +8613,7 @@
           },
           "evidence": [],
           "body": "## What to check\n\nClimate estimation software/data family using interpolation and elevation adjustment. Its output is not a daily precipitation event series.\n\nChoose a specific version and variable. Check precipitation accumulation intervals, geographic coverage and changes in the observing or modeling system. Add application findings with supporting links. This draft is not an expert endorsement.",
-          "contentFile": "datasets/climatena.md",
+          "contentFile": "datasets/climatena.nt",
           "paperIds": []
         }
       }

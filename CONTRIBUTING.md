@@ -1,6 +1,6 @@
 # Contributing to the site
 
-For scientific content, edit the Markdown pages in [datasets-and-guidance](https://github.com/practical-precip/datasets-and-guidance). Its contribution guide has instructions for editing online. This repository is for the interface and content tooling.
+For scientific content, edit the NestedText datasets and Markdown guidance in [datasets-and-guidance](https://github.com/practical-precip/datasets-and-guidance). Its contribution guide has instructions for editing online. This repository is for the interface and content tooling.
 
 ## Validate a content revision
 
@@ -39,10 +39,10 @@ git push
 
 GitHub Actions rebuilds from the checked-in snapshot and deploys Pages to `/site/`. It needs no private-repository credentials. Review the content and generated assets before publishing because both will become public.
 
-## Markdown conversion
+## Content conversion
 
-The author format uses `- __Field:__ value` bullets for scalar metadata, headings or nested fields for groups, simple lists for values, and numbered entries with indented fields for collections of records. Free prose follows `## Guidance`. The compiler accepts optional regional pages and combines dataset facts and guidance into the established site schema. Types and conversion code belong here, never in the human content repository.
+Dataset metadata uses standard NestedText, including multiline Markdown strings for guidance. The site owns the parser, type conversion, and schema validation. INDEX.md supplies names, IDs, aliases, and order through ordinary Markdown links. Guidance boxes and table configuration retain labeled Markdown lists. The content repository has no conversion scripts.
 
-For browser checks, install Playwright in a local environment and provide `PLAYWRIGHT_MODULE` and `PLAYWRIGHT_EXECUTABLE` if it is not in the default module path. Serve the static export and run `scripts/check_regions_browser.mjs` with `PRECIP_SITE_URL` pointing to `/site`. Run `scripts/check_content_preview.mjs` against a development server on `http://localhost:PORT` to test live Markdown edits and restoration.
+The JavaScript parser supports NestedText 3.0 syntax. Every migrated `.nt` file was independently parsed by the official Python NestedText 3.8 implementation with identical results. Numeric conversion and blank-as-unknown handling are schema rules applied after parsing; NestedText itself contains strings, lists, and mappings.
 
 The shared bibliography is `metadata/datasets-and-guidance/references.bib`. The site uses a BibTeX parser to handle author lists, braces, string macros, and LaTeX accents. Duplicate keys or fields, malformed entries, and missing support/scope annotations fail validation.

@@ -42,7 +42,7 @@ if (
   resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 ) {
   buildContent();
-  console.log("Content compiled. Watching Markdown and assets.");
+  console.log("Content compiled. Watching NestedText, Markdown, and assets.");
   const close = process.env.SITE_CONTENT_MODE === "snapshot" ? () => {} : watchContent(projectRoot, () => {
     prepareContent(projectRoot);
     buildContent(projectRoot);

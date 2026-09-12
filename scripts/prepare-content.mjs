@@ -12,7 +12,7 @@ export function prepareContent(base=root){
   cpSync(published,resolve(base,'public/content-assets'),{recursive:true});return;
  }
  const source=resolve(base,'metadata/datasets-and-guidance');
- if(!existsSync(resolve(source,'Dataset order.md')))throw Error('Missing metadata/datasets-and-guidance. Run git submodule update --init --recursive.');
+ if(!existsSync(resolve(source,'INDEX.md')))throw Error('Missing metadata/datasets-and-guidance. Run git submodule update --init --recursive.');
  const records=readMarkdownContent(source),stage=resolve(base,'.content-staging');
  rmSync(stage,{recursive:true,force:true});mkdirSync(stage);
  const emitted=new Set();
@@ -36,5 +36,5 @@ export function prepareContent(base=root){
  }catch(error){rmSync(stage,{recursive:true,force:true});throw error;}
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- try{prepareContent();console.log(process.env.SITE_CONTENT_MODE==='snapshot'?'Using the published content snapshot.':'Converted editable Markdown into site content.');}catch(e){console.error(e.message);process.exitCode=1;}
+ try{prepareContent();console.log(process.env.SITE_CONTENT_MODE==='snapshot'?'Using the published content snapshot.':'Converted NestedText datasets and Markdown guidance into site content.');}catch(e){console.error(e.message);process.exitCode=1;}
 }

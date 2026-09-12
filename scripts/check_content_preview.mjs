@@ -4,14 +4,17 @@ const { chromium } = await import(
 import { fileURLToPath } from "node:url";
 import { readFileSync, writeFileSync, unlinkSync, existsSync } from "node:fs";
 import assert from "node:assert/strict";
+import {load, dump} from "nestedtext";
 const root = fileURLToPath(new URL("../", import.meta.url)).replace(/\/$/, "");
-const base = root + "/metadata/datasets-and-guidance/datasets/loca2.md";
-const variant = root + "/metadata/datasets-and-guidance/datasets/regional/loca2.northwest-test.md";
+const base = root + "/metadata/datasets-and-guidance/datasets/loca2.nt";
+const variant = root + "/metadata/datasets-and-guidance/datasets/regional/loca2.northwest-test.nt";
 if (existsSync(variant))
   throw new Error(
     "Temporary test variant already exists; preserve it and choose another path.",
   );
 const original = readFileSync(base, "utf8");
+const indexFile = root + "/metadata/datasets-and-guidance/INDEX.md";
+const originalIndex = readFileSync(indexFile, "utf8");
 const browser = await chromium.launch({
   headless: true,
   executablePath: process.env.PLAYWRIGHT_EXECUTABLE,
@@ -26,17 +29,13 @@ try {
     .getByRole("heading", { name: "LOCA2 North America", exact: true })
     .waitFor();
   await page.waitForFunction(() => document.querySelector("#climate-region")?.value === "northwest");
-  writeFileSync(
-    variant,
-    readFileSync(root + "/metadata/datasets-and-guidance/templates/regional-guidance.md", "utf8").replace("### Contributors\n\nNo entries.", "### Contributors\n\n- Preview test").replace("## Guidance\n", "## Guidance\n\n## Regional reload verification\n"),
-  );
-  writeFileSync(
-    base,
-    original.replace(
-      "## Guidance\n",
-      "### Regions\n\n- __Northwest:__ product-guidance/loca2.northwest-test.md\n\n## Guidance\n",
-    ),
-  );
+  const regional = load(readFileSync(root + "/metadata/datasets-and-guidance/templates/regional-dataset.nt", "utf8"));
+  regional.review.contributors = ["Preview test"];
+  regional.text = "## Regional reload verification\n\n" + regional.text;
+  writeFileSync(variant, dump(regional, {indent: "  "}));
+  const value = load(original);
+  value["expert guidance"].regions = {northwest: "datasets/regional/loca2.northwest-test.nt"};
+  writeFileSync(base, dump(value, {indent: "  "}));
   await page
     .getByRole("heading", { name: "Regional reload verification", exact: true })
     .waitFor({ timeout: 20000 });
@@ -46,8 +45,12 @@ try {
   );
   assert.match(
     await page.locator(".contribution-note a").first().getAttribute("href"),
-    /loca2.northwest-test.md/,
+    /loca2.northwest-test.nt/,
   );
+  writeFileSync(indexFile, originalIndex.replace("[LOCA2 North America](datasets/loca2.nt)", "[LOCA2 preview name](datasets/loca2.nt)"));
+  await page.getByRole("heading", {name: "LOCA2 preview name", exact: true}).waitFor({timeout: 20000});
+  writeFileSync(indexFile, originalIndex);
+  await page.getByRole("heading", {name: "LOCA2 North America", exact: true}).waitFor({timeout: 20000});
   writeFileSync(base, original);
   unlinkSync(variant);
   await page
@@ -58,9 +61,10 @@ try {
     /General product guidance/,
   );
   console.log(
-    "PASS: live Markdown reload, product regional document and source link, and restoration to general guidance.",
+    "PASS: live NestedText guidance and INDEX.md name edits, regional source links, and restoration.",
   );
 } finally {
+  writeFileSync(indexFile, originalIndex);
   writeFileSync(base, original);
   if (existsSync(variant)) unlinkSync(variant);
   await browser.close();

@@ -184,3 +184,15 @@ These checks validate the migration and software behavior. They do not constitut
 - All 35 tests passed. Added coverage for nested lists, leading-zero state codes, punctuation, soft-wrapped values, duplicate labels, missing bullets, invalid indentation, and empty markers.
 - Independent review found no important parser or instruction issue in its bounded review.
 - Chromium verified a live regional override written with underscore labels and restoration to general guidance. The test now supplies its required contributor name and selects the region through its URL before hydration.
+
+## NestedText datasets
+
+- Converted 67 dataset records, two regional records, and two templates to standard NestedText. Dataset names, IDs, aliases, and order are defined by links and nested aliases in INDEX.md. Removed the separate workshop-name mapping and dataset-order files.
+- All 71 NestedText files parsed identically with the site's JavaScript package and the official Python NestedText 3.8 implementation.
+- Exact comparison passed for all 132 retained source records and their prose. The removed workshop-name mapping was redundant; dataset aliases remain unchanged. Compiled scientific content, names, aliases, order, and prose match the preceding snapshot exactly, allowing only changed source-file links.
+- All 41 content tests passed. New cases cover index identities, invalid paths, missing and unindexed files, duplicate fields, invalid numbers, empty-list syntax, and regional overrides. Independent review found no important parsing or data-loss issue in its bounded review.
+- Chromium verified live NestedText regional edits, index-only name changes, source links, and restoration. Static browser checks passed for all 67 dataset pages, region controls, dialogs, citations, images, equations, and mobile layout, with no browser errors.
+- Production build and TypeScript checks passed for 78 pages. Export validation checked 1,737 local links/assets. ESLint reported no errors and the existing image-optimization warning.
+- Updated contributor instructions explain NestedText indentation and multiline strings, index ownership, and the difference between source editing on GitHub and rendered guidance in the site. The existing user edit in FIELDS.md was preserved.
+
+This migration did not add or revalidate scientific claims.
