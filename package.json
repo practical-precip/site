@@ -13,7 +13,7 @@
     "lint": "eslint app scripts next.config.ts",
     "content:build": "npm run content:prepare && node scripts/content.mjs",
     "content:check": "npm run content:prepare && node scripts/content.mjs --check",
-    "test:content": "node --test scripts/content.test.mjs scripts/prepare-content.test.mjs scripts/snapshot.test.mjs",
+    "test:content": "node --test scripts/content.test.mjs scripts/prepare-content.test.mjs scripts/snapshot.test.mjs scripts/bibliography.test.mjs",
     "prebuild": "npm run content:build",
     "content:prepare": "node scripts/prepare-content.mjs --validate",
     "predev": "npm run content:prepare",
@@ -33,6 +33,7 @@
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@retorquere/bibtex-parser": "^11.0.0",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",

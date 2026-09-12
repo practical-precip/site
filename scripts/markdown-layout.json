@@ -247,16 +247,6 @@
           ]
         }
       ]
-    },
-    "paper": {
-      "authors": "string",
-      "year": "number",
-      "title": "string",
-      "journal": "string",
-      "url": "string",
-      "doi": "string",
-      "support": "string",
-      "scope": "string"
     }
   },
   "files": [

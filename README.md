@@ -36,7 +36,7 @@ The submodule records one exact content commit. A maintainer selects a reviewed 
 
 The snapshot and rendered assets are intentionally public. The content repository's private status restricts access and editing; it does not make published guidance confidential. A content merge does not publish automatically.
 
-`scripts/markdown-content.mjs` reads Markdown tables, lists, and guidance prose. `scripts/markdown-layout.json` describes field types and singleton indexes. Dataset, application, reference, and guidance files are discovered by directory, so adding a page does not require changing code. `scripts/prepare-content.mjs` assembles disposable YAML into ignored `content/`. `scripts/content.mjs` validates it and compiles the site data. No conversion tools live in the human content repository.
+`scripts/markdown-content.mjs` reads Markdown tables, lists, and guidance prose. `scripts/markdown-layout.json` describes field types and singleton indexes. Dataset, application, and guidance files are discovered by directory, so adding a page does not require changing code. `scripts/prepare-content.mjs` assembles disposable YAML into ignored `content/`. `scripts/content.mjs` validates it and compiles the site data. References are read from its single `references.bib` file by `scripts/bibliography.mjs`. Citation keys, standard bibliographic fields, and the custom `support` and `scope` fields are validated. No conversion tools live in the human content repository.
 
 The original personal-account mockup remains at [its original address](https://cameronbracken.github.io/pcef_workshop_site_mockup/) with a banner linking here.
 

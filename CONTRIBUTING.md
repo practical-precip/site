@@ -44,3 +44,5 @@ GitHub Actions rebuilds from the checked-in snapshot and deploys Pages to `/site
 The author format uses Field/Value tables for scalar metadata, headings for groups, lists for simple collections, and tables for collections of records. Free prose follows `## Guidance`. The compiler accepts optional regional pages and combines dataset facts and guidance into the established site schema. Types and conversion code belong here, never in the human content repository.
 
 For browser checks, install Playwright in a local environment and provide `PLAYWRIGHT_MODULE` and `PLAYWRIGHT_EXECUTABLE` if it is not in the default module path. Serve the static export and run `scripts/check_regions_browser.mjs` with `PRECIP_SITE_URL` pointing to `/site`. Run `scripts/check_content_preview.mjs` against a development server on `http://localhost:PORT` to test live Markdown edits and restoration.
+
+The shared bibliography is `metadata/datasets-and-guidance/references.bib`. The site uses a BibTeX parser to handle author lists, braces, string macros, and LaTeX accents. Duplicate keys or fields, malformed entries, and missing support/scope annotations fail validation.

@@ -20,6 +20,7 @@ jobs:
       - run: npm ci
       - run: npm run snapshot:check
       - run: npm run test:snapshot
+      - run: node --test scripts/bibliography.test.mjs
       - run: npm run build:pages
       - run: npm run check:export
       - run: npm run lint

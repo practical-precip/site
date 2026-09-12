@@ -169,3 +169,10 @@ to `main`; pull requests build a preview only.
 - The original personal-account mockup was rebuilt from revision `0fc6618`. Chromium verified the exact migration-banner text and destination on home, guidance, and about pages after hydration.
 
 These checks validate the migration and software behavior. They do not constitute a new scientific review of the guidance or dataset metadata.
+
+## Shared BibTeX bibliography
+
+- Exact equality passed for all 20 references and for the entire compiled site content after converting the bibliography.
+- All 31 content, conversion, snapshot, and bibliography tests passed. BibTeX tests cover author lists, literal names, protected capitals, LaTeX accents, string macros, duplicate keys/fields, malformed entries, and required annotations.
+- Independent review confirmed the reference parity and found no important loss or validation issue.
+- Bibliography parser tests also run in public CI without access to the private source repository.

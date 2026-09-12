@@ -197,3 +197,9 @@ Conversion and validation live in the site repository. One submodule pins the re
 The original public URL was restored from the original mockup source, with the requested banner linking to `https://practical-precip.github.io/site/`. The wording preserves the supplied spelling of "verison".
 
 Exact migration and compiled-content comparisons confirmed no scientific content or prose was lost. Conversion, snapshot, export, browser, and live-edit checks passed. See `VALIDATION.md` for the scope of each check.
+
+## Shared BibTeX bibliography
+
+User: "The references can be combined in a single file in bibtex format"
+
+Combined all 20 reference pages into `references.bib` in the private content repository. Citation keys, existing author labels, bibliographic fields, and the `support` and `scope` annotations were preserved exactly. The site owns BibTeX parsing and validation; contributors edit the one bibliography file. Updated contribution instructions include a BibTeX example and explain the custom annotation fields.

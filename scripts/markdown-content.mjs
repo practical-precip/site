@@ -3,6 +3,7 @@ import {resolve,relative} from 'node:path';
 import {unified} from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
+import {readBibliography} from './bibliography.mjs';
 import layout from './markdown-layout.json' with {type:'json'};
 const parser=unified().use(remarkParse).use(remarkGfm);
 const label=k=>k.replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
@@ -39,7 +40,7 @@ export function parseMarkdown(raw,shape,file='Markdown'){try{
 }catch(e){throw Error(`${file}: ${e.message}`);}}
 function walk(dir){if(!existsSync(dir))return [];return readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(resolve(dir,e.name)):[resolve(dir,e.name)]);}
 export function readMarkdownContent(root){const entries=layout.files.filter(e=>!['product','document','row','paper'].includes(e.type));
- for(const[folder,type,prefix]of [['datasets','product','products'],['guidance/applications','row','rows'],['guidance/cells','document','cells'],['references','paper','papers']])for(const path of walk(resolve(root,folder))){if(!path.endsWith('.md')||path.includes('/regional/'))continue;const file=relative(root,path);entries.push({file,type,output:prefix+'/'+relative(resolve(root,folder),path).replace(/\.md$/,type==='document'?'.md':'.yaml'),document:type==='document'||type==='product'});}
+ for(const[folder,type,prefix]of [['datasets','product','products'],['guidance/applications','row','rows'],['guidance/cells','document','cells']])for(const path of walk(resolve(root,folder))){if(!path.endsWith('.md')||path.includes('/regional/'))continue;const file=relative(root,path);entries.push({file,type,output:prefix+'/'+relative(resolve(root,folder),path).replace(/\.md$/,type==='document'?'.md':'.yaml'),document:type==='document'||type==='product'});}
  for(const path of walk(resolve(root,'datasets/regional')))if(path.endsWith('.md'))entries.push({file:relative(root,path),type:'document',output:'product-guidance/'+relative(resolve(root,'datasets/regional'),path),document:true});
- const records=new Map();for(const entry of entries){const parsed=parseMarkdown(readFileSync(resolve(root,entry.file),'utf8'),layout.groups[entry.type],entry.file);if(entry.type==='product')parsed.value.guidance=`product-guidance/${parsed.value.id}.md`;if(entry.document&& !parsed.body?.trim())throw Error(`${entry.file}: missing ## Guidance prose`);if(records.has(entry.output))throw Error(`Duplicate output ${entry.output}`);records.set(entry.output,{...parsed,file:entry.file,type:entry.type});}return records;
+ const records=new Map();for(const entry of entries){const parsed=parseMarkdown(readFileSync(resolve(root,entry.file),'utf8'),layout.groups[entry.type],entry.file);if(entry.type==='product')parsed.value.guidance=`product-guidance/${parsed.value.id}.md`;if(entry.document&& !parsed.body?.trim())throw Error(`${entry.file}: missing ## Guidance prose`);if(records.has(entry.output))throw Error(`Duplicate output ${entry.output}`);records.set(entry.output,{...parsed,file:entry.file,type:entry.type});}for(const[id,value]of Object.entries(readBibliography(readFileSync(resolve(root,'references.bib'),'utf8'))))records.set(`papers/${id}.yaml`,{value,file:'references.bib',type:'paper'});return records;
 }

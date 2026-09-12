@@ -1,9 +1,9 @@
 {
   "version": 1,
   "revisions": {
-    "datasets-and-guidance": "b871ffd5ddf271e3889fd3e1b77655b8540fd870"
+    "datasets-and-guidance": "3da6a323974c5fb68c66cf1b1cf4d80f32029f97"
   },
-  "sha256": "7c08303f641db3575e3dc3cec984ab9d787a33375123f17ec8eddd32d76c0ebc",
+  "sha256": "56af9bbbca0676120ded943054da96dd7e7c2b00af55d96137b71c2091a19a43",
   "content": {
     "version": 1,
     "columns": [
@@ -977,8 +977,8 @@
         "year": 2012,
         "title": "A comparison of statistical downscaling methods suited for wildfire applications",
         "journal": "International Journal of Climatology",
-        "doi": "10.1002/joc.2312",
         "url": "https://rmets.onlinelibrary.wiley.com/doi/10.1002/joc.2312",
+        "doi": "10.1002/joc.2312",
         "support": "Describes and compares the MACA method for wildfire-relevant meteorology.",
         "scope": "Method paper, published online in 2011 and in the 2012 journal volume. Archive coverage comes from the MACAv2 provider documentation."
       },
@@ -987,8 +987,8 @@
         "year": 2020,
         "title": "Regional climate change projections from NA-CORDEX and their relation to climate sensitivity",
         "journal": "Climatic Change",
-        "doi": "10.1007/s10584-020-02835-x",
         "url": "https://link.springer.com/article/10.1007/s10584-020-02835-x",
+        "doi": "10.1007/s10584-020-02835-x",
         "support": "Analyzes NA-CORDEX regional projections and their relation to parent-model climate sensitivity.",
         "scope": "RCP8.5 experiments available at the time of the study, not every archive configuration or later release."
       },
@@ -1017,8 +1017,8 @@
         "year": 2024,
         "title": "Global Downscaled Projections for Climate Impacts Research (GDPCIR): preserving quantile trends for modeling future climate impacts",
         "journal": "Geoscientific Model Development",
-        "doi": "10.5194/gmd-17-191-2024",
         "url": "https://gmd.copernicus.org/articles/17/191/2024/",
+        "doi": "10.5194/gmd-17-191-2024",
         "support": "Describes QDM bias adjustment followed by QPLAD spatial downscaling for 25 CMIP6 models.",
         "scope": "2024 dataset description. Preservation of modeled quantile changes is not evidence that those future changes are correct."
       },
@@ -1027,8 +1027,8 @@
         "year": 2024,
         "title": "GARD-LENS: A downscaled large ensemble dataset for understanding future climate and its uncertainties",
         "journal": "Scientific Data",
-        "doi": "10.1038/s41597-024-04205-z",
         "url": "https://www.nature.com/articles/s41597-024-04205-z",
+        "doi": "10.1038/s41597-024-04205-z",
         "support": "Documents a 200-member downscaled ensemble from three CMIP6 models and comparisons with other products.",
         "scope": "Historical and SSP3-7.0 ensemble. Three parent models do not represent the full range of model or scenario uncertainty."
       },
@@ -1037,8 +1037,8 @@
         "year": 2025,
         "title": "Lack of clear standards and usable comparisons of downscaled climate projections pose a roadblock for US climate discovery and adaptation",
         "journal": "Environmental Research Letters",
-        "doi": "10.1088/1748-9326/adc74e",
         "url": "https://repository.library.noaa.gov/view/noaa/71089",
+        "doi": "10.1088/1748-9326/adc74e",
         "support": "Identifies gaps in comparable downscaling evaluations and argues for coordinated benchmarking.",
         "scope": "Supports documenting evaluation context and uncertainty; not a universal ranking of products."
       },
@@ -1057,8 +1057,8 @@
         "year": 2023,
         "title": "Continental United States climate projections based on thermodynamic modification of historical weather",
         "journal": "Scientific Data",
-        "doi": "10.1038/s41597-023-02485-5",
         "url": "https://www.nature.com/articles/s41597-023-02485-5",
+        "doi": "10.1038/s41597-023-02485-5",
         "support": "Documents WRF simulations that repeat historical weather with four thermodynamic warming trajectories.",
         "scope": "Conditional warming experiments using a repeated 40-year weather sequence, not independently generated future weather realizations."
       },
@@ -1107,8 +1107,8 @@
         "year": 2014,
         "title": "Statistical Downscaling Using Localized Constructed Analogs (LOCA)",
         "journal": "Journal of Hydrometeorology",
-        "doi": "10.1175/JHM-D-14-0082.1",
         "url": "https://doi.org/10.1175/JHM-D-14-0082.1",
+        "doi": "10.1175/JHM-D-14-0082.1",
         "support": "Introduces localized constructed analog downscaling.",
         "scope": "Original method; distinguish CMIP5 LOCA products, evaluation regridding, and later LOCA2 releases."
       },
@@ -1127,8 +1127,8 @@
         "year": 2024,
         "title": "An overview of the Western United States Dynamically Downscaled Dataset (WUS-D3)",
         "journal": "Geoscientific Model Development",
-        "doi": "10.5194/gmd-17-2265-2024",
         "url": "https://gmd.copernicus.org/articles/17/2265/2024/",
+        "doi": "10.5194/gmd-17-2265-2024",
         "support": "Describes 16 WRF simulations driven by 14 CMIP6 models and evaluates western US climate.",
         "scope": "Original 2024 ensemble with uncorrected GCM forcing; later bias-corrected experiments require separate evaluation."
       },
@@ -1137,8 +1137,8 @@
         "year": 2013,
         "title": "Downscaled Climate Projections Suitable for Resource Management",
         "journal": "Eos, Transactions American Geophysical Union",
-        "doi": "10.1002/2013EO370002",
         "url": "https://doi.org/10.1002/2013EO370002",
+        "doi": "10.1002/2013EO370002",
         "support": "NEX-DCP30 publication cited by the Earth Engine distribution catalog.",
         "scope": "Bibliographic metadata checked in the distributor citation. Full text was not retrieved in this catalog update; technical claims use the NASA documentation."
       },
@@ -1147,8 +1147,8 @@
         "year": 2012,
         "title": "Technical Note: Bias correcting climate model simulated daily temperature extremes with quantile mapping",
         "journal": "Hydrology and Earth System Sciences",
-        "doi": "10.5194/hess-16-3309-2012",
         "url": "https://hess.copernicus.org/articles/16/3309/2012/",
+        "doi": "10.5194/hess-16-3309-2012",
         "support": "Describes quantile-mapping treatment of daily temperature extremes and is cited by the NEX-GDDP distributor.",
         "scope": "Temperature methods paper; it does not establish precipitation skill or all metadata for the NEX-GDDP archive."
       },
