@@ -7,7 +7,7 @@ const { chromium } = await import(
 );
 const origin =
   process.env.PRECIP_SITE_URL ||
-  "http://localhost:3005/pcef_workshop_site_mockup";
+  "http://localhost:3005/site";
 const browser = await chromium.launch({
   headless: true,
   executablePath: process.env.PLAYWRIGHT_EXECUTABLE,

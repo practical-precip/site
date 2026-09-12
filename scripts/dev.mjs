@@ -12,6 +12,7 @@ export function contentSignature(root = projectRoot) {
       a.name.localeCompare(b.name),
     )) {
       const full = resolve(path, file.name);
+      if (file.name.startsWith(".")) continue;
       if (file.isDirectory()) scan(full);
       else {
         const stat = statSync(full);
@@ -19,15 +20,7 @@ export function contentSignature(root = projectRoot) {
       }
     }
   }
-  for (const repo of ["guidance", "datasets"]) {
-    for (const folder of [repo === "guidance" ? "cells" : "products", repo === "guidance" ? "rows" : "product-guidance", "assets"]) scan(resolve(root, "metadata", repo, folder));
-    for (const file of readdirSync(resolve(root, "metadata", repo))) {
-      if (!/\.(yaml|json)$/.test(file)) continue;
-      const full = resolve(root, "metadata", repo, file);
-      const stat = statSync(full);
-      entries.push(`${full}:${stat.size}:${stat.mtimeMs}`);
-    }
-  }
+  scan(resolve(root, "metadata/datasets-and-guidance"));
   return entries.join("\n");
 }
 export function watchContent(root, onChange, interval = 500) {
@@ -49,7 +42,7 @@ if (
   resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 ) {
   buildContent();
-  console.log("Content compiled. Watching Markdown, YAML, and public assets.");
+  console.log("Content compiled. Watching Markdown and assets.");
   const close = process.env.SITE_CONTENT_MODE === "snapshot" ? () => {} : watchContent(projectRoot, () => {
     prepareContent(projectRoot);
     buildContent(projectRoot);

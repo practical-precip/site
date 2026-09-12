@@ -5,8 +5,8 @@ import { fileURLToPath } from "node:url";
 import { readFileSync, writeFileSync, unlinkSync, existsSync } from "node:fs";
 import assert from "node:assert/strict";
 const root = fileURLToPath(new URL("../", import.meta.url)).replace(/\/$/, "");
-const base = root + "/metadata/datasets/product-guidance/loca2.md";
-const variant = root + "/metadata/datasets/product-guidance/loca2.northwest-test.md";
+const base = root + "/metadata/datasets-and-guidance/datasets/loca2.md";
+const variant = root + "/metadata/datasets-and-guidance/datasets/regional/loca2.northwest-test.md";
 if (existsSync(variant))
   throw new Error(
     "Temporary test variant already exists; preserve it and choose another path.",
@@ -27,16 +27,13 @@ try {
     .waitFor();
   writeFileSync(
     variant,
-    original.replace(
-      "## Application guidance",
-      "## Regional reload verification",
-    ),
+    readFileSync(root + "/metadata/datasets-and-guidance/templates/regional-guidance.md", "utf8").replace("## Guidance\n", "## Guidance\n\n## Regional reload verification\n"),
   );
   writeFileSync(
     base,
     original.replace(
-      "---\n",
-      "---\nregions:\n  northwest: product-guidance/loca2.northwest-test.md\n",
+      "## Guidance\n",
+      "### Regions\n\n| Field | Value |\n| --- | --- |\n| Northwest | product-guidance/loca2.northwest-test.md |\n\n## Guidance\n",
     ),
   );
   await page.locator("#climate-region").selectOption("northwest");
@@ -61,7 +58,7 @@ try {
     /General product guidance/,
   );
   console.log(
-    "PASS: live Markdown/YAML reload, product regional document and source link, and restoration to general guidance.",
+    "PASS: live Markdown reload, product regional document and source link, and restoration to general guidance.",
   );
 } finally {
   writeFileSync(base, original);

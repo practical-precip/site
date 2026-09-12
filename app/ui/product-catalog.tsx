@@ -28,6 +28,6 @@ export default function ProductCatalog() {
       <dl><dt>Version scope</dt><dd>{p.version}</dd><dt>Resolution</dt><dd>{p.coverage.grid_spacing.value ?? "Not established"} {p.coverage.grid_spacing.unit}; {p.coverage.timestep}</dd></dl>
     </section>)}</div>
     {matches.length===0&&<p>No match. Try another name or choose all dataset types.</p>}
-    <p><a href="https://github.com/practical-precip/datasets/blob/main/INDEX.md">Edit a dataset or suggest a correction</a></p>
+    <p><a href="https://github.com/practical-precip/datasets-and-guidance/blob/main/INDEX.md">Edit a dataset or suggest a correction</a></p>
   </>;
 }

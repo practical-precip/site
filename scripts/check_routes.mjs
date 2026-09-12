@@ -3,7 +3,7 @@ import { topics, columns, products } from "../app/data.ts";
 const origin = process.env.PRECIP_SITE_URL || "http://localhost:3000";
 const metadataOrigin =
   process.env.PRECIP_METADATA_ORIGIN ||
-  "https://practical-precip.github.io/pcef_workshop_site_mockup";
+  "https://practical-precip.github.io/site";
 let checked = 0;
 async function get(path, status = 200) {
   const response = await fetch(origin + path);

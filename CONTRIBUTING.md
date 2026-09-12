@@ -1,47 +1,46 @@
-# Contributing
+# Contributing to the site
 
-For guidance, dataset facts, images, equations or expert recommendations, edit
-[guidance](https://github.com/practical-precip/guidance) or
-[datasets](https://github.com/practical-precip/datasets). Both repositories explain
-online editing and technical PR workflows. Their content is independent of the
-site implementation.
+For scientific content, edit the Markdown pages in [datasets-and-guidance](https://github.com/practical-precip/datasets-and-guidance). Its contribution guide has instructions for editing online. This repository is for the interface and content tooling.
 
-The content repositories are private. Invited contributors can edit there; the
-public site renders only the published content snapshot and copied assets.
-
-For site code, create a branch and follow the setup/check commands in the
-[README](README.md). Keep `.gitmodules` and the two submodule commit pointers in
-version control. Content, schemas and figures are assembled from those pointers
-before a maintainer build. Public CI uses `published-content.json` instead.
-Never hand-edit that snapshot, generated `content/`, or `docs/` files.
-
-The assembler rejects conflicting paper definitions or schemas. The site compiler
-also checks cross-repository region/application links. When adding a new region
-or application, update both metadata pointers together if dataset guidance uses
-that new ID.
-
-The development server watches `metadata/guidance` and `metadata/datasets`.
-For experimental content changes, create a branch inside the relevant submodule:
+## Validate a content revision
 
 ```sh
-git -C metadata/datasets switch -c my-content-edit
+gh auth setup-git
+git submodule update --init --recursive
+npm ci
+npm run content:check
+npm run test:content
+npm run dev
 ```
 
-Commit and submit those edits to the dataset repository, then select the merged
-commit in this site repository. A site commit does not include uncommitted edits
-inside a submodule. Check `git submodule status` and `git status` before publishing.
+Edit files inside `metadata/datasets-and-guidance/` to preview proposed content. Submit scientific changes to that repository first. For a content pull request, fetch its branch inside the submodule, check it out, and run the same checks. This keeps software installation out of the contributor workflow.
 
-Browser checks use `scripts/check_regions_browser.mjs`. Configure
-`PLAYWRIGHT_MODULE`, `PLAYWRIGHT_EXECUTABLE`, and `PRECIP_SITE_URL` for a local
-Playwright installation and a served Pages export. The live-edit check
-`scripts/check_content_preview.mjs` temporarily changes a dataset Markdown file
-and restores it. Use that check only in an isolated checkout.
+## Publish reviewed content
 
-A site PR should describe the resulting behavior and tests. If metadata pointers
-change, link the content commits and explain any cross-repository changes.
+After its pull request is merged, select the exact reviewed commit:
 
-After selecting metadata commits, stage their pointers and run
-`npm run snapshot:update` before the Pages build. The snapshot records committed
-content only. Publish its JSON and rebuilt `docs/` in the same site commit.
-Private repository checks validate author edits. Public site checks validate the
-published snapshot and rendering without access to the private repositories.
+```sh
+git -C metadata/datasets-and-guidance fetch origin
+git -C metadata/datasets-and-guidance checkout REVIEWED_COMMIT_SHA
+git add metadata/datasets-and-guidance
+npm run content:check
+npm run snapshot:update
+npm run test:content
+npm run snapshot:check
+npm run build:pages
+npm run check:export
+npm run lint
+git add published-content.json docs
+git commit -S -m "Publish reviewed precipitation content"
+git push
+```
+
+`test:content` includes snapshot checks. When changing the selected content commit, run `snapshot:update` before the full test suite so the snapshot matches the newly staged pointer. The update command rejects uncommitted source changes or a pointer that differs from the source checkout.
+
+GitHub Actions rebuilds from the checked-in snapshot and deploys Pages to `/site/`. It needs no private-repository credentials. Review the content and generated assets before publishing because both will become public.
+
+## Markdown conversion
+
+The author format uses Field/Value tables for scalar metadata, headings for groups, lists for simple collections, and tables for collections of records. Free prose follows `## Guidance`. The compiler accepts optional regional pages and combines dataset facts and guidance into the established site schema. Types and conversion code belong here, never in the human content repository.
+
+For browser checks, install Playwright in a local environment and provide `PLAYWRIGHT_MODULE` and `PLAYWRIGHT_EXECUTABLE` if it is not in the default module path. Serve the static export and run `scripts/check_regions_browser.mjs` with `PRECIP_SITE_URL` pointing to `/site`. Run `scripts/check_content_preview.mjs` against a development server on `http://localhost:PORT` to test live Markdown edits and restoration.

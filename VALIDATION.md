@@ -154,3 +154,18 @@ The legacy branch-based Pages job attempted to initialize private submodules and
 failed. Pages now uses the validated snapshot build artifact from the explicit
 Actions workflow, whose checkout does not fetch submodules. Deployment is limited
 to `main`; pull requests build a preview only.
+
+## Combined Markdown content and renamed site, September 11, 2026
+
+- GitHub repository renamed to `practical-precip/site`; deployment path is `/site/`.
+- One private `datasets-and-guidance` submodule replaces the separate sources.
+- Exact migration comparison passed for all 133 input records, including prose. The compiled scientific content also exactly matches the preceding published snapshot, allowing only changed source links and relocated illustration-code URLs.
+- All 27 content, conversion, and snapshot tests passed. Regression coverage includes Windows line endings, extra table cells, duplicate guidance output paths, and discovery of new Markdown dataset pages.
+- Production build and TypeScript checks passed for 78 static pages. Export validation checked 1,737 local links/assets and all configured guidance anchors.
+- Chromium checks passed for map/dropdown synchronization, keyboard selection, region fallback, guidance dialogs, images/equations, citations, all 67 dataset pages, source links, and mobile overflow. No browser errors were observed.
+- A live Markdown edit added regional dataset guidance, updated the development preview, and restored the general guidance after cleanup.
+- Independent review identified three conversion hazards. All were fixed and covered by regression tests; the follow-up review found no remaining blocker in that bounded review.
+- ESLint reported no errors and one existing Next.js image-optimization warning for a static illustration.
+- The original personal-account mockup was rebuilt from revision `0fc6618`. Chromium verified the exact migration-banner text and destination on home, guidance, and about pages after hydration.
+
+These checks validate the migration and software behavior. They do not constitute a new scientific review of the guidance or dataset metadata.

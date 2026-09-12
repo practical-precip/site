@@ -176,7 +176,7 @@ export function loadContent(root = projectRoot) {
     const out = {
       ...meta,
       body: compiled.body,
-      contentFile: file,
+      contentFile: existsSync(resolve(root, "content/source-map.json")) ? JSON.parse(readFileSync(resolve(root, "content/source-map.json")))[file] ?? file : file,
       paperIds: [
         ...new Set([
           ...compiled.paperIds,

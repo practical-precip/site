@@ -42,7 +42,7 @@ export default function GuidanceDocument({
           <>
             {" "}
             <a
-              href={`https://github.com/practical-precip/${document.contentFile.startsWith("product-guidance/") ? "datasets" : "guidance"}/edit/main/${document.contentFile}`}
+              href={`https://github.com/practical-precip/datasets-and-guidance/edit/main/${document.contentFile.split("/").map(encodeURIComponent).join("/")}`}
               target="_blank"
               rel="noreferrer"
             >

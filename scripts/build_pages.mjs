@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const build = spawnSync(process.execPath, [resolve(root, 'node_modules/next/dist/bin/next'), 'build', '--webpack'], {
-  cwd: root, stdio: 'inherit', env: { ...process.env, NEXT_PUBLIC_BASE_PATH: '/pcef_workshop_site_mockup' },
+  cwd: root, stdio: 'inherit', env: { ...process.env, NEXT_PUBLIC_BASE_PATH: '/site' },
 });
 if (build.error) throw build.error;
 if (build.status !== 0) process.exit(build.status ?? 1);

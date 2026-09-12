@@ -4,7 +4,7 @@ import { resolve, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { topics, columns, products } from "../app/data.ts";
 const root = fileURLToPath(new URL("../docs/", import.meta.url));
-const prefix = "/pcef_workshop_site_mockup";
+const prefix = "/site";
 const published = "https://practical-precip.github.io" + prefix;
 let links = 0;
 function inspectHtml(file) {

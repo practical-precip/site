@@ -1,8 +1,4 @@
-[submodule "metadata/guidance"]
-	path = metadata/guidance
-	url = https://github.com/practical-precip/guidance.git
-	branch = main
-[submodule "metadata/datasets"]
-	path = metadata/datasets
-	url = https://github.com/practical-precip/datasets.git
+[submodule "metadata/datasets-and-guidance"]
+	path = metadata/datasets-and-guidance
+	url = https://github.com/practical-precip/datasets-and-guidance.git
 	branch = main

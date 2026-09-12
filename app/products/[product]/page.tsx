@@ -165,7 +165,7 @@ export default async function ProductPage({
         </section>
         <p className="contribution-note">
           <a
-            href={`https://github.com/practical-precip/datasets/edit/main/products/${p.id}.yaml`}
+            href={`https://github.com/practical-precip/datasets-and-guidance/edit/main/datasets/${p.id}.md`}
           >
             Edit metadata (invited contributors)
           </a>

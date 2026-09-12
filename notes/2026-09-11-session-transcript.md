@@ -179,3 +179,21 @@ private repositories. Maintainers with access pull reviewed content commits,
 validate them and update the snapshot before publishing. Public CI needs no
 private repository credentials. Browser tests cover alias search, dataset-type
 filters, regional guidance and live content editing.
+
+## Repository simplification, September 11, 2026
+
+### User request
+
+> Change the website repo to be called "site". Also, I gave the link to the first site version on my personal account to a few people, add a banner at the top of the original site to say "This is the original site mockup, click here for the updated verison." (link to the new site on the org page). Also I intended the guidance and dataset repos to be the same, call it "datasets-and-guidance". This combined repo needs to be super accessible and dead easy to edit, complex data formats like json and yaml can be used for the site, but the repo that intended for humans to edit should be mostly markdown with clear names, like the way guidance/cells is set up. The human edited data can involve a conversion step if needed to be more easily used by the site, but keep that out of the repo, that can live in the site repo or a "tools" repo if it becomes unwieldy. I'm still not sure the best way to link the site and the data but the most important thing is to have the data repo be easy to edit.
+
+### Implementation record
+
+The public website repository is now `practical-precip/site`. The private `datasets` repository was renamed `datasets-and-guidance` and received all guidance content. The former guidance repository has a redirect notice and is archived for history.
+
+Dataset facts and expert prose now share one Markdown page. Guidance boxes, application definitions, table configuration, climate regions, references, and dataset indexes also use Markdown. The combined repo includes a browsable index, online editing instructions, a Git contribution guide, templates, and field explanations. It has no build scripts, package files, JSON, or YAML authoring files. Image/PDF assets and the original workshop source list are retained.
+
+Conversion and validation live in the site repository. One submodule pins the reviewed content revision. A generated public snapshot lets GitHub Actions and public contributors build the site without private credentials. Maintainers select and publish content deliberately after review.
+
+The original public URL was restored from the original mockup source, with the requested banner linking to `https://practical-precip.github.io/site/`. The wording preserves the supplied spelling of "verison".
+
+Exact migration and compiled-content comparisons confirmed no scientific content or prose was lost. Conversion, snapshot, export, browser, and live-edit checks passed. See `VALIDATION.md` for the scope of each check.

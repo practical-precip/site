@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 export const root=fileURLToPath(new URL('../',import.meta.url));
 const digest=content=>createHash('sha256').update(JSON.stringify(content)).digest('hex');
-function pins(base){const out={};for(const name of ['guidance','datasets']){const entry=execFileSync('git',['ls-files','--stage',`metadata/${name}`],{cwd:base,encoding:'utf8'}).trim().split(/\s+/);if(entry[0]!=='160000')throw Error(`Missing submodule pointer metadata/${name}`);out[name]=entry[1];}return out;}
+function pins(base){const out={};for(const name of ['datasets-and-guidance']){const entry=execFileSync('git',['ls-files','--stage',`metadata/${name}`],{cwd:base,encoding:'utf8'}).trim().split(/\s+/);if(entry[0]!=='160000')throw Error(`Missing submodule pointer metadata/${name}`);out[name]=entry[1];}return out;}
 export function readSnapshot(base=root){
  const snap=JSON.parse(readFileSync(resolve(base,'published-content.json'),'utf8'));
  if(snap.version!==1||digest(snap.content)!==snap.sha256)throw Error('Published snapshot checksum/version is invalid. Regenerate it from metadata.');
