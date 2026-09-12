@@ -41,7 +41,7 @@ GitHub Actions rebuilds from the checked-in snapshot and deploys Pages to `/site
 
 ## Content conversion
 
-Dataset metadata uses standard NestedText, including multiline Markdown strings for guidance. The site owns the parser, type conversion, and schema validation. INDEX.md supplies names, IDs, aliases, and order through ordinary Markdown links. Guidance boxes and table configuration retain labeled Markdown lists. The content repository has no conversion scripts.
+Dataset metadata uses standard NestedText, including multiline Markdown strings for guidance. The site owns the parser, type conversion, and schema validation. INDEX.md supplies names, IDs, aliases, and order through ordinary Markdown links. Regions.nt and guidance/Table.nt also use NestedText. Guidance boxes and application pages retain labeled Markdown lists. The content repository has no conversion scripts.
 
 The JavaScript parser supports NestedText 3.0 syntax. Every migrated `.nt` file was independently parsed by the official Python NestedText 3.8 implementation with identical results. Numeric conversion and blank-as-unknown handling are schema rules applied after parsing; NestedText itself contains strings, lists, and mappings.
 

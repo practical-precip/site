@@ -14,3 +14,17 @@ test('regional output cannot overwrite a dataset guidance document',()=>fixture(
 test('editing the shared BibTeX file updates assembled references',()=>fixture(dir=>{const file=join(dir,'metadata/datasets-and-guidance/references.bib');const text=readFileSync(file,'utf8');writeFileSync(file,text.replace('Future Increases in North American Extreme Precipitation in CMIP6 Downscaled with LOCA','Updated reference title'));prepareContent(dir);assert.match(readFileSync(join(dir,'content/papers.yaml'),'utf8'),/Updated reference title/);}));
 test('reviewer lists can be added without changing the site field layout',()=>fixture(dir=>{const file=join(dir,'metadata/datasets-and-guidance/datasets/loca2.nt');const text=readFileSync(file,'utf8').replace('status: draft','status: expert-reviewed\n    reviewed by:\n      - Example Expert\n    reviewed on: 2026-09-11');writeFileSync(file,text);const r=readMarkdownContent(join(dir,'metadata/datasets-and-guidance')).get('products/loca2.yaml');assert.deepEqual(r.value.expert_guidance.review.reviewed_by,['Example Expert']);}));
 test('unlisted datasets and dangling index links fail before replacing assembled content',()=>fixture(dir=>{const source=join(dir,'metadata/datasets-and-guidance');cpSync(join(source,'datasets/loca2.nt'),join(source,'datasets/unlisted.nt'));assert.throws(()=>prepareContent(dir),/missing entry in INDEX.md/);rmSync(join(source,'datasets/unlisted.nt'));rmSync(join(source,'datasets/loca2.nt'));assert.throws(()=>prepareContent(dir),/loca2.nt/);}));
+
+test('NestedText definition edits update output and invalid edits preserve the last assembly',()=>fixture(dir=>{
+ const source=join(dir,'metadata/datasets-and-guidance');
+ const region=join(source,'Regions.nt'), table=join(source,'guidance/Table.nt');
+ writeFileSync(region,readFileSync(region,'utf8').replace('name: Northwest','name: Northwest preview'));
+ writeFileSync(table,readFileSync(table,'utf8').replace('title: Spatial resolution','title: Grid spacing preview'));
+ prepareContent(dir);
+ assert.match(readFileSync(join(dir,'content/regions.yaml'),'utf8'),/Northwest preview/);
+ const before=readFileSync(join(dir,'content/table.yaml'),'utf8');
+ assert.match(before,/Grid spacing preview/);
+ writeFileSync(table,readFileSync(table,'utf8').replace('version: 1','version: many'));
+ assert.throws(()=>prepareContent(dir),/expected a number/);
+ assert.equal(readFileSync(join(dir,'content/table.yaml'),'utf8'),before);
+}));

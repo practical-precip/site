@@ -3,7 +3,7 @@ import { resolve, relative } from 'node:path';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
-import { readDatasetContent } from './dataset-content.mjs';
+import { readDatasetContent, parseDefinition } from './dataset-content.mjs';
 import { readBibliography } from './bibliography.mjs';
 import layout from './markdown-layout.json' with { type: 'json' };
 
@@ -137,5 +137,6 @@ export function parseMarkdown(raw, shape, file = 'Markdown') {
 function walk(dir){if(!existsSync(dir))return [];return readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(resolve(dir,e.name)):[resolve(dir,e.name)]);}
 export function readMarkdownContent(root){const entries=layout.files.filter(e=>!['product','document','row','paper'].includes(e.type));
  for(const[folder,type,prefix]of [['guidance/applications','row','rows'],['guidance/cells','document','cells']])for(const path of walk(resolve(root,folder))){if(!path.endsWith('.md')||path.includes('/regional/'))continue;const file=relative(root,path);entries.push({file,type,output:prefix+'/'+relative(resolve(root,folder),path).replace(/\.md$/,type==='document'?'.md':'.yaml'),document:type==='document'||type==='product'});}
- const records=readDatasetContent(root);for(const entry of entries){const parsed=parseMarkdown(readFileSync(resolve(root,entry.file),'utf8'),layout.groups[entry.type],entry.file);if(entry.type==='product')parsed.value.guidance=`product-guidance/${parsed.value.id}.md`;if(entry.document&& !parsed.body?.trim())throw Error(`${entry.file}: missing ## Guidance prose`);if(records.has(entry.output))throw Error(`Duplicate output ${entry.output}`);records.set(entry.output,{...parsed,file:entry.file,type:entry.type});}for(const[id,value]of Object.entries(readBibliography(readFileSync(resolve(root,'references.bib'),'utf8'))))records.set(`papers/${id}.yaml`,{value,file:'references.bib',type:'paper'});return records;
+ const records=readDatasetContent(root);
+ for(const [file,type] of [['Regions.nt','regions'],['guidance/Table.nt','table']]) records.set(`${type}.yaml`,parseDefinition(readFileSync(resolve(root,file),'utf8'),file,type));for(const entry of entries){const parsed=parseMarkdown(readFileSync(resolve(root,entry.file),'utf8'),layout.groups[entry.type],entry.file);if(entry.type==='product')parsed.value.guidance=`product-guidance/${parsed.value.id}.md`;if(entry.document&& !parsed.body?.trim())throw Error(`${entry.file}: missing ## Guidance prose`);if(records.has(entry.output))throw Error(`Duplicate output ${entry.output}`);records.set(entry.output,{...parsed,file:entry.file,type:entry.type});}for(const[id,value]of Object.entries(readBibliography(readFileSync(resolve(root,'references.bib'),'utf8'))))records.set(`papers/${id}.yaml`,{value,file:'references.bib',type:'paper'});return records;
 }

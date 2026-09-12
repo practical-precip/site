@@ -221,3 +221,9 @@ User: "I want to try using NestedText instead of markdown for the datasets, with
 Converted all 67 datasets and their two regional records to standard NestedText, with expert guidance stored as Markdown in a multiline string. INDEX.md links now define display names, filename-based IDs, aliases, and order. Removed Workshop names.md and Dataset order.md. Guidance boxes remain Markdown, and references remain in the shared BibTeX file.
 
 The site uses the published NestedText parser and owns conversion and validation. Updated templates and online/Git contribution instructions. Preserved the user's existing field-guide wording edit. Exact data comparisons, the official reference parser, 41 tests, production build, export checks, and live/static browser checks passed. See VALIDATION.md for their scope.
+
+## NestedText region and table definitions, September 12, 2026
+
+User: "The datasets look a lot better this way, nt was the right choice, use nt for the Regions and the Table definitions"
+
+Converted Regions.md to Regions.nt and guidance/Table.md to guidance/Table.nt. Updated the site reader and contributor instructions. State codes, map positions, column definitions, row order, and compiled website content are unchanged. Guidance boxes and application pages remain Markdown. All 43 tests, the production build, export checks, and browser checks passed.

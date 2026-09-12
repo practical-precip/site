@@ -61,33 +61,6 @@
         "coverage": "string"
       }
     },
-    "table": {
-      "version": "number",
-      "columns": [
-        {
-          "id": "string",
-          "title": "string",
-          "subtitle": "string",
-          "definition": "string"
-        }
-      ],
-      "rows": [
-        "string"
-      ]
-    },
-    "regions": [
-      {
-        "id": "string",
-        "name": "string",
-        "short": "string",
-        "states": [
-          "string"
-        ],
-        "label": [
-          "number"
-        ]
-      }
-    ],
     "matrix": {
       "source": "string",
       "checked_on": "string",
@@ -104,16 +77,6 @@
     }
   },
   "files": [
-    {
-      "file": "guidance/Table.md",
-      "output": "table.yaml",
-      "type": "table"
-    },
-    {
-      "file": "Regions.md",
-      "output": "regions.yaml",
-      "type": "regions"
-    },
     {
       "file": "notes/NCAR matrix coverage.md",
       "output": "notes/ncar-matrix-coverage.yaml",

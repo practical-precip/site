@@ -196,3 +196,11 @@ These checks validate the migration and software behavior. They do not constitut
 - Updated contributor instructions explain NestedText indentation and multiline strings, index ownership, and the difference between source editing on GitHub and rendered guidance in the site. The existing user edit in FIELDS.md was preserved.
 
 This migration did not add or revalidate scientific claims.
+
+## NestedText region and table definitions, September 12, 2026
+
+- Replaced Regions.md and guidance/Table.md with NestedText definitions using the existing parser and schema type conversion. Updated editing instructions and removed their obsolete Markdown layouts.
+- Exact comparison passed for all 132 source records and prose, including leading-zero state codes, numeric map positions, and column and row order. The complete compiled site content matches the previous published snapshot.
+- All 43 content tests passed, including edits to region names and column titles, numeric conversion, duplicate fields, and malformed numeric edits preserving the last assembled output. Schema constraints continue to be checked by the content compiler.
+- The 78-page production build, TypeScript check, and export check passed (1,737 local links/assets). ESLint had no errors and one existing image-optimization warning.
+- Chromium verified map/dropdown synchronization, keyboard controls, regional guidance, all 67 dataset pages, citations, images, equations, and mobile layout without browser errors.

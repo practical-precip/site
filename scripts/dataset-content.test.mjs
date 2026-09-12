@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { dump } from 'nestedtext';
-import { parseDataset, readDatasetIndex } from './dataset-content.mjs';
+import { parseDataset, readDatasetIndex, parseDefinition } from './dataset-content.mjs';
 const identity = {id:'example',name:'From the index',aliases:['Familiar name']};
 const dataset = {
   coverage:{'grid spacing':{value:'0.0625',unit:'degrees'}},
@@ -50,4 +50,15 @@ test('regional paths are converted for the site without permitting traversal or 
  assert.equal(parse(region).value.expert_guidance.regions.northwest,'product-guidance/example.northwest.md');
  region['expert guidance'].regions.northwest='../private.nt';assert.throws(()=>parse(region),/invalid regional/);
  assert.throws(()=>parseDataset(dump(region['expert guidance']),'regional.nt'),/cannot contain regional overrides/);
+});
+
+test('NestedText definitions preserve FIPS strings and convert map coordinates and version',()=>{
+ const regions=parseDefinition('-\n  id: west\n  states:\n    - 06\n  label:\n    - 170\n    - 105\n','Regions.nt','regions').value;
+ assert.deepEqual(regions[0].states,['06']);
+ assert.deepEqual(regions[0].label,[170,105]);
+ const table=parseDefinition('version: 1\ncolumns:\n  []\nrows:\n  - second\n  - first\n','guidance/Table.nt','table').value;
+ assert.equal(table.version,1);
+ assert.deepEqual(table.rows,['second','first']);
+ assert.throws(()=>parseDefinition('-\n  label:\n    - east\n','Regions.nt','regions'),/Regions.nt:.*expected a number/);
+ assert.throws(()=>parseDefinition('version: 1\nversion: 2','guidance/Table.nt','table'),/Table.nt:.*Duplicate key/);
 });

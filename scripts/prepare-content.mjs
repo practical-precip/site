@@ -36,5 +36,5 @@ export function prepareContent(base=root){
  }catch(error){rmSync(stage,{recursive:true,force:true});throw error;}
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- try{prepareContent();console.log(process.env.SITE_CONTENT_MODE==='snapshot'?'Using the published content snapshot.':'Converted NestedText datasets and Markdown guidance into site content.');}catch(e){console.error(e.message);process.exitCode=1;}
+ try{prepareContent();console.log(process.env.SITE_CONTENT_MODE==='snapshot'?'Using the published content snapshot.':'Converted NestedText datasets and definitions, plus Markdown guidance into site content.');}catch(e){console.error(e.message);process.exitCode=1;}
 }

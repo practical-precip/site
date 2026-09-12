@@ -44,6 +44,7 @@ function resolveSchema(spec) {
 }
 function convert(value, spec, path) {
   spec = resolveSchema(spec);
+  if (typeof spec.const === 'number') spec = {...spec, type: 'number'};
   if (Array.isArray(spec.type)) {
     if (value === '' && spec.type.includes('null')) return null;
     spec = {...spec, type: spec.type.find(t => t !== 'null')};
@@ -104,6 +105,15 @@ export function parseDataset(raw, file, identity) {
     if (!identity) return { value: meta, body, file, type: 'document' };
     const product = convert(value, schema.definitions.product, 'dataset');
     return { value: { ...product, id: identity.id, name: identity.name, aliases: identity.aliases, guidance: `product-guidance/${identity.id}.md`, expert_guidance: meta }, body, file, type: 'product' };
+  } catch (error) {
+    throw new Error(`${file}: ${error.message}`);
+  }
+}
+export function parseDefinition(raw, file, type) {
+  try {
+    if (!['regions', 'table'].includes(type)) throw new Error('unknown definition type');
+    if (/^\s*(?:__proto__|constructor|prototype):/m.test(raw)) throw new Error('reserved field name');
+    return { value: convert(load(raw), schema.definitions[type], type), file, type };
   } catch (error) {
     throw new Error(`${file}: ${error.message}`);
   }
