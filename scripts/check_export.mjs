@@ -36,7 +36,7 @@ for (const phrase of [
   "Practical Precip (working title)",
   "What are you looking for?",
   "General information",
-  "Guidance on using datasets",
+  "What dataset should I use?",
   "Detailed information on each dataset",
 ]) assert.ok(home.includes(phrase), `Landing page missing ${phrase}`);
 const matrix = inspectHtml(resolve(root, "matrix", "index.html"));
