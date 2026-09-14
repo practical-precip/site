@@ -146,6 +146,84 @@ nav a[aria-current="page"] {
   margin: auto;
   padding: 0 4%;
 }
+.landing-page {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 4% 110px;
+}
+.landing-intro {
+  padding: clamp(72px, 11vw, 160px) 0 88px;
+  max-width: 900px;
+}
+.landing-intro h1 {
+  max-width: 850px;
+}
+.landing-intro p {
+  max-width: 780px;
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.5;
+}
+.landing-choices {
+  border-top: 1px solid var(--line);
+  padding-top: 38px;
+}
+.landing-choices h2 {
+  font-size: clamp(25px, 2.5vw, 34px);
+  margin-bottom: 32px;
+}
+.landing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.landing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 295px;
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.landing-card:hover {
+  background: var(--panel2);
+  border-color: var(--sage);
+  text-decoration: none;
+}
+.landing-card-number {
+  color: var(--sage);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+.landing-card h3 {
+  margin-top: 28px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26px;
+  line-height: 1.2;
+}
+.landing-card p {
+  margin-top: 15px;
+  padding-bottom: 34px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.landing-card-arrow {
+  position: absolute;
+  right: 26px;
+  bottom: 20px;
+  color: var(--orange);
+  font-size: 24px;
+}
+.placeholder-page {
+  padding-top: 100px;
+}
+.placeholder-page p:not(.eyebrow) {
+  margin: 24px 0;
+  color: var(--muted);
+}
 .hero {
   display: grid;
   grid-template-columns: 1fr 240px;
@@ -581,6 +659,9 @@ dialog > p:not(.eyebrow, .dialog-property, .draft-note) {
   }
 }
 @media (max-width: 1000px) {
+  .landing-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .hero {
     grid-template-columns: 1fr;
   }
@@ -607,6 +688,15 @@ dialog > p:not(.eyebrow, .dialog-property, .draft-note) {
   }
 }
 @media (max-width: 600px) {
+  .landing-intro {
+    padding: 72px 0 62px;
+  }
+  .landing-cards {
+    grid-template-columns: 1fr;
+  }
+  .landing-card {
+    min-height: 220px;
+  }
   .site-header {
     min-height: 112px;
     align-items: start;
@@ -624,7 +714,8 @@ dialog > p:not(.eyebrow, .dialog-property, .draft-note) {
   }
   .site-header nav {
     font-size: 11px;
-    gap: 28px;
+    gap: 14px;
+    flex-wrap: wrap;
   }
   .brand-sub {
     font-size: 7px;

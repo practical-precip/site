@@ -5,7 +5,6 @@ import { fileURLToPath } from "node:url";
 import { topics, columns, products } from "../app/data.ts";
 const root = fileURLToPath(new URL("../docs/", import.meta.url));
 const prefix = "/site";
-const published = "https://practical-precip.github.io" + prefix;
 let links = 0;
 function inspectHtml(file) {
   const html = readFileSync(file, "utf8");
@@ -33,11 +32,22 @@ function inspectHtml(file) {
 }
 assert.ok(existsSync(resolve(root, ".nojekyll")));
 const home = inspectHtml(resolve(root, "index.html"));
+for (const phrase of [
+  "Practical Precip (working title)",
+  "What are you looking for?",
+  "General information",
+  "Guidance on using datasets",
+  "Detailed information on each dataset",
+]) assert.ok(home.includes(phrase), `Landing page missing ${phrase}`);
+const matrix = inspectHtml(resolve(root, "matrix", "index.html"));
 assert.equal(
-  (home.match(/class="matrix-cell /g) || []).length,
+  (matrix.match(/class="matrix-cell /g) || []).length,
   topics.length * columns.length,
 );
-assert.ok(home.includes(published + "/og.png"), "Wrong social image origin");
+assert.ok(
+  !home.includes('property="og:image"'),
+  "Landing page should not inherit the old field-guide image",
+);
 for (const t of topics) {
   const html = inspectHtml(resolve(root, "guidance", t.id, "index.html"));
   for (const c of columns)
@@ -55,6 +65,7 @@ for (const p of products)
   inspectHtml(resolve(root, "products", p.id, "index.html"));
 for (const page of [
   "products/index.html",
+  "general-information/index.html",
   "about/index.html",
   "reading-room/index.html",
   "404.html",

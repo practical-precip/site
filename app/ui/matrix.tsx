@@ -25,7 +25,10 @@ export function Header({ active = "matrix" }: { active?: string }) {
         </span>
       </Link>
       <nav aria-label="Main navigation">
-        <Link aria-current={active === "matrix" ? "page" : undefined} href="/">
+        <Link aria-current={active === "home" ? "page" : undefined} href="/">
+          Home
+        </Link>
+        <Link aria-current={active === "matrix" ? "page" : undefined} href="/matrix">
           The matrix
         </Link>
         <Link

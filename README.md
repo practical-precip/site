@@ -1,6 +1,6 @@
 # Practical Precip site
 
-The [public website](https://practical-precip.github.io/site/) presents precipitation dataset information and application guidance. The editable source lives in the private [datasets-and-guidance repository](https://github.com/practical-precip/datasets-and-guidance).
+The [public website](https://practical-precip.github.io/site/) starts with links to general information, the [guidance matrix](https://practical-precip.github.io/site/matrix/), and the dataset files. The editable source lives in the private [datasets-and-guidance repository](https://github.com/practical-precip/datasets-and-guidance), so its GitHub files are available only to invited contributors.
 
 Contributors edit NestedText datasets and definitions, Markdown guidance, and a shared BibTeX bibliography there. This repository owns the interface, content conversion, schemas, validation, and publication. Each dataset .nt file combines metadata and Markdown prose in a standard multiline string. INDEX.md alone defines dataset names, IDs, aliases, and order. Guidance boxes remain separate Markdown pages.
 

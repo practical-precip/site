@@ -1,9 +1,7 @@
 import assert from "node:assert/strict";
 import { topics, columns, products } from "../app/data.ts";
 const origin = process.env.PRECIP_SITE_URL || "http://localhost:3000";
-const metadataOrigin =
-  process.env.PRECIP_METADATA_ORIGIN ||
-  "https://practical-precip.github.io/site";
+const basePath = new URL(origin).pathname.replace(/\/$/, "");
 let checked = 0;
 async function get(path, status = 200) {
   const response = await fetch(origin + path);
@@ -16,14 +14,22 @@ async function get(path, status = 200) {
   return response;
 }
 const root = await (await get("/")).text();
+for (const phrase of [
+  "Practical Precip (working title)",
+  "What are you looking for?",
+  "General information",
+  "Guidance on using datasets",
+  "Detailed information on each dataset",
+]) assert.ok(root.includes(phrase), `Landing page missing ${phrase}`);
+const matrix = await (await get("/matrix")).text();
 assert.equal(
-  (root.match(/class="matrix-cell /g) || []).length,
+  (matrix.match(/class="matrix-cell /g) || []).length,
   topics.length * columns.length,
   "Expected one button for every configured cell",
 );
 assert.ok(
-  root.includes(`${metadataOrigin}/og.png`),
-  "Root social image should use trusted local origin",
+  !root.includes('property="og:image"'),
+  "Landing page should not inherit the old field-guide image",
 );
 for (const t of topics) {
   const html = await (await get(`/guidance/${t.id}`)).text();
@@ -46,7 +52,7 @@ for (const t of topics) {
   );
   if (t.figure) {
     assert.ok(
-      html.includes(`src="${t.figure.image}"`),
+      html.includes(`src="${basePath}${t.figure.image}"`),
       `${t.id}: missing figure`,
     );
     await get(t.figure.image);
@@ -55,12 +61,13 @@ for (const t of topics) {
 }
 for (const p of products) await get(`/products/${p.id}`);
 for (const p of [
+  "/general-information",
   "/products",
   "/about",
   "/reading-room",
   "/og.png",
-  "/content-assets/guidance/figures/examples.json",
-  "/content-assets/guidance/figures/make_figures.py",
+  "/illustrations/examples.json",
+  "/illustrations/make_figures.py",
 ])
   await get(p);
 await get("/guidance/not-a-topic", 404);

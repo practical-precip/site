@@ -10,7 +10,7 @@ export default function NotFound() {
         <p className="article-intro">
           Return to the matrix to explore the five application guides.
         </p>
-        <Link className="outline-link" href="/">
+        <Link className="outline-link" href="/matrix">
           ← Back to the matrix
         </Link>
       </main>

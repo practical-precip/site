@@ -40,7 +40,7 @@ export default async function Guidance({
       <Header active="guidance" />
       <main id="main" className="article-shell">
         <div className="breadcrumb">
-          <Link href="/">The matrix</Link>
+          <Link href="/matrix">The matrix</Link>
           <span>/</span>
           {topic.short}
         </div>
@@ -56,7 +56,7 @@ export default async function Guidance({
             {figure && <a href="#figure">Illustrative figure</a>}
             <a href="#literature">Supporting literature</a>
             <hr />
-            <Link href="/">← Back to the matrix</Link>
+            <Link href="/matrix">← Back to the matrix</Link>
           </aside>
           <article>
             <header className="article-hero" id="overview">

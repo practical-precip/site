@@ -21,7 +21,7 @@ try {
   });
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(origin + "/");
+  await page.goto(origin + "/matrix/");
   const dropdown = page.locator("#climate-region");
   console.log("Loaded matrix; checking region selection.");
   await dropdown.selectOption("northwest");
@@ -67,7 +67,7 @@ try {
     .getByRole("link", { name: "The matrix", exact: true })
     .first()
     .click();
-  await page.waitForURL(/\/?\?region=northwest$/);
+  await page.waitForURL(/\/matrix\/?\?region=northwest$/);
   await page
     .getByLabel("Focus on an application")
     .selectOption("annual-maximum");
@@ -79,9 +79,9 @@ try {
   await page.getByRole("button", { name: "Reset to all regions" }).click();
   assert.equal(await dropdown.inputValue(), "all");
   assert.ok(!page.url().includes("region="));
-  await page.goto(origin + "/?region=invalid");
+  await page.goto(origin + "/matrix/?region=invalid");
   assert.equal(await dropdown.inputValue(), "all");
-  await page.goto(origin + "/?region=alaska");
+  await page.goto(origin + "/matrix/?region=alaska");
   await page.waitForFunction(
     () => document.querySelector("#climate-region")?.value === "alaska",
   );
@@ -105,7 +105,7 @@ try {
     path: join(tmpdir(), "pcef-regions-mobile.png"),
     fullPage: true,
   });
-  await page.goto(origin + "/");
+  await page.goto(origin + "/matrix/");
   await page.locator(".matrix-cell").first().click();
   assert.ok(
     (await page.locator("dialog .katex").count()) > 0,
