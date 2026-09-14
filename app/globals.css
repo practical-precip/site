@@ -521,7 +521,7 @@ td {
   padding: 34px 0 45px;
   margin-top: 42px;
   display: grid;
-  grid-template-columns: 1.2fr 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 45px;
 }
@@ -531,11 +531,6 @@ td {
 }
 .bottom-guide h2 {
   font-size: 28px;
-}
-.bottom-guide > p {
-  color: var(--muted);
-  font-size: 13px;
-  max-width: 390px;
 }
 .outline-link {
   border: 1px solid var(--line);

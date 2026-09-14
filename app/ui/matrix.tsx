@@ -221,16 +221,11 @@ export default function Matrix() {
         </section>
         <section className="bottom-guide">
           <div>
-            <p className="eyebrow">EVALUATION APPROACH</p>
-            <h2>Define the evaluation target</h2>
+            <p className="eyebrow">DATASET GUIDANCE</p>
+            <h2>Explore expert guidance by dataset</h2>
           </div>
-          <p>
-            Start with the statistic you need. Define its spatial footprint,
-            accumulation interval, and planning horizon. Then evaluate candidate
-            products against that target.
-          </p>
-          <Link className="outline-link" href="/reading-room">
-            Explore the literature ↗
+          <Link className="outline-link" href="/products">
+            See all datasets
           </Link>
         </section>
       </main>
