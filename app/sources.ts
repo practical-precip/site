@@ -4,8 +4,8 @@ export type Paper = {
   year: number;
   title: string;
   journal: string;
-  url: string;
-  doi: string;
+  url: string | null;
+  doi: string | null;
   support: string;
   scope: string;
 };

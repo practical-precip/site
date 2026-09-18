@@ -1,8 +1,9 @@
-import {writeFileSync,cpSync,mkdirSync,rmSync,existsSync,renameSync} from 'node:fs';
+import {writeFileSync,readFileSync,cpSync,mkdirSync,rmSync,existsSync,renameSync} from 'node:fs';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import yaml from 'js-yaml';
 import {readMarkdownContent} from './markdown-content.mjs';
+import {parseConfig} from './dataset-content.mjs';
 export const root=fileURLToPath(new URL('../',import.meta.url));
 export function prepareContent(base=root){
  if(process.env.SITE_CONTENT_MODE==='snapshot'){
@@ -21,12 +22,11 @@ export function prepareContent(base=root){
  const papers={},sources={};
  try{
   cpSync(resolve(base,'scripts/content-schema.json'),resolve(stage,'schema.json'));
+  put('regions.yaml',yaml.dump(parseConfig(readFileSync(resolve(base,'config/regions.yaml'),'utf8'),'config/regions.yaml','regions')));
+  put('table.yaml',yaml.dump(parseConfig(readFileSync(resolve(base,'config/guidance-table.yaml'),'utf8'),'config/guidance-table.yaml','table')));
   for(const[file,record]of records){let value=structuredClone(record.value);sources[file]=record.file;
    if(record.type==='paper'){papers[file.slice(7,-5)]=value;continue;}
-   if(record.type==='product'){
-    const guidance=value.expert_guidance;delete value.expert_guidance;
-    doc(value.guidance,guidance,record.body);sources[value.guidance]=record.file;
-   }else if(record.type==='document'){doc(file,value,record.body);continue;}
+   if(record.type==='document'){doc(file,value,record.body);continue;}
    if(record.type==='row'&&value.figure){value.figure.data=value.figure.data?.replace('/content-assets/guidance/figures/','/illustrations/');value.figure.code=value.figure.code?.replace('/content-assets/guidance/figures/','/illustrations/');}
    put(file,yaml.dump(value));
   }
@@ -36,5 +36,5 @@ export function prepareContent(base=root){
  }catch(error){rmSync(stage,{recursive:true,force:true});throw error;}
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
- try{prepareContent();console.log(process.env.SITE_CONTENT_MODE==='snapshot'?'Using the published content snapshot.':'Converted NestedText datasets and definitions, plus Markdown guidance into site content.');}catch(e){console.error(e.message);process.exitCode=1;}
+ try{prepareContent();console.log(process.env.SITE_CONTENT_MODE==='snapshot'?'Using the published content snapshot.':'Prepared YAML metadata and Markdown guidance for the site.');}catch(e){console.error(e.message);process.exitCode=1;}
 }

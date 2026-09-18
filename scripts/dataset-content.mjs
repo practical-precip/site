@@ -1,134 +1,137 @@
-import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { load } from 'nestedtext';
-import { unified } from 'unified';
+import {existsSync,readFileSync,readdirSync} from 'node:fs';
+import {resolve} from 'node:path';
+import Ajv from 'ajv';
+import yaml from 'js-yaml';
+import {unified} from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
-import schema from './content-schema.json' with { type: 'json' };
+import schema from './content-schema.json' with {type:'json'};
 
-const markdown = unified().use(remarkParse).use(remarkGfm);
-const text = node => node.value ?? node.children?.map(text).join('') ?? '';
-export function readDatasetIndex(raw, file = 'INDEX.md') {
-  const nodes = markdown.parse(raw).children;
-  const starts = nodes.flatMap((n, i) => n.type === 'heading' && n.depth === 2 && text(n) === 'Datasets' ? [i] : []);
-  if (starts.length !== 1) throw new Error(`${file}: expected one ## Datasets section`);
-  const entries = [], ids = new Set();
-  for (let i = starts[0] + 1; i < nodes.length; i++) {
-    const node = nodes[i];
-    if (node.type === 'heading' && node.depth <= 2) break;
-    if (node.type === 'paragraph') continue;
-    if (node.type !== 'list') throw new Error(`${file}: datasets must be Markdown links in a list`);
-    for (const item of node.children) {
-      const paragraph = item.children[0];
-      const link = paragraph?.children?.[0];
-      if (paragraph?.type !== 'paragraph' || paragraph.children.length !== 1 || link?.type !== 'link') throw new Error(`${file}: use - [Dataset name](datasets/stable-id.nt)`);
-      const match = link.url.match(/^datasets\/([a-z][a-z0-9-]*)\.nt$/);
-      const name = text(link).trim();
-      if (!match || !name) throw new Error(`${file}: invalid dataset name or .nt path: ${link.url}`);
-      const id = match[1];
-      if (ids.has(id)) throw new Error(`${file}: duplicate dataset ID ${id}`);
-      ids.add(id);
-      if (item.children.length > 2 || (item.children[1] && item.children[1].type !== 'list')) throw new Error(`${file} [${id}]: aliases must be indented list items`);
-      const aliases = (item.children[1]?.children ?? []).map(alias => {
-        if (alias.children.length !== 1 || alias.children[0].type !== 'paragraph') throw new Error(`${file} [${id}]: use one alias per indented list item`);
-        return text(alias.children[0]);
-      });
-      entries.push({ id, name, aliases, file: link.url });
-    }
-  }
-  if (!entries.length) throw new Error(`${file}: no datasets listed`);
-  return entries;
+const markdown=unified().use(remarkParse).use(remarkGfm);
+const text=node=>node?.value??node?.children?.map(text).join('')??'';
+const ajv=new Ajv({allErrors:true,jsonPointers:true,schemaId:'auto',format:'full'});
+ajv.addSchema(schema,'content');
+const validateProduct=ajv.getSchema('content#/definitions/product');
+const validateDocument=ajv.getSchema('content#/definitions/document');
+const validateRegions=ajv.getSchema('content#/definitions/regions');
+const validateTable=ajv.getSchema('content#/definitions/table');
+
+function validationError(file,check){
+ return new Error(`${file}: ${ajv.errorsText(check.errors,{separator:'\n'})}`);
 }
-function resolveSchema(spec) {
-  return spec.$ref ? schema.definitions[spec.$ref.split('/').at(-1)] : spec;
-}
-function convert(value, spec, path) {
-  spec = resolveSchema(spec);
-  if (typeof spec.const === 'number') spec = {...spec, type: 'number'};
-  if (Array.isArray(spec.type)) {
-    if (value === '' && spec.type.includes('null')) return null;
-    spec = {...spec, type: spec.type.find(t => t !== 'null')};
-  }
-  if (spec.anyOf) {
-    if (value === '' && spec.anyOf.some(s => s.type === 'null')) return null;
-    spec = spec.anyOf.find(s => s.type !== 'null');
-  }
-  if (spec.type === 'object') {
-    if (!value || Array.isArray(value) || typeof value !== 'object' || Object.getPrototypeOf(value) !== Object.prototype) throw new Error(`${path}: expected a mapping`);
-    const out = {};
-    for (const [rawKey, item] of Object.entries(value)) {
-      const key = rawKey.replaceAll(' ', '_');
-      if (['__proto__', 'constructor', 'prototype'].includes(key)) throw new Error(`${path}: reserved field ${rawKey}`);
-      const field = spec.properties?.[key] ?? (typeof spec.additionalProperties === 'object' ? spec.additionalProperties : undefined);
-      if (!field) throw new Error(`${path}: unknown field ${rawKey}`);
-      if (Object.hasOwn(out, key)) throw new Error(`${path}: duplicate normalized field ${rawKey}`);
-      out[key] = convert(item, field, `${path} / ${rawKey}`);
-    }
-    return out;
-  }
-  if (spec.type === 'array') {
-    if (!Array.isArray(value)) throw new Error(`${path}: expected a list; an empty list is [] on its own indented line`);
-    return value.map((v, i) => convert(v, spec.items, `${path} / item ${i + 1}`));
-  }
-  if (typeof value !== 'string') throw new Error(`${path}: expected text`);
-  if (['number', 'integer'].includes(spec.type)) {
-    if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(value) || !Number.isFinite(Number(value))) throw new Error(`${path}: expected a number`);
-    if (spec.type === 'integer' && !Number.isSafeInteger(Number(value))) throw new Error(`${path}: expected an integer`);
-    return Number(value);
-  }
+function mapping(raw,file){
+ try{
+  if(/^\s*(?:__proto__|constructor|prototype):/m.test(raw))throw new Error('reserved field name');
+  const value=yaml.load(raw,{schema:yaml.JSON_SCHEMA,filename:file});
+  if(!value||Array.isArray(value)||typeof value!=='object'||Object.getPrototypeOf(value)!==Object.prototype)throw new Error('expected a YAML mapping');
   return value;
+ }catch(error){throw new Error(`${file}: ${error.message}`);}
 }
-export function parseDataset(raw, file, identity) {
-  try {
-    // These are not dataset fields. Reject them before the JS loader can interpret prototype keys.
-    if (/^\s*(?:__proto__|constructor|prototype):/m.test(raw)) throw new Error('reserved field name');
-    const value = load(raw);
-    if (!value || Array.isArray(value) || typeof value !== 'object' || Object.getPrototypeOf(value) !== Object.prototype) throw new Error('expected a NestedText mapping');
-    let document;
-    if (identity) {
-      for (const field of ['id', 'name', 'aliases', 'guidance']) if (Object.hasOwn(value, field)) throw new Error(`${field} is defined by INDEX.md, not the dataset file`);
-      document = value['expert guidance'];
-      delete value['expert guidance'];
-    } else document = value;
-    if (!document || Array.isArray(document) || typeof document !== 'object') throw new Error('missing expert guidance mapping');
-    const body = document.text;
-    delete document.text;
-    if (typeof body !== 'string' || !body.trim()) throw new Error('guidance text must be a nonempty NestedText multiline string');
-    if (document.regions) {
-      if (!identity) throw new Error('regional guidance cannot contain regional overrides');
-      for (const [region, path] of Object.entries(document.regions)) {
-        if (typeof path !== 'string' || !/^datasets\/regional\/[a-z][a-z0-9.-]*\.nt$/.test(path)) throw new Error(`invalid regional dataset path for ${region}`);
-        document.regions[region] = path.replace('datasets/regional/', 'product-guidance/').replace(/\.nt$/, '.md');
-      }
-    }
-    const meta = convert(document, schema.definitions.document, 'expert guidance');
-    if (!identity) return { value: meta, body, file, type: 'document' };
-    const product = convert(value, schema.definitions.product, 'dataset');
-    return { value: { ...product, id: identity.id, name: identity.name, aliases: identity.aliases, guidance: `product-guidance/${identity.id}.md`, expert_guidance: meta }, body, file, type: 'product' };
-  } catch (error) {
-    throw new Error(`${file}: ${error.message}`);
+
+export function readDatasetIndex(raw,file='INDEX.md'){
+ const nodes=markdown.parse(raw).children;
+ const starts=nodes.flatMap((node,index)=>node.type==='heading'&&node.depth===2&&text(node)==='Datasets'?[index]:[]);
+ if(starts.length!==1)throw new Error(`${file}: expected one ## Datasets section`);
+ const entries=[],ids=new Set();
+ for(let i=starts[0]+1;i<nodes.length;i++){
+  const node=nodes[i];
+  if(node.type==='heading'&&node.depth<=2)break;
+  if(node.type==='paragraph')continue;
+  if(node.type!=='list')throw new Error(`${file}: datasets must be Markdown entries in a list`);
+  for(const item of node.children){
+   const paragraph=item.children[0];
+   const nameNode=paragraph?.children?.find(child=>child.type==='strong');
+   const links=paragraph?.children?.filter(child=>child.type==='link')??[];
+   const guidance=links.find(link=>text(link)==='Guidance');
+   const metadata=links.find(link=>text(link)==='Metadata');
+   const name=text(nameNode).trim();
+   const guidanceMatch=guidance?.url.match(/^guidance\/datasets\/([a-z][a-z0-9-]*)\.md$/);
+   const metadataMatch=metadata?.url.match(/^datasets\/([a-z][a-z0-9-]*)\.yaml$/);
+   if(paragraph?.type!=='paragraph'||!name||!guidanceMatch||!metadataMatch||links.length!==2)throw new Error(`${file}: invalid dataset entry; link Guidance and Metadata using repository paths`);
+   if(guidanceMatch[1]!==metadataMatch[1])throw new Error(`${file}: Guidance and Metadata need matching filename stems`);
+   const id=guidanceMatch[1];
+   if(ids.has(id))throw new Error(`${file}: duplicate dataset ID ${id}`);
+   ids.add(id);
+   if(item.children.length>2||(item.children[1]&&item.children[1].type!=='list'))throw new Error(`${file} [${id}]: aliases must be indented list items`);
+   const aliases=(item.children[1]?.children??[]).map(alias=>{
+    if(alias.children.length!==1||alias.children[0].type!=='paragraph')throw new Error(`${file} [${id}]: use one alias per indented list item`);
+    const value=text(alias.children[0]);
+    if(!value.startsWith('Alias: ')||!value.slice(7).trim())throw new Error(`${file} [${id}]: prefix each familiar name with Alias:`);
+    return value.slice(7).trim();
+   });
+   entries.push({id,name,aliases,metadataFile:metadata.url,guidanceFile:guidance.url});
   }
+ }
+ if(!entries.length)throw new Error(`${file}: no datasets listed`);
+ return entries;
 }
-export function parseDefinition(raw, file, type) {
-  try {
-    if (!['regions', 'table'].includes(type)) throw new Error('unknown definition type');
-    if (/^\s*(?:__proto__|constructor|prototype):/m.test(raw)) throw new Error('reserved field name');
-    return { value: convert(load(raw), schema.definitions[type], type), file, type };
-  } catch (error) {
-    throw new Error(`${file}: ${error.message}`);
-  }
+
+export function parseDataset(raw,file,identity){
+ const value=mapping(raw,file);
+ for(const field of ['id','name','aliases','guidance'])if(Object.hasOwn(value,field))throw new Error(`${file}: ${field} is defined by INDEX.md, not the metadata file`);
+ const product={...value,id:identity.id,name:identity.name,aliases:identity.aliases,guidance:`product-guidance/${identity.id}.md`};
+ if(!validateProduct(product))throw validationError(file,validateProduct);
+ return {value:product,file,type:'product'};
 }
-export function readDatasetContent(root) {
-  const index = readDatasetIndex(readFileSync(resolve(root, 'INDEX.md'), 'utf8'));
-  const known = new Set(index.map(r => `${r.id}.nt`));
-  for (const file of readdirSync(resolve(root, 'datasets'))) if (file.endsWith('.nt') && !known.has(file)) throw new Error(`datasets/${file}: missing entry in INDEX.md`);
-  const records = new Map();
-  records.set('catalog.yaml', { value: { version: 1, products: index.map(r => r.id) }, type: 'catalog', file: 'INDEX.md' });
-  for (const entry of index) records.set(`products/${entry.id}.yaml`, parseDataset(readFileSync(resolve(root, entry.file), 'utf8'), entry.file, entry));
-  for (const entry of existsSync(resolve(root, 'datasets/regional')) ? readdirSync(resolve(root, 'datasets/regional')) : []) {
-    if (!entry.endsWith('.nt')) continue;
-    const file = `datasets/regional/${entry}`;
-    records.set(`product-guidance/${entry.replace(/\.nt$/, '.md')}`, parseDataset(readFileSync(resolve(root, file), 'utf8'), file));
+
+export function parseGuidance(raw,file,{regional=false}={}){
+ try{
+  raw=raw.replace(/\r\n?/g,'\n');
+  const match=raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if(!match)throw new Error('expected YAML front matter between --- lines');
+  const value=mapping(match[1],file);
+  if(regional&&value.regions)throw new Error('regional guidance cannot contain regional overrides');
+  if(value.regions){
+   for(const[region,path]of Object.entries(value.regions)){
+    const expected=/^guidance\/datasets\/regional\/([a-z][a-z0-9.-]*)\.md$/.exec(path);
+    if(!expected)throw new Error(`invalid regional guidance path for ${region}`);
+    value.regions[region]=`product-guidance/${expected[1]}.md`;
+   }
   }
-  return records;
+  if(!validateDocument(value))throw validationError(file,validateDocument);
+  if(!match[2].trim())throw new Error('Markdown body is empty');
+  return {value,body:match[2].trim(),file,type:'document'};
+ }catch(error){
+  if(error.message.startsWith(`${file}:`))throw error;
+  throw new Error(`${file}: ${error.message}`);
+ }
+}
+
+export function parseConfig(raw,file,type){
+ try{
+  const value=yaml.load(raw,{schema:yaml.JSON_SCHEMA,filename:file});
+  const check={regions:validateRegions,table:validateTable}[type];
+  if(!check)throw new Error(`unknown configuration type ${type}`);
+  if(!check(value))throw validationError(file,check);
+  return value;
+ }catch(error){
+  if(error.message.startsWith(`${file}:`))throw error;
+  throw new Error(`${file}: ${error.message}`);
+ }
+}
+
+export function readDatasetContent(root){
+ const index=readDatasetIndex(readFileSync(resolve(root,'INDEX.md'),'utf8'));
+ const metadataNames=new Set(index.map(entry=>`${entry.id}.yaml`));
+ const guidanceNames=new Set(index.map(entry=>`${entry.id}.md`));
+ for(const file of readdirSync(resolve(root,'datasets')))if(file.endsWith('.yaml')&&!metadataNames.has(file))throw new Error(`datasets/${file}: missing entry in INDEX.md`);
+ for(const file of readdirSync(resolve(root,'guidance/datasets')))if(file.endsWith('.md')&&!guidanceNames.has(file))throw new Error(`guidance/datasets/${file}: missing entry in INDEX.md`);
+ const records=new Map();
+ records.set('catalog.yaml',{value:{version:1,products:index.map(entry=>entry.id)},type:'catalog',file:'INDEX.md'});
+ for(const entry of index){
+  if(!existsSync(resolve(root,entry.metadataFile)))throw new Error(`${entry.metadataFile}: linked from INDEX.md but missing`);
+  if(!existsSync(resolve(root,entry.guidanceFile)))throw new Error(`${entry.guidanceFile}: linked from INDEX.md but missing`);
+  records.set(`products/${entry.id}.yaml`,parseDataset(readFileSync(resolve(root,entry.metadataFile),'utf8'),entry.metadataFile,entry));
+  records.set(`product-guidance/${entry.id}.md`,parseGuidance(readFileSync(resolve(root,entry.guidanceFile),'utf8'),entry.guidanceFile));
+ }
+ const regionalRoot=resolve(root,'guidance/datasets/regional');
+ for(const entry of existsSync(regionalRoot)?readdirSync(regionalRoot):[]){
+  if(!entry.endsWith('.md'))continue;
+  if(!/^[a-z][a-z0-9-]*\.[a-z][a-z0-9-]*\.md$/.test(entry))throw new Error(`guidance/datasets/regional/${entry}: expected <dataset>.<region>.md`);
+  const file=`guidance/datasets/regional/${entry}`;
+  const output=`product-guidance/${entry}`;
+  if(records.has(output))throw new Error(`Duplicate generated path ${output}`);
+  records.set(output,parseGuidance(readFileSync(resolve(root,file),'utf8'),file,{regional:true}));
+ }
+ return records;
 }

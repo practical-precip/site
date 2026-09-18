@@ -39,11 +39,11 @@ export default function ReadingRoom() {
                 <p className="reference-byline">
                   {s.authors} ({s.year}) · {s.journal}
                 </p>
-                <h2>
+                <h2>{s.url ? (
                   <a href={s.url} target="_blank" rel="noreferrer">
                     {s.title} ↗
                   </a>
-                </h2>
+                ) : s.title}</h2>
                 <p>{s.support}</p>
                 <p className="reference-scope">{s.scope}</p>
                 <div className="topic-tags">
@@ -55,9 +55,11 @@ export default function ReadingRoom() {
                       </Link>
                     ))}
                 </div>
-                <a className="doi" href={`https://doi.org/${s.doi}`}>
-                  DOI: {s.doi}
-                </a>
+                {s.doi && (
+                  <a className="doi" href={`https://doi.org/${s.doi}`}>
+                    DOI: {s.doi}
+                  </a>
+                )}
               </div>
             </section>
           ))}

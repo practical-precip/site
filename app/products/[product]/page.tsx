@@ -147,9 +147,11 @@ export default async function ProductPage({
           {p.references.length === 0 && <p>No bibliography entries have been added. Related publications and reports may be linked under associated resources.</p>}
           {p.references.map((id) => (
             <p key={id}>
-              <a href={sources[id].url}>
-                {sources[id].authors} ({sources[id].year}): {sources[id].title}
-              </a>
+              {sources[id].url ? (
+                <a href={sources[id].url}>
+                  {sources[id].authors} ({sources[id].year}): {sources[id].title}
+                </a>
+              ) : `${sources[id].authors} (${sources[id].year}): ${sources[id].title}`}
             </p>
           ))}
         </section>
@@ -165,7 +167,7 @@ export default async function ProductPage({
         </section>
         <p className="contribution-note">
           <a
-            href={`https://github.com/practical-precip/datasets-and-guidance/edit/main/datasets/${p.id}.nt`}
+            href={`https://github.com/practical-precip/datasets-and-guidance/edit/main/datasets/${p.id}.yaml`}
           >
             Edit metadata (invited contributors)
           </a>

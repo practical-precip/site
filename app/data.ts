@@ -4,8 +4,8 @@ export type Priority = "essential" | "context" | "lower";
 export type Evidence = {
   statement: string;
   paper: string;
-  locator: string;
-  scope: string;
+  locator?: string;
+  scope?: string;
 };
 export type Review = {
   status: "draft" | "expert-reviewed";

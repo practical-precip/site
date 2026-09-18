@@ -113,7 +113,7 @@ export function loadContent(root = projectRoot) {
     const text = body.replace(/\[@([a-z][a-z0-9-]*)\]/g, (_, id) => {
       const p = cite(id, file);
       paperIds.push(id);
-      return `[${p.authors} (${p.year})](${p.url})`;
+      return p.url ? `[${p.authors} (${p.year})](${p.url})` : `${p.authors} (${p.year})`;
     });
     const tree = parser.parse(text);
     visit(tree, (node) => {

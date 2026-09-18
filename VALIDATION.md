@@ -1,5 +1,15 @@
 # GitHub Pages preparation
 
+## YAML and Markdown content layout, September 17, 2026
+
+- Dataset facts moved from NestedText to YAML, with a separate Markdown guidance file per dataset.
+- `INDEX.md` now links both files and remains the source for names, IDs, aliases, and order.
+- Region and guidance table definitions moved to YAML files under `config/`.
+- Content assembly and all 41 content tests passed for 67 datasets, 30 matrix cells, and 25
+  references.
+- The migration preserved recent LOCA2 guidance and exposed an existing indentation error before
+  conversion.
+
 Checked on 2026-09-11:
 
 - `npm run build:pages`: Next.js compiled, type checked, and exported all application routes.
