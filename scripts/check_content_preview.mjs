@@ -4,10 +4,10 @@ const { chromium } = await import(
 import { fileURLToPath } from "node:url";
 import { readFileSync, writeFileSync, unlinkSync, existsSync } from "node:fs";
 import assert from "node:assert/strict";
-import {load, dump} from "nestedtext";
+import yaml from "js-yaml";
 const root = fileURLToPath(new URL("../", import.meta.url)).replace(/\/$/, "");
-const base = root + "/metadata/datasets-and-guidance/datasets/loca2.nt";
-const variant = root + "/metadata/datasets-and-guidance/datasets/regional/loca2.northwest-test.nt";
+const base = root + "/metadata/datasets-and-guidance/guidance/datasets/loca2.md";
+const variant = root + "/metadata/datasets-and-guidance/guidance/datasets/regional/loca2.northwest-test.md";
 if (existsSync(variant))
   throw new Error(
     "Temporary test variant already exists; preserve it and choose another path.",
@@ -29,13 +29,15 @@ try {
     .getByRole("heading", { name: "LOCA2 North America", exact: true })
     .waitFor();
   await page.waitForFunction(() => document.querySelector("#climate-region")?.value === "northwest");
-  const regional = load(readFileSync(root + "/metadata/datasets-and-guidance/templates/regional-dataset.nt", "utf8"));
+  const split = text => text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  const template = split(readFileSync(root + "/metadata/datasets-and-guidance/templates/regional-dataset-guidance.md", "utf8"));
+  const regional = yaml.load(template[1], {schema: yaml.JSON_SCHEMA});
   regional.review.contributors = ["Preview test"];
-  regional.text = "## Regional reload verification\n\n" + regional.text;
-  writeFileSync(variant, dump(regional, {indent: "  "}));
-  const value = load(original);
-  value["expert guidance"].regions = {northwest: "datasets/regional/loca2.northwest-test.nt"};
-  writeFileSync(base, dump(value, {indent: "  "}));
+  writeFileSync(variant, `---\n${yaml.dump(regional)}---\n\n## Regional reload verification\n\n${template[2].trim()}\n`);
+  const source = split(original);
+  const value = yaml.load(source[1], {schema: yaml.JSON_SCHEMA});
+  value.regions = {northwest: "guidance/datasets/regional/loca2.northwest-test.md"};
+  writeFileSync(base, `---\n${yaml.dump(value)}---\n${source[2]}`);
   await page
     .getByRole("heading", { name: "Regional reload verification", exact: true })
     .waitFor({ timeout: 20000 });
@@ -45,9 +47,9 @@ try {
   );
   assert.match(
     await page.locator(".contribution-note a").first().getAttribute("href"),
-    /loca2.northwest-test.nt/,
+    /loca2.northwest-test.md/,
   );
-  writeFileSync(indexFile, originalIndex.replace("[LOCA2 North America](datasets/loca2.nt)", "[LOCA2 preview name](datasets/loca2.nt)"));
+  writeFileSync(indexFile, originalIndex.replace("__LOCA2 North America__", "__LOCA2 preview name__"));
   await page.getByRole("heading", {name: "LOCA2 preview name", exact: true}).waitFor({timeout: 20000});
   writeFileSync(indexFile, originalIndex);
   await page.getByRole("heading", {name: "LOCA2 North America", exact: true}).waitFor({timeout: 20000});
@@ -61,7 +63,7 @@ try {
     /General product guidance/,
   );
   console.log(
-    "PASS: live NestedText guidance and INDEX.md name edits, regional source links, and restoration.",
+    "PASS: live Markdown guidance and INDEX.md name edits, regional source links, and restoration.",
   );
 } finally {
   writeFileSync(indexFile, originalIndex);

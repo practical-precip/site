@@ -1,64 +1,60 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { dump } from 'nestedtext';
-import { parseDataset, readDatasetIndex, parseDefinition } from './dataset-content.mjs';
-const identity = {id:'example',name:'From the index',aliases:['Familiar name']};
-const dataset = {
-  coverage:{'grid spacing':{value:'0.0625',unit:'degrees'}},
-  ensemble:{'model count':'',members:'001'},
-  dates:{created:'',released:'2024-09-22',publication:''},
-  generation:['CMIP6'],
-  'expert guidance':{
-    title:'Guidance',summary:'Scope',review:{status:'draft',updated:'2026-09-11',contributors:['An expert']},evidence:[],
-    text:'\n## Evaluation\n\nLiteral \\sum_i, __emphasis__, "quotes", # and |.\n',
-  },
+import yaml from 'js-yaml';
+import {parseDataset,parseGuidance,readDatasetIndex} from './dataset-content.mjs';
+
+const identity={
+ id:'example',name:'From the index',aliases:['Familiar name'],
+ metadataFile:'datasets/example.yaml',guidanceFile:'guidance/datasets/example.md',
 };
-const parse = value => parseDataset(dump(value,{indent:'  '}),'datasets/example.nt',identity);
-test('NestedText preserves strings and Markdown while schema types numbers and blanks',()=>{
- const r=parse(dataset);
- assert.equal(r.value.coverage.grid_spacing.value,0.0625);
- assert.equal(r.value.ensemble.model_count,null);
- assert.equal(r.value.ensemble.members,'001');
- assert.equal(r.value.dates.created,null);
- assert.equal(r.value.dates.released,'2024-09-22');
- assert.deepEqual(r.value.generation,['CMIP6']);
- assert.equal(r.body,dataset['expert guidance'].text);
- assert.equal(r.value.name,'From the index');
+const dataset={
+ version:'v1',summary:'Example',provider:'Provider',verified_on:'2026-09-17',source_scope:'Sources checked',kind:'observation',
+ method:{family:'Observed',description:'Example',reference_dataset:'Example',training_period:'Not applicable'},
+ coverage:{domain:'CONUS',grid:'Regular',timestep:'Daily',historical:'2000-2020',future:'Not applicable',calendar:'Gregorian',grid_spacing:{value:0.0625,unit:'degrees'},scenarios:['Historical'],variables:[{name:'pr',unit:'mm',description:'Precipitation'}]},
+ ensemble:{driving_models:'Not applicable',model_count:null,members:'Not applicable',member_counts:[]},
+ access:{landing_page:'https://example.org',data:'https://example.org/data',format:'NetCDF',license:'Example',license_url:null,subsetting:'None',cost:'None'},
+ references:[],metadata_sources:[{url:'https://example.org',locator:'Landing page'}],relevant_rows:[],generation:[],
+ dates:{created:null,released:null,publication:null,notes:'Unknown'},existing_uses:[],funding:[],associated_resources:[],
+};
+const guidance=`---\ntitle: Guidance\nsummary: Scope\nreview:\n  status: draft\n  updated: '2026-09-17'\n  contributors:\n    - An expert\nevidence: []\n---\n\n## Evaluation\n\nLiteral \\sum_i, __emphasis__, "quotes", # and |.\n`;
+
+test('YAML metadata and Markdown guidance remain separate and gain index identity',()=>{
+ const product=parseDataset(yaml.dump(dataset),'datasets/example.yaml',identity);
+ const document=parseGuidance(guidance,'guidance/datasets/example.md');
+ assert.equal(product.value.coverage.grid_spacing.value,0.0625);
+ assert.equal(product.value.ensemble.model_count,null);
+ assert.equal(product.value.id,'example');
+ assert.equal(product.value.name,'From the index');
+ assert.equal(product.value.guidance,'product-guidance/example.md');
+ assert.match(document.body,/Literal \\sum_i/);
 });
-test('INDEX.md supplies names, IDs, aliases and ordering using ordinary links',()=>{
- const entries=readDatasetIndex('# Index\n\n## Datasets\n\n- [Second](datasets/two.nt)\n  - Other name\n- [First](datasets/one.nt)\n\n## Guidance boxes\n\n- [A box](guidance/one.md)\n');
+
+test('INDEX.md links both files and supplies names, IDs, aliases, and ordering',()=>{
+ const raw='# Index\n\n## Datasets\n\n- __Second__ ([Guidance](guidance/datasets/two.md), [Metadata](datasets/two.yaml))\n  - Alias: Other name\n- __First__ ([Guidance](guidance/datasets/one.md), [Metadata](datasets/one.yaml))\n\n## Guidance boxes\n';
+ const entries=readDatasetIndex(raw);
  assert.deepEqual(entries.map(r=>r.id),['two','one']);
  assert.equal(entries[0].name,'Second');
  assert.deepEqual(entries[0].aliases,['Other name']);
 });
-test('duplicate index IDs, unsafe paths and missing sections fail',()=>{
- assert.throws(()=>readDatasetIndex('## Datasets\n\n- [A](datasets/a.nt)\n- [B](datasets/a.nt)'),/duplicate dataset ID/);
- assert.throws(()=>readDatasetIndex('## Datasets\n\n- [A](../a.nt)'),/invalid dataset/);
+
+test('duplicate IDs, mismatched pairs, unsafe paths, and missing sections fail',()=>{
+ assert.throws(()=>readDatasetIndex('## Datasets\n\n- __A__ ([Guidance](guidance/datasets/a.md), [Metadata](datasets/a.yaml))\n- __B__ ([Guidance](guidance/datasets/a.md), [Metadata](datasets/a.yaml))'),/duplicate dataset ID/);
+ assert.throws(()=>readDatasetIndex('## Datasets\n\n- __A__ ([Guidance](guidance/datasets/a.md), [Metadata](datasets/b.yaml))'),/matching filename stems/);
+ assert.throws(()=>readDatasetIndex('## Datasets\n\n- __A__ ([Guidance](..\/a.md), [Metadata](datasets/a.yaml))'),/invalid dataset/);
  assert.throws(()=>readDatasetIndex('## Missing\n'),/expected one/);
 });
-test('NestedText syntax, duplicate fields and invalid types fail with the filename',()=>{
- assert.throws(()=>parseDataset('x: one\nx: two','bad.nt',identity),/bad.nt:.*Duplicate key/);
- assert.throws(()=>parseDataset('x:\n  y: a\n z: b','bad.nt',identity),/bad.nt:.*indentation/);
- const number=structuredClone(dataset);number.ensemble['model count']='many';assert.throws(()=>parse(number),/expected a number/);
- number.ensemble['model count']='2.5';assert.throws(()=>parse(number),/expected an integer/);
- const list=structuredClone(dataset);list.generation='[]';assert.throws(()=>parse(list),/expected a list/);
- const name=structuredClone(dataset);name.name='Duplicate';assert.throws(()=>parse(name),/defined by INDEX.md/);
- const duplicate=structuredClone(dataset);duplicate.coverage.grid_spacing={value:'1',unit:'degree'};assert.throws(()=>parse(duplicate),/duplicate normalized field/);
-});
-test('regional paths are converted for the site without permitting traversal or nested overrides',()=>{
- const region=structuredClone(dataset);region['expert guidance'].regions={northwest:'datasets/regional/example.northwest.nt'};
- assert.equal(parse(region).value.expert_guidance.regions.northwest,'product-guidance/example.northwest.md');
- region['expert guidance'].regions.northwest='../private.nt';assert.throws(()=>parse(region),/invalid regional/);
- assert.throws(()=>parseDataset(dump(region['expert guidance']),'regional.nt'),/cannot contain regional overrides/);
+
+test('YAML syntax, duplicate fields, source identities, and invalid types fail clearly',()=>{
+ assert.throws(()=>parseDataset('version: one\nversion: two','bad.yaml',identity),/bad.yaml:.*duplicated mapping key/i);
+ assert.throws(()=>parseDataset('version:\n bad','bad.yaml',identity),/bad.yaml/);
+ assert.throws(()=>parseDataset(yaml.dump({...dataset,name:'Duplicate'}),'bad.yaml',identity),/defined by INDEX.md/);
+ const invalid=structuredClone(dataset);invalid.ensemble.model_count='many';
+ assert.throws(()=>parseDataset(yaml.dump(invalid),'bad.yaml',identity),/model_count/);
 });
 
-test('NestedText definitions preserve FIPS strings and convert map coordinates and version',()=>{
- const regions=parseDefinition('-\n  id: west\n  states:\n    - 06\n  label:\n    - 170\n    - 105\n','Regions.nt','regions').value;
- assert.deepEqual(regions[0].states,['06']);
- assert.deepEqual(regions[0].label,[170,105]);
- const table=parseDefinition('version: 1\ncolumns:\n  []\nrows:\n  - second\n  - first\n','guidance/Table.nt','table').value;
- assert.equal(table.version,1);
- assert.deepEqual(table.rows,['second','first']);
- assert.throws(()=>parseDefinition('-\n  label:\n    - east\n','Regions.nt','regions'),/Regions.nt:.*expected a number/);
- assert.throws(()=>parseDefinition('version: 1\nversion: 2','guidance/Table.nt','table'),/Table.nt:.*Duplicate key/);
+test('guidance front matter and regional overrides are validated',()=>{
+ const regional=guidance.replace('evidence: []','evidence: []\nregions:\n  northwest: guidance/datasets/regional/example.northwest.md');
+ assert.equal(parseGuidance(regional,'example.md').value.regions.northwest,'product-guidance/example.northwest.md');
+ assert.throws(()=>parseGuidance(guidance.replace('evidence: []','evidence: []\nregions:\n  northwest: ../private.md'),'bad.md'),/invalid regional/);
+ assert.throws(()=>parseGuidance('No front matter','bad.md'),/front matter/);
 });

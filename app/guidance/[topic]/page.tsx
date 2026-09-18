@@ -124,11 +124,11 @@ export default async function Guidance({
                     <p className="reference-byline">
                       {s.authors} ({s.year}) · {s.journal}
                     </p>
-                    <h3>
+                    <h3>{s.url ? (
                       <a href={s.url} target="_blank" rel="noreferrer">
                         {s.title} ↗
                       </a>
-                    </h3>
+                    ) : s.title}</h3>
                     <p>{s.support}</p>
                     <p className="reference-scope">
                       <strong>Scope:</strong> {s.scope}

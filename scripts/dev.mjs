@@ -21,6 +21,7 @@ export function contentSignature(root = projectRoot) {
     }
   }
   scan(resolve(root, "metadata/datasets-and-guidance"));
+  scan(resolve(root, "config"));
   return entries.join("\n");
 }
 export function watchContent(root, onChange, interval = 500) {
@@ -42,7 +43,7 @@ if (
   resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 ) {
   buildContent();
-  console.log("Content compiled. Watching NestedText, Markdown, and assets.");
+  console.log("Content compiled. Watching YAML, Markdown, BibTeX, and assets.");
   const close = process.env.SITE_CONTENT_MODE === "snapshot" ? () => {} : watchContent(projectRoot, () => {
     prepareContent(projectRoot);
     buildContent(projectRoot);

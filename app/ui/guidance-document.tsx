@@ -24,12 +24,20 @@ export default function GuidanceDocument({
             return (
               <div className="evidence-entry" key={i}>
                 <p>{e.statement}</p>
-                <a href={paper.url} target="_blank" rel="noreferrer">
-                  {paper.authors} ({paper.year}): {paper.title}
-                </a>
-                <p className="reference-scope">
-                  {e.locator}. Scope: {e.scope}
-                </p>
+                {paper.url ? (
+                  <a href={paper.url} target="_blank" rel="noreferrer">
+                    {paper.authors} ({paper.year}): {paper.title}
+                  </a>
+                ) : (
+                  <p>{paper.authors} ({paper.year}): {paper.title}</p>
+                )}
+                {(e.locator || e.scope) && (
+                  <p className="reference-scope">
+                    {[e.locator, e.scope && `Scope: ${e.scope}`]
+                      .filter(Boolean)
+                      .join(". ")}
+                  </p>
+                )}
               </div>
             );
           })

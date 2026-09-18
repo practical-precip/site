@@ -20,6 +20,13 @@ test('literal abbreviated names and string macros are accepted', () => {
  assert.equal(p.authors, 'Doe et al.');
  assert.equal(p.journal, 'Climate');
 });
+test('reports and unpublished work may omit DOI and public URL', () => {
+ const report=entry.replace('@article','@techreport').replace('journal = {Climate},','institution = {Example Lab},').replace(' doi = {10.1234/example}, url = {https://example.org/paper},\n','');
+ const p=readBibliography(report).example;
+ assert.equal(p.journal,'Example Lab');
+ assert.equal(p.url,null);
+ assert.equal(p.doi,null);
+});
 test('duplicates, malformed entries and missing guidance annotations fail clearly', () => {
  assert.throws(() => readBibliography(entry + '\n' + entry), /references.bib.*duplicate citation key/);
  assert.throws(() => readBibliography(entry.replace('year = 2024,', 'year = 2024, year = 2025,')), /duplicate BibTeX field/);

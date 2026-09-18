@@ -20,20 +20,21 @@ export function readBibliography(text, file = 'references.bib') {
     if (!/^[a-z][a-z0-9-]*$/.test(id) || ['constructor', 'prototype'].includes(id)) fail('use a lowercase citation key with letters, digits, and hyphens');
     if (Object.hasOwn(papers, id)) fail('duplicate citation key');
     if (Object.keys(fields).some(k => k.includes('+duplicate-'))) fail('duplicate BibTeX field');
-    for (const field of ['title', 'journal', 'year', 'url', 'doi', 'support', 'scope']) {
+    for (const field of ['title', 'year', 'support', 'scope']) {
       if (typeof fields[field] !== 'string' || !fields[field].trim()) fail(`missing ${field} field`);
     }
     if (!/^\d{4}$/.test(fields.year)) fail('year must have four digits');
     if (!Array.isArray(fields.author) || !fields.author.length) fail('missing author field');
     const authors = fields.author.map(person => person.name || [person.firstName, person.prefix, person.lastName, person.suffix].filter(Boolean).join(' ')).join(' & ');
     if (!authors.trim()) fail('empty author field');
+    const venue = fields.journal || fields.institution || fields.publisher || 'Unpublished';
     papers[id] = {
       authors,
       year: Number(fields.year),
       title: fields.title,
-      journal: fields.journal,
-      url: fields.url,
-      doi: fields.doi,
+      journal: Array.isArray(venue) ? venue.join('; ') : venue,
+      url: fields.url || null,
+      doi: fields.doi || null,
       support: fields.support,
       scope: fields.scope,
     };

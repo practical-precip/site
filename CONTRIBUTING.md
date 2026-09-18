@@ -1,6 +1,9 @@
 # Contributing to the site
 
-For scientific content, edit the NestedText datasets and Markdown guidance in [datasets-and-guidance](https://github.com/practical-precip/datasets-and-guidance). Its contribution guide has instructions for editing online. This repository is for the interface and content tooling.
+For scientific content, edit the YAML metadata or Markdown guidance in
+[datasets-and-guidance](https://github.com/practical-precip/datasets-and-guidance). Its contribution
+guide covers online editing. This repository owns the interface, website configuration, and content
+tooling.
 
 ## Validate a content revision
 
@@ -13,11 +16,28 @@ npm run test:content
 npm run dev
 ```
 
-Edit files inside `metadata/datasets-and-guidance/` to preview proposed content. Submit scientific changes to that repository first. For a content pull request, fetch its branch inside the submodule, check it out, and run the same checks. This keeps software installation out of the contributor workflow.
+Edit files inside `metadata/datasets-and-guidance/` to preview proposed content. Submit scientific
+changes to that repository first. For a content pull request, fetch its branch inside the submodule,
+check it out, and run the same checks.
+
+## Content contract
+
+Each dataset has two files with the same stable filename stem:
+
+- `datasets/<id>.yaml` contains structured facts.
+- `guidance/datasets/<id>.md` contains YAML front matter and Markdown prose.
+
+`INDEX.md` links both files and defines the dataset name, aliases, ID, and display order. Adding a
+dataset requires those two files and one index entry. The parser rejects missing, unlisted,
+duplicated, or mismatched files.
+
+Application pages and matrix cells remain Markdown. The shared bibliography is
+`metadata/datasets-and-guidance/references.bib`. Website regions and guidance table layout live in
+`config/regions.yaml` and `config/guidance-table.yaml`.
 
 ## Publish reviewed content
 
-After its pull request is merged, select the exact reviewed commit:
+After the content pull request is merged, select its exact commit:
 
 ```sh
 git -C metadata/datasets-and-guidance fetch origin
@@ -35,14 +55,9 @@ git commit -S -m "Publish reviewed precipitation content"
 git push
 ```
 
-`test:content` includes snapshot checks. When changing the selected content commit, run `snapshot:update` before the full test suite so the snapshot matches the newly staged pointer. The update command rejects uncommitted source changes or a pointer that differs from the source checkout.
+`test:content` includes snapshot checks. When the selected content commit changes, run
+`snapshot:update` before the full suite so the snapshot matches the staged submodule pointer. The
+update rejects uncommitted source changes or a pointer that differs from the source checkout.
 
-GitHub Actions rebuilds from the checked-in snapshot and deploys Pages to `/site/`. It needs no private-repository credentials. Review the content and generated assets before publishing because both will become public.
-
-## Content conversion
-
-Dataset metadata uses standard NestedText, including multiline Markdown strings for guidance. The site owns the parser, type conversion, and schema validation. INDEX.md supplies names, IDs, aliases, and order through ordinary Markdown links. Regions.nt and guidance/Table.nt also use NestedText. Guidance boxes and application pages retain labeled Markdown lists. The content repository has no conversion scripts.
-
-The JavaScript parser supports NestedText 3.0 syntax. Every migrated `.nt` file was independently parsed by the official Python NestedText 3.8 implementation with identical results. Numeric conversion and blank-as-unknown handling are schema rules applied after parsing; NestedText itself contains strings, lists, and mappings.
-
-The shared bibliography is `metadata/datasets-and-guidance/references.bib`. The site uses a BibTeX parser to handle author lists, braces, string macros, and LaTeX accents. Duplicate keys or fields, malformed entries, and missing support/scope annotations fail validation.
+GitHub Actions rebuilds from the checked in snapshot and deploys Pages to `/site/`. Review content
+and generated assets before publishing because both become public.
